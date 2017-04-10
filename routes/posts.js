@@ -156,7 +156,7 @@ function isLoggedIn(req, res, next) {
     return next();
   }
   req.flash("postsMessage","Please login first.");
-  res.redirect('/');
+  res.redirect('/posts');
 }
 
 module.exports = router;
