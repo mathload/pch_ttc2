@@ -13,7 +13,7 @@ router.get("/about", function(req, res){
 
 // Login
 router.get('/login', function (req,res) {
-  res.render('login/login',{email:req.flash("email")[0], loginError:req.flash('loginError'), loginMessage:req.flash('loginMessage')});
+  res.render('login/login',{username:req.flash("username")[0], loginError:req.flash('loginError'), loginMessage:req.flash('loginMessage')});
 });
 
 // Post Login 인증-passport.authenticate함수호출 data from login.ejs form

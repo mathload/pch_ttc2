@@ -18,23 +18,23 @@ passport.deserializeUser(function(id, done) {
 // local strategy를 이용한 인증(username과 password이용)
 passport.use('local-login',
   new LocalStrategy({
-      usernameField : 'email',
+      usernameField : 'username',
       passwordField : 'password',
       passReqToCallback : true
     },
-    function(req, email, password, done) {
-      User.findOne({ 'email' :  email }, function(err, user) {
+    function(req, username, password, done) {
+      User.findOne({ 'username' :  username }, function(err, user) {
         if (err) return done(err);
 
         if (!user){
-            req.flash("email", req.body.email);
+            req.flash("username", req.body.username);
             return done(null, false, req.flash('loginError', 'No user found.')); // 또는 {message:'loginError', 'No user found.'}
         }
         if (!user.authenticate(password)){
-            req.flash("email", req.body.email);
+            req.flash("username", req.body.username);
             return done(null, false, req.flash('loginError', 'Password does not Match.'));
         }
-        req.flash('postsMessage', 'Welcome '+user.nickname+'!');
+        req.flash('postsMessage', 'Welcome '+user.username+'!');
         return done(null, user); // 인증성공시 passport.serializeUse함수를 호출하면서 user객체 전달
                                 //회원가입인경우 이후 passport의 req.login() req.logout()함수을 사용할수 있다
       });

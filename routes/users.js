@@ -9,7 +9,7 @@ router.get('/new', function(req,res){
   res.render('users/new', {
                             formData: req.flash('formData')[0],
                             emailError: req.flash('emailError')[0],
-                            nicknameError: req.flash('nicknameError')[0],
+                            usernameError: req.flash('usernameError')[0],
                             passwordError: req.flash('passwordError')[0]
                           }
   );
@@ -41,7 +41,7 @@ router.get('/:id/edit', isLoggedIn, function(req,res){
                               user: user,
                               formData: req.flash('formData')[0],
                               emailError: req.flash('emailError')[0],
-                              nicknameError: req.flash('nicknameError')[0],
+                              usernameError: req.flash('usernameError')[0],
                               passwordError: req.flash('passwordError')[0]
                              }
     );
@@ -81,21 +81,21 @@ function checkUserRegValidation(req, res, next) {
 
   async.waterfall(
     [function(callback) {
-      User.findOne({email: req.body.user.email, _id: {$ne: mongoose.Types.ObjectId(req.params.id)}},
+      User.findOne({username: req.body.user.username, _id: {$ne: mongoose.Types.ObjectId(req.params.id)}},
         function(err,user){
           if(user){
             isValid = false;
-            req.flash("emailError","- This email is already resistered.");
+            req.flash("usernameError","- This username is already resistered.");
           }
           callback(null, isValid);
         }
       );
     }, function(isValid, callback) {
-      User.findOne({nickname: req.body.user.nickname, _id: {$ne: mongoose.Types.ObjectId(req.params.id)}},
+      User.findOne({username: req.body.user.username, _id: {$ne: mongoose.Types.ObjectId(req.params.id)}},
         function(err,user){
           if(user){
             isValid = false;
-            req.flash("nicknameError","- This nickname is already resistered.");
+            req.flash("usernameError","- This username is already resistered.");
           }
           callback(null, isValid);
         }

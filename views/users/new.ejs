@@ -27,9 +27,9 @@
         <div id="cvErrEmail" class="message"><%= emailError?emailError:"" %></div>
       </div>
       <div class="floats">
-        <label>Nickname*</label>
-        <input class="cvRequired" type="text" name="user[nickname]" cvRqErrMsg="Nickname is required." cvRqErrTo="#cvErrNickname" value="<%= formData?formData.nickname:"" %>">
-        <div id="cvErrNickname" class="message"><%= nicknameError?nicknameError:"" %></div>
+        <label>username*</label>
+        <input class="cvRequired" type="text" name="user[username]" cvRqErrMsg="username is required." cvRqErrTo="#cvErrusername" value="<%= formData?formData.username:"" %>">
+        <div id="cvErrusername" class="message"><%= usernameError?usernameError:"" %></div>
       </div>
       <div class="floats">
         <label>Password*</label>
