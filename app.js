@@ -32,7 +32,7 @@ app.use(flash());
 app.use(session({secret:'MySecret'}));
 app.use(countVisitors);
 
-// passport
+// passport //after session setting
 var passport = require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());

@@ -7,6 +7,7 @@ var userSchema = mongoose.Schema({
   password: {type:String, required:true},
   createdAt: {type:Date, default:Date.now}
 });
+
 userSchema.pre("save", hashPassword);
 userSchema.pre("findOneAndUpdate", function hashPassword(next){
   console.log(this._update);
