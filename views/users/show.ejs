@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <% include ../partials/head %>
-  </head>
-  <body>
-    <header>
-      <% include ../partials/header %>
-    </header>
-    <div class="users">
-      <% include ../partials/navbar %>
+  <% include ../partials/head %>
+
+<body>
+
+  <% include ../partials/navbar %>
+  <% include ../partials/header %>
+
 <!-- main start-->
 
 <!-- views/users/show.ejs -->
-<div class="show">
-  <div class="buttons floats">
+  <div class="container user user-show">
+  <div class="buttons">
     <button onclick="location.href='/'">Home</button>
-    <button onclick="location.href='/users/<%=user._id%>/edit'" class="float_right">Edit</button>
+    <button onclick="location.href='/users/<%=user.username%>/edit'" class="float_right">정보수정</button>
   </div>
-  <h3>User Info</h3>
-  <div class="inputs">
-    <div class="floats">
-      <label>Email</label>
-      <input disabled type="text" value="<%= user.email %>">
-    </div>
-    <div class="floats">
-      <label>username</label>
-      <input disabled type="text" value="<%= user.username %>">
-    </div>
+  <h3 class="contentBoxTop"><%= user.username %>님 정보</h3>
+  <form class="user-form form-horizontal" action="/users" method="post">
+    <div class="contentBox">
+      <fieldset disabled>
+      <div class="form-group">
+        <label for="Email" class="col-sm-3 control-label">Email</label>
+        <div class="col-sm-9">
+        <input class="form-control" disabled type="text" value="<%= user.email %>">
+        </div>
+      </div>
+        <div class="form-group">
+          <label for="username"  class="col-sm-3 control-label">username</label>
+          <div class="col-sm-9">
+          <input class="form-control" disabled type="text" value="<%= user.username %>">
+          </div>
+        </div>
+    </fieldset>
   </div>
-</div>
+</form>
+</div><!--users end -->
+    <!-- main end -->
 
-<!-- main end -->
-    </div><!--users end -->
     <footer>
       <% include ../partials/footer %>
     </footer>

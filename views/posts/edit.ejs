@@ -1,46 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
     <% include ../partials/head %>
-  </head>
-  <body>
-    <header>
-      <% include ../partials/header %>
-    </header>
-    <div class="posts">
-      <% include ../partials/navbar %>
+
+<body>
+
+    <% include ../partials/navbar %>
+    <% include ../partials/header %>
 
     <% include partials/top %>
 <!-- main start-->
 
 <!-- views/posts/index.ejs -->
-<div class="edit">
-  <div class="buttons">
-    <button onclick="history.back()">Back</button>
+  <div class="container post post-edit">
+      <div class="buttons">
+        <button class="btn btn-default" onclick="history.back()">목록보기</button>
+      </div>
+    <h3 class="contentBoxTop">게시글 수정</h3>
+
+    <form class="post-form form-horizontal" action="/posts/<%=post._id%>?_method=put" method="post">
+      <div class="contentBox">
+        <div class="form-group">
+          <label for="title" class="col-sm-2 control-label">제목</label>
+          <div class="col-sm-10">
+          <input class="form-control" type="text" name="post[title]" cvRqErrMsg="Title is required." cvRqErrTo="#cvErrTitle" value="<%=post.title%>">
+          <div id="cvErrTitle" class="message"></div>
+          </div>
+      </div>
+
+        <div class="form-group">
+          <label for="author" class="col-sm-2 control-label">글쓴이</label>
+          <div class="col-sm-10">
+          <input class="form-control" disabled type="text" value="<%= user.username %>">
+          </div>
+      </div>
+
+        <div class="form-group">
+          <label for="body" class="col-sm-2 control-label">본문</label>
+          <div class="col-sm-10">
+          <textarea class="form-control" name="post[body]" cvRqErrMsg="Body is required." cvRqErrTo="#cvErrBody"><%=post.body%></textarea>
+          <div id="cvErrBody" class="message"></div>
+          </div>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="btn btn-default" type="submit">수정</button>
+      </div>
+    </form>
   </div>
-  <h3>Edit Post</h3>
-  <form class="checkValidation" action="/posts/<%=post._id%>?_method=put" method="post">
-    <div class="inputs">
-      <div class="floats">
-        <label>Title</label>
-        <input class="cvRequired" type="text" name="post[title]" cvRqErrMsg="Title is required." cvRqErrTo="#cvErrTitle" value="<%=post.title%>">
-        <div id="cvErrTitle" class="message"></div>
-      </div>
-      <div class="floats">
-        <label>Author</label>
-        <input disabled type="text" value="<%= user.username %>">
-      </div>
-      <div class="floats">
-        <label>Body</label>
-        <textarea class="cvRequired" name="post[body]" cvRqErrMsg="Body is required." cvRqErrTo="#cvErrBody"><%=post.body%></textarea>
-        <div id="cvErrBody" class="message"></div>
-      </div>
-    </div>
-    <div class="buttons">
-      <button type="submit">Submit</button>
-    </div>
-  </form>
-</div>
 
 <!-- main end -->
     </div><!--posts end -->

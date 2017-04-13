@@ -1,23 +1,20 @@
 <!-- views/posts/index.ejs -->
 <!DOCTYPE html>
 <html>
-  <head>
-    <% include ../partials/head %>
-  </head>
-  <body>
-    <header>
-      <% include ../partials/header %>
-    </header>
-    <div class="posts">
-    <% include ../partials/navbar %>
+<% include ../partials/head %>
 
-    <% include partials/top %>
+<body>
+
+  <% include ../partials/navbar %>
+  <% include ../partials/header %>
+
+  <% include partials/top %>
 <!-- main start-->
 
-<div class="index">
-<div class="message">
-  <%= postsMessage %>
-</div>
+  <div class="container post post-index">
+    <div class="message">
+      <%= postsMessage %>
+    </div>
   <div class="buttons">
     <button class="float_left" onclick="location.href='/posts/new'">New</button>
     <% if(user) {%>

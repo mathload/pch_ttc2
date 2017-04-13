@@ -6,6 +6,12 @@ body{
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
 }
+
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
 header, footer{
   display:block;
 }
@@ -193,12 +199,97 @@ button[disabled]:hover{
   display: inline;
 }
 
+/* home style -login-ejs*/
+.home h1{
+  color: darkseagreen;
+}
+.home-login{
+  max-width: 500px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+}
+
+.form-horizontal .control-label {
+  padding-top: 5px;
+  text-align: right;
+  font-size: 14px;
+}
+
+.contentBox{
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.contentBoxTop {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  border-bottom: 1px solid #ccc;
+  background-color: #F5F5F5;
+  padding: 6px 15px;
+}
+
+form .form-group{
+  margin: 0;
+  padding-bottom: 6px;
+}
+
+
+/* user style */
+.user {
+  max-width: 500px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+}
+.user-index ul{
+  margin: 0;
+  padding: 3px 12px;
+}
+.user-index ul:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.user-index ul li{
+  display: inline-block;
+  list-style-type: none;
+  float:left;
+}
+.user-index ul li a{
+  display: inline-block;
+  text-decoration:none;
+  margin: 3px;
+  background-color: #eee;
+  padding: 3px 10px;
+  border-radius: 3px;
+}
+.user-index ul li a:hover{
+  background-color: #ccc;
+}
+.user-edit hr{
+  margin-top: 5px;
+  margin-bottom: 11px;
+}
+
 .login,
 .users
 {
   width: 300px;
   margin: 0 auto;
 }
+
+/* post style */
+.post {
+  max-width: 800px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+}
+
+.post .post-body {
+  white-space: pre-line;
+  padding: 6px 15px 20px;
+}
+
 .posts .index,
 .posts .show{
   width: 700px;
@@ -281,7 +372,7 @@ select::-ms-expand { /* for IE 11 */
   clear: both;
 }
 .posts .show .comments h4{
-  width: 630px;
+  width: 700px;
   border-bottom: 1px solid #ccc;
   padding-bottom: 3px;
   margin-bottom: 10px;
@@ -296,7 +387,7 @@ select::-ms-expand { /* for IE 11 */
 .posts .show .comment .body{
   word-break: break-all;
   margin-left: 5px;
-  width: 545px;
+  width: 650px;
 }
 .posts .show .comment .delete button{
   position:relative;
