@@ -1,0 +1,168 @@
+<!-- views/gbooks/index.ejs -->
+<!DOCTYPE html>
+<html>
+<% include ../partials/head %>
+
+<body>
+
+  <% include ../partials/navbar %>
+  <% include ../partials/header %>
+
+  <% include partials/top %>
+<!-- main start-->
+  <style>
+  .contentBox{
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  }
+
+  .gbook-body{
+  padding-top: 50px;
+  }
+
+  .contentBoxTop {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 3px;
+  border-bottom: 1px solid #ccc;
+  background-color: #F5F5F5;
+  padding: 6px 15px;
+  }
+  </style>
+
+  <div class="container gbook gbook-index">
+    <div class="contentBox">
+    <h3 class="contentBoxTop">방명록 글남기기</h3>
+    <form class="post-form form-horizontal" action="/gbooks" method="post">
+
+
+        <div class="form-group">
+          <label for="Author" class="col-sm-2 control-label">작성자</label>
+          <div class="col-sm-2">
+          <input class="form-control" disabled type="text" value="<%= user.username %>">
+          </div>
+        </div>  <!-- form-group end -->
+
+        <div class="form-group">
+          <label for="mesg" class="col-sm-2 control-label">본문</label>
+          <div class="col-sm-10">
+          <textarea class="form-control" name="gbook[mesg]" cvRqErrMsg="mesg is required." cvRqErrTo="#cvErrmesg"></textarea>
+          <div id="cvErrmesg" class="message"></div>
+          </div>
+        </div> <!-- form-group end -->
+
+    </div>  <!-- contentBox end -->
+
+        <div class="buttons">
+          <button class="btn btn-default" type="submit">작성완료</button>
+        </div>
+    </form>
+  </div>
+
+    <div class="container gbook gbook-index">
+
+        <div class="contentBox">
+
+            <% if(gbooks == null || gbooks.length == 0){ %>
+                <tr class="noData">
+                  <td colspan="5">There is no data to show :(</td>
+                </tr>
+            <% } %>
+            <% gbooks.forEach(function(gbook){ %>
+            <div class="gbook-body">
+                <table>
+                  <tr>
+                    <div class="buttons">
+
+                      <!-- <% if(user) {%> -->
+                        <% if(user && user.equals(gbook.author._id)) { %>
+                          <form class="float_right" action="/gbooks/<%= gbook._id %>?_method=delete" method="post">
+                            <button class="btn btn-default float_right" type="button" onclick="confirm('삭제 기능이 작동 안됨니다 ㅠ.ㅠ')?this.parentElement.submit():null;">삭제</button>
+                          </form>
+                          <button class="btn btn-default float_right"  onclick="location.href='/gbooks/<%=gbook._id%>/edit'">수정</button>
+                        <% } %>
+                        <button  class="float_right" onclick="location.href='/users/<%= user._id %>'">My Profile (<%= user.username %>)</button>
+                      <% } else { %>
+                        <button class="float_right" onclick="location.href='/login'">Login</button>
+                        <button class="float_right" onclick="location.href='/users/new'">Sign Up</button>
+                      <% } %>
+                    </div>
+                  </tr>
+              <colgroup>
+                <col class="num"/>
+                <col class="date"/>
+                <col class="author"/>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Num : <%= gbook.numId %></th>
+                  <th>Author : <%= user.username %></th>
+                  <th>Date : <%= gbook.getFormattedDate(gbook.createdAt) %></th>
+                </tr>
+              </thead>
+
+              <tbody>
+              </tbody>
+              </table>
+              <style>
+              .gbook-mesg {
+                white-space: pre-line;
+                padding: 6px 15px 20px;
+              }
+              </style>
+              <div class="gbook-mesg" data-highlight="<%= search.highlight.body %>"><%= gbook.mesg %></div>
+              <hr></hr>
+                    <% }) %>
+              <div>
+              </div>
+    </div>
+    <style>
+    .gbook-page-disp{
+      text-align: center;
+    }
+    .gbook-page-disp li{
+      display: inline;
+    }
+   </style>
+  <ul class="gbook-page-disp">
+    <%
+      var offset = 3;
+      var partialQuery;
+      if(urlQuery) partialQuery = "&"+urlQuery.replace(/page=(.*?)(&|$)/ig,"");
+    %>
+    <% for(i=1;i<=maxPage;i++){ %>
+      <% if(i<=offset || i>maxPage-offset || (i>=page-(offset-1) && i<=page+(offset-1))){ %>
+        <% if(i != page){ %>
+          <li>[<a href="/gbooks?page=<%= i %><%= partialQuery %>"> <%= i %> </a>]</li>
+        <% } else { %>
+          <li>[ <b><%= i %></b> ]</li>
+        <% } %>
+      <% } else if(i == offset+1 || i == maxPage-offset){ %>
+          <li>...</li>
+      <% } %>
+    <%}%>
+  </ul>
+
+  <style>
+  .gbook-float-left{
+    float:left;
+    margin-right:10px;
+  }
+  </style>
+
+    <div class="gbook-float-left">
+      <% if(counter){ %>
+        Total <%= counter.totalCount %> visitors<br>
+        (today: <%= counter.todayCount %>)
+      <% } %>
+    </div>
+
+</div>  <!-- contentBox end -->
+</div><!--gbooks container end -->
+<footer>
+    <% include ../partials/footer %>
+</footer>
+  <!-- <% include ../partials/scripts %> -->
+    <% include ../partials/scripts %>
+</body>
+</html>

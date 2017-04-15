@@ -103,6 +103,14 @@ form .form-group{
   white-space: pre-line;
   padding: 6px 15px 20px;
 }
+
+.gbook .post-body {
+  white-space: pre-line;
+  padding: 6px 15px 20px;
+}
+
+
+
 .post .post-info{
   font-size: 11px;
   margin: 5px;

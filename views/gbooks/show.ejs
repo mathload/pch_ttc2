@@ -1,0 +1,133 @@
+<!-- views/gbooks/show.ejs -->
+<!DOCTYPE html>
+<html>
+<% include ../partials/head %>
+
+<body>
+
+<% include ../partials/navbar %>
+<% include ../partials/header %>
+  <div class="container gbook gbook-show">
+    <div class="gbooks">
+    <% include partials/top %>
+<!-- main start-->
+
+
+<div class="show">
+
+  <div class="buttons floats">
+  <div class="buttons">
+      <div class="row">
+      <div class="col-sm-12 col-sm-push-0" float>
+      <% if(user && user.equals(gbook.author._id)) { %>
+        <form class="float_right" action="/gbooks/<%=gbook._id%>?_method=delete" method="post">
+          <button class="btn btn-default" type="button" onclick="confirm('Your gbook will be deleted')?this.parentElement.submit():null;">삭제</button>
+        </form>
+        <button class="btn btn-default float_right"  onclick="location.href='/gbooks/<%=gbook._id%>/edit'">수정</button>
+      <% } %>
+      <button class="btn btn-default float_left" onclick="location.href='/gbooks?<%= urlQuery %>'">목록보기</button>
+    </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="contentBox">
+  <h3>
+    <%= gbook.numId %>.
+    <span class="contentBoxTop" data-highlight="<%= search.highlight.title %>">
+      <%= gbook.title %>
+    </span>
+  </h3>
+
+  <div class="row">
+  <div class="col-sm-4 col-sm-push-8">
+      <div class="contentBox">
+        <div class="info float_right">
+            <div class="highlight" data-highlight="<%= search.highlight.author %>">
+              Author: <%= gbook.author.username %>
+            </div>
+            <div>
+              <%= gbook.views %> views
+            </div>
+            <div class="timestamp"><span>Created:</span>
+              <%= gbook.getFormattedTime(gbook.createdAt) %>, <%= gbook.getFormattedDate(gbook.createdAt) %>
+            </div>
+            <% if(gbook.updatedAt) { %>
+              <div class="timestamp"><span>Updated:</span>
+                <%= gbook.getFormattedTime(gbook.updatedAt) %>, <%= gbook.getFormattedDate(gbook.updatedAt) %>
+              </div>
+            <% } %>
+          </div>
+      </div>
+    </div>
+
+    <div class="col-sm-8 col-sm-pull-4">
+      <div class="post-body" data-highlight="<%= search.highlight.body %>"><%= gbook.body %></div>
+    </div>
+  </div>
+    </div>
+
+
+
+
+    <div class="contentBox">
+
+    <div class="comments">
+      <h4>댓글 (<%= gbook.comments?gbook.comments.length:"0" %>)</h4>
+      <% if(gbook.comments) { %>
+        <% gbook.comments.forEach(function(comment){ %>
+
+          <div class="comment">
+
+              <div class="top">
+
+                <b><%= comment.author.username %></b>
+                (<%= gbook.getFormattedTime(comment.createdAt) %>,
+                <%= gbook.getFormattedDate(comment.createdAt) %>)
+                <% if(user && user.equals(comment.author._id)) { %>
+                  <form class="delete"  method="post"
+                    action="/gbooks/<%=gbook._id%>/comments/<%=comment._id%>?_method=delete&<%= urlQuery %>">
+                      <button type="button"
+                        onclick="confirm('Your comment will be deleted')?this.parentElement.submit():null;">
+                        x
+                      </button>
+                  </form>
+                <% } %>
+              </div>
+
+            <div class="body"><%= comment.body %></div>
+
+            <% }) %>
+            <% } %>
+
+            <div class="row">
+            <div class="col-sm-9 col-sm-push-0">
+              <form class="addComment checkValidation"
+                action="/gbooks/<%=gbook._id%>/comments?<%= urlQuery %>" method="post">
+                <textarea class="cvRequired" type="text" name="comment[body]"
+                  cvRqErrMsg="comments is empty." cvRqErrTo="#cvErrTitle" <%= user?"":"disabled" %>
+                  placeholder="<%= user?"Add comment here":"Please login to make a comment" %>"></textarea>
+            </div>
+
+           <div class="col-sm-3 col-sm-push-1">
+                  <button class="btn btn-default" type="submit" <%= user?"":"disabled" %>>댓글달기</button>
+                  <div id="cvErrTitle" class="message"></div>
+                </form>
+          </div>
+          </div>
+
+        </div>
+      </div>
+      </div>
+      </div>
+
+</div>
+</div>
+
+</div><!--gbooks end -->
+<!-- main end -->
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>

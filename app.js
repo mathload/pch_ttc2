@@ -48,6 +48,7 @@ app.use(function(req,res,next){
 app.use('/', require('./routes/home'));
 app.use('/users', require('./routes/users'));
 app.use('/posts', require('./routes/posts'));
+app.use('/gbooks', require('./routes/gbooks'));
 
 // start server
 var port = process.env.PORT || 3000;

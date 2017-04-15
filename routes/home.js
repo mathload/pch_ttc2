@@ -8,7 +8,7 @@ router.get("/", function(req, res){
   res.render("home/welcome");
 });
 router.get("/about", function(req, res){
-  res.render("home/about");
+  res.render("gbooks/index");
 });
 
 // Login
@@ -21,7 +21,7 @@ router.post('/login',
   passport.authenticate(
     'local-login',
     {
-    successRedirect : '/posts',  // 인증성공시
+    successRedirect : '/',  // 인증성공시
     failureRedirect : '/login', // 인증실패시
     failureFlash : true         // 인증실패시 보여줄 메세지
     }

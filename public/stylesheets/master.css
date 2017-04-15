@@ -290,6 +290,11 @@ form .form-group{
   padding: 6px 15px 20px;
 }
 
+.gbook .post-body {
+  white-space: pre-line;
+  padding: 6px 15px 20px;
+}
+
 .posts .index,
 .posts .show{
   width: 700px;
