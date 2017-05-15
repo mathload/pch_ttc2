@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/head2 %>
+
+<body>
+
+  <article id="main">
+    <div>
+      <input type="button" value="메인화면" onclick="window.location.href='/'" />
+      <input type="button" value="업데이트 보기" onclick="window.location.href='/rt_rankview/tmview'" />
+    </div>
+
+  <h1>XX대회 단체전 순위표 </h1>
+      <div class="container-fluid">
+      	<div class="row">
+      		<div class="col-md-12">
+      			<table class="table table-bordered table-hover">
+      				<thead>
+      					<tr>
+                  <th>순위</th>
+                  <th>조이름</th>
+                  <th>단식승점</th>
+                  <th>복식승점</th>
+                  <th>득실차</th>
+                  <th>총점</th>
+      					</tr>
+      				</thead>
+      				<tbody>
+      					<tr class="danger">
+                  <td>1</td>
+                  <td id = "aN0"></td>
+                  <td id = "aP0"></td>
+                  <td id = "aR0"></td>
+                  <td id = "ad0"></td>
+                  <td id = "at0"></td>
+      					</tr>
+      					<tr class="success">
+                  <td>2</td>
+                  <td id = "aN1"></td>
+                  <td id = "aP1"></td>
+                  <td id = "aR1"></td>
+                  <td id = "ad1"></td>
+                  <td id = "at1"></td>
+      					</tr>
+      					<tr class="info">
+                  <td>3</td>
+                  <td id = "aN2"></td>
+                  <td id = "aP2"></td>
+                  <td id = "aR2"></td>
+                  <td id = "ad2"></td>
+                  <td id = "at2"></td>
+      					</tr>
+      					<tr class="success">
+                  <td>4</td>
+                  <td id = "aN3"></td>
+                  <td id = "aP3"></td>
+                  <td id = "aR3"></td>
+                  <td id = "ad3"></td>
+                  <td id = "at3"></td>
+      					</tr>
+      					<tr class="info">
+                    <td>5</td>
+                    <td id = "aN4"></td>
+                    <td id = "aP4"></td>
+                    <td id = "aR4"></td>
+                    <td id = "ad4"></td>
+                    <td id = "at4"></td>
+      					</tr>
+
+      				</tbody>
+      			</table>
+      		</div>
+      	</div>
+      </div>
+
+
+
+  <script type="text/javascript">
+
+    //alert('스크립트');
+    console.log("스크립트");
+
+    var ardata = [];
+    var rdata_A = [];
+    var rdata_B = [];
+    var rdata_C = [];
+    var rdata_D = [];
+    var rdata_E = [];
+    var rdata_F = [];
+    var rdata_sm = [];
+    var rdata_dm = [];
+    var rdata_gpsa = [];
+    var rdata_gpsb = [];
+    var rdata_gpsc = [];
+    var rdata_gpsd = [];
+    var rdata_gpse = [];
+    var rdata_gpda = [];
+    var rdata_gpdb = [];
+    var rdata_gpdc = [];
+    var rdata_gpdd = [];
+    var rdata_gpde = [];
+    var rdata_diff1 = new Array();
+    var rdata_diff2 = new Array();
+
+    rdata_diff1[0] = new Array();
+    rdata_diff1[1] = new Array();
+    rdata_diff1[2] = new Array();
+    rdata_diff1[3] = new Array();
+    rdata_diff1[4] = new Array();
+    rdata_diff2[0] = new Array();
+    rdata_diff2[1] = new Array();
+    rdata_diff2[2] = new Array();
+    rdata_diff2[3] = new Array();
+    rdata_diff2[4] = new Array();
+    var total_sa = 0;
+    var total_sb = 0;
+    var total_sc = 0;
+    var total_sd = 0;
+    var total_se = 0;
+    var total_da = 0;
+    var total_db = 0;
+    var total_dc = 0;
+    var total_dd = 0;
+    var total_de = 0;
+    var total_lsa = 0;
+    var total_lsb = 0;
+    var total_lsc = 0;
+    var total_lsd = 0;
+    var total_lse = 0;
+    var total_lda = 0;
+    var total_ldb = 0;
+    var total_ldc = 0;
+    var total_ldd = 0;
+    var total_lde = 0;
+
+    ardata[0] = <%- JSON.stringify(data_0) %>;
+    ardata[1] = <%- JSON.stringify(data_1) %>;
+    ardata[2] = <%- JSON.stringify(data_2) %>;
+    ardata[3] = <%- JSON.stringify(data_3) %>;
+    ardata[4] = <%- JSON.stringify(data_4) %>;
+    ardata[5] = <%- JSON.stringify(data_5) %>;
+    ardata[6] = <%- JSON.stringify(data_6) %>;
+    ardata[7] = <%- JSON.stringify(data_7) %>;
+    ardata[8] = <%- JSON.stringify(data_8) %>;
+    ardata[9] = <%- JSON.stringify(data_9) %>;
+    ardata[10] = <%- JSON.stringify(data_10) %>;
+    ardata[11] = <%- JSON.stringify(data_11) %>;
+    ardata[12] = <%- JSON.stringify(data_12) %>;
+
+    // alert(ardata[1]);
+    // console.log(ardata[1]);
+    //alert('ardata[0].gName='+ardata[0].gName);
+    // 단식과 복식으로 원본 데이터 분류
+   for ( var kf = 0 ; kf < 12 ; kf++ ){
+     if(ardata[kf].gName > 19 && ardata[kf].gName < 29 ){
+       rdata_sm.push(ardata[kf]);
+     }
+     if(ardata[kf].gName > 29 && ardata[kf].gName < 39 ){
+       rdata_dm.push(ardata[kf]);
+     }
+   };
+  // alert('rdata_sm[0].gnamePlus='+rdata_sm[0].gnamePlus); ok
+  for ( var sm = 0 ; sm < rdata_sm.length ; sm++ ){
+    rdata_gpsa.push(rdata_sm[sm].gnamePlus[0]);
+    rdata_gpsb.push(rdata_sm[sm].gnamePlus[1]);
+    rdata_gpsc.push(rdata_sm[sm].gnamePlus[2]);
+    rdata_gpsd.push(rdata_sm[sm].gnamePlus[3]);
+    rdata_gpse.push(rdata_sm[sm].gnamePlus[4]);
+    var idx = rdata_sm[sm].rankData[0]%100;
+    var diff = parseInt(rdata_sm[sm].rankData[0]/1000000)%1000;
+    rdata_diff1[idx].push(diff);
+    var idx = rdata_sm[sm].rankData[1]%100;
+    var diff = parseInt(rdata_sm[sm].rankData[1]/1000000)%1000;
+    rdata_diff1[idx].push(diff);
+    var idx = rdata_sm[sm].rankData[2]%100;
+    var diff = parseInt(rdata_sm[sm].rankData[2]/1000000)%1000;
+    rdata_diff1[idx].push(diff);
+    var idx = rdata_sm[sm].rankData[3]%100;
+    var diff = parseInt(rdata_sm[sm].rankData[3]/1000000)%1000;
+    rdata_diff1[idx].push(diff);
+    var idx = rdata_sm[sm].rankData[4]%100;
+    var diff = parseInt(rdata_sm[sm].rankData[4]/1000000)%1000;
+    rdata_diff1[idx].push(diff);
+  };
+   //alert('rdata_diff1='+rdata_diff1[0]);
+  for ( var dm = 0 ; dm < rdata_dm.length ; dm++ ){
+    rdata_gpda.push(rdata_dm[dm].gnamePlus[0]);
+    rdata_gpdb.push(rdata_dm[dm].gnamePlus[1]);
+    rdata_gpdc.push(rdata_dm[dm].gnamePlus[2]);
+    rdata_gpdd.push(rdata_dm[dm].gnamePlus[3]);
+    rdata_gpde.push(rdata_dm[dm].gnamePlus[4]);
+    var idx = rdata_dm[dm].rankData[0]%100;
+    var diff = parseInt(rdata_dm[dm].rankData[0]/1000000)%1000;
+    rdata_diff2[idx].push(diff);
+    var idx = rdata_dm[dm].rankData[1]%100;
+    var diff = parseInt(rdata_dm[dm].rankData[1]/1000000)%1000;
+    rdata_diff2[idx].push(diff);
+    var idx = rdata_dm[dm].rankData[2]%100;
+    var diff = parseInt(rdata_dm[dm].rankData[2]/1000000)%1000;
+    rdata_diff2[idx].push(diff);
+    var idx = rdata_dm[dm].rankData[3]%100;
+    var diff = parseInt(rdata_dm[dm].rankData[3]/1000000)%1000;
+    rdata_diff2[idx].push(diff);
+    var idx = rdata_dm[dm].rankData[4]%100;
+    var diff = parseInt(rdata_dm[dm].rankData[4]/1000000)%1000;
+    rdata_diff2[idx].push(diff);
+  }; // rdata_diff2[0] A조의 복식 득실 모안논 배열
+  //alert('rdata_diff2[1]='+rdata_diff2[1]);
+  for ( var sn = 0 ; sn < rdata_gpsa.length ; sn++ ){
+    var wpStr = rdata_gpsa[sn].split('-');
+    total_sa = total_sa+ Number(wpStr[3]);
+    total_lsa = total_lsa+ Number(wpStr[4]);
+  };
+  for ( var sn = 0 ; sn < rdata_gpsb.length ; sn++ ){
+    var wpStr = rdata_gpsb[sn].split('-');
+    total_sb = total_sb+Number(wpStr[3]);
+    total_lsb = total_lsb+ Number(wpStr[4]);
+  };
+  for ( var sn = 0 ; sn < rdata_gpsc.length ; sn++ ){
+    var wpStr = rdata_gpsc[sn].split('-');
+    total_sc = total_sc+Number(wpStr[3]);
+    total_lsc = total_lsc+ Number(wpStr[4]);
+  };
+  for ( var sn = 0 ; sn < rdata_gpsd.length ; sn++ ){
+    var wpStr = rdata_gpsd[sn].split('-');
+    total_sd = total_sd+Number(wpStr[3]);
+    total_lsd = total_lsd+ Number(wpStr[4]);
+  };
+  for ( var sn = 0 ; sn < rdata_gpse.length ; sn++ ){
+    var wpStr = rdata_gpse[sn].split('-');
+    total_se = total_se+Number(wpStr[3]);
+    total_lse = total_lse+ Number(wpStr[4]);
+  };
+
+  for ( var sn = 0 ; sn < rdata_gpdb.length ; sn++ ){
+    var wpStr = rdata_gpdb[sn].split('-');
+    total_db = total_db+Number(wpStr[3])*2;
+    total_ldb = total_ldb+Number(wpStr[4]);
+  };
+  for ( var sn = 0 ; sn < rdata_gpdc.length ; sn++ ){
+    var wpStr = rdata_gpdc[sn].split('-');
+    total_dc = total_dc+Number(wpStr[3])*2;
+    total_ldc = total_ldc+Number(wpStr[4]);
+  };
+  for ( var sn = 0 ; sn < rdata_gpdd.length ; sn++ ){
+    var wpStr = rdata_gpdd[sn].split('-');
+    total_dd = total_dd+Number(wpStr[3])*2;
+    total_ldd = total_ldd+Number(wpStr[4]);
+  };
+  for ( var sn = 0 ; sn < rdata_gpde.length ; sn++ ){
+    var wpStr = rdata_gpde[sn].split('-');
+    total_de = total_de+Number(wpStr[3])*2;
+    total_lde = total_lde+Number(wpStr[4]);
+  };
+  for ( var sn = 0 ; sn < rdata_gpda.length ; sn++ ){
+    var wpStr = rdata_gpda[sn].split('-');
+    total_da = total_da+Number(wpStr[3])*2;
+    total_lda = total_lda+Number(wpStr[4]);
+  };
+    // alert('total_sa='+total_sa+500);
+    //alert('rdata_diff1[df][sf]='+rdata_diff1[0][0]);
+    for ( var df = 0 ; df < 5 ; df++ ){
+      for ( var sf = 0 ; sf < rdata_diff1[df].length ; sf++ ){
+        if(Number(rdata_diff1[df][sf]) > 99){
+          rdata_diff1[df][sf] = Number(rdata_diff1[df][sf])%100;
+          //alert('양수='+rdata_diff1[df][sf]);
+        } else if(Number(rdata_diff1[df][sf]) < 99){
+          rdata_diff1[df][sf] = -(Number(rdata_diff1[df][sf])%100);
+          //alert('음수=');
+        };
+      };
+    };
+     //alert('rdata_diff1[df][sf]='+rdata_diff1[0][0]);
+     for ( var df = 0 ; df < 5 ; df++ ){
+       for ( var sf = 0 ; sf < rdata_diff2[df].length ; sf++ ){
+         if(Number(rdata_diff2[df][sf]) > 99){
+           rdata_diff2[df][sf] = Number(rdata_diff2[df][sf])%100;
+           //alert('양수='+rdata_diff2[df][sf]);
+         } else if(Number(rdata_diff2[df][sf]) < 99){
+           rdata_diff2[df][sf] = -(Number(rdata_diff2[df][sf])%100);
+           //alert('음수=');
+         };
+       };
+     };
+     //alert('rdata_diff2[1][3]='+rdata_diff2[1][3]);
+    var diff_t1 = [0,0,0,0,0,];
+    var diff_t2 = [0,0,0,0,0,];
+    for ( var df = 0 ; df < 5 ; df++ ){
+      for ( var dd = 0 ; dd < rdata_diff1[df].length ; dd++ ){
+        diff_t1[df] = diff_t1[df] + rdata_diff1[df][dd];
+      };
+    };
+   //alert('diff_t1[df]='+diff_t1[0]);
+  for ( var df = 0 ; df < 5 ; df++ ){
+    for ( var dd = 0 ; dd < rdata_diff2[df].length ; dd++ ){
+      diff_t2[df] = diff_t2[df] + rdata_diff2[df][dd];
+    };
+  };
+  //alert('diff_t2[df]='+diff_t2[1]);
+  var total_A = (total_sa + total_da)*1000 + diff_t1[0] + diff_t2[0] + 0.1;
+  var total_B = (total_sb + total_db)*1000 + diff_t1[1] + diff_t2[1] + 0.2;
+  var total_C = (total_sc + total_dc)*1000 + diff_t1[2] + diff_t2[2] + 0.3;
+  var total_D = (total_sd + total_dd)*1000 + diff_t1[3] + diff_t2[3] + 0.4;
+  var total_E = (total_se + total_de)*1000 + diff_t1[4] + diff_t2[4] + 0.5;
+  //alert('total_C='+total_C);
+  var sortArr=[];
+    sortArr.push(total_A);
+    sortArr.push(total_B);
+    sortArr.push(total_C);
+    sortArr.push(total_D);
+    sortArr.push(total_E);
+
+    sortArr.sort(function(a,b){// 내림차순
+       return b-a;
+    });
+  var st_id = [];
+  for ( var st = 0 ; st < 5 ; st++ ){
+    var te1 = sortArr[st]*10;
+     if(te1 < 0 ){
+       te1 = - te1;
+     };
+    var te2 = te1%10;
+      if(te2 > 5){
+        te2 = 10-te2;
+      };
+    var te3 = te2-1;
+    st_id.push(te3);
+  };
+  //alert('st_id='+st_id);
+  var nameArr = ['A','B','C','D','E']
+  var saArr = [];
+  saArr.push(total_sa);
+  saArr.push(total_sb);
+  saArr.push(total_sc);
+  saArr.push(total_sd);
+  saArr.push(total_se);
+
+  var sdArr = [];
+  sdArr.push(total_da);
+  sdArr.push(total_db);
+  sdArr.push(total_dc);
+  sdArr.push(total_dd);
+  sdArr.push(total_de);
+
+  var lsaArr = [];
+  lsaArr.push(total_lsa);
+  lsaArr.push(total_lsb);
+  lsaArr.push(total_lsc);
+  lsaArr.push(total_lsd);
+  lsaArr.push(total_lse);
+
+  var lsdArr = [];
+  lsdArr.push(total_lda);
+  lsdArr.push(total_ldb);
+  lsdArr.push(total_ldc);
+  lsdArr.push(total_ldd);
+  lsdArr.push(total_lde);
+
+  $("#aN0").text(nameArr[st_id[0]]+'조');
+  $("#aP0").text(saArr[st_id[0]]+'점('+saArr[st_id[0]]+'승'+lsaArr[st_id[0]]+'패)');
+  $("#aR0").text(sdArr[st_id[0]]+'점('+sdArr[st_id[0]]/2+'승'+lsdArr[st_id[0]]+'패)');
+  $("#ad0").text(diff_t1[st_id[0]] + diff_t2[st_id[0]]);
+  $("#at0").text((saArr[st_id[0]]+sdArr[st_id[0]])+'점');
+
+  $("#aN1").text(nameArr[st_id[1]]+'조');
+  $("#aP1").text(saArr[st_id[1]]+'점('+saArr[st_id[1]]+'승'+lsaArr[st_id[1]]+'패)');
+  $("#aR1").text(sdArr[st_id[1]]+'점('+sdArr[st_id[1]]/2+'승'+lsdArr[st_id[1]]+'패)');
+  $("#ad1").text(diff_t1[st_id[1]] + diff_t2[st_id[1]]);
+  $("#at1").text((saArr[st_id[1]]+sdArr[st_id[1]])+'점');
+
+  $("#aN2").text(nameArr[st_id[2]]+'조');
+  $("#aP2").text(saArr[st_id[2]]+'점('+saArr[st_id[2]]+'승'+lsaArr[st_id[2]]+'패)');
+  $("#aR2").text(sdArr[st_id[2]]+'점('+sdArr[st_id[2]]/2+'승'+lsdArr[st_id[2]]+'패)');
+  $("#ad2").text(diff_t1[st_id[2]] + diff_t2[st_id[2]]);
+  $("#at2").text((saArr[st_id[2]]+sdArr[st_id[2]])+'점');
+
+  $("#aN3").text(nameArr[st_id[3]]+'조');
+  $("#aP3").text(saArr[st_id[3]]+'점('+saArr[st_id[3]]+'승'+lsaArr[st_id[3]]+'패)');
+  $("#aR3").text(sdArr[st_id[3]]+'점('+sdArr[st_id[3]]/2+'승'+lsdArr[st_id[3]]+'패)');
+  $("#ad3").text(diff_t1[st_id[3]] + diff_t2[st_id[3]]);
+  $("#at3").text((saArr[st_id[3]]+sdArr[st_id[3]])+'점');
+
+  $("#aN4").text(nameArr[st_id[4]]+'조');
+  $("#aP4").text(saArr[st_id[4]]+'점('+saArr[st_id[4]]+'승'+lsaArr[st_id[4]]+'패)');
+  $("#aR4").text(sdArr[st_id[4]]+'점('+sdArr[st_id[4]]/2+'승'+lsdArr[st_id[4]]+'패)');
+  $("#ad4").text(diff_t1[st_id[4]] + diff_t2[st_id[4]]);
+  $("#at4").text((saArr[st_id[4]]+sdArr[st_id[4]])+'점');
+
+  </script>
+
+</article>
+    <% include ../partials/scripts2 %>
+
+    </script> %>
+</body>
+
+</html>

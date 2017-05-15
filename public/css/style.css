@@ -1,0 +1,11 @@
+body { padding: 1%; background-color: #EEE; padding: 0; }
+pre { background-color: #EEE; max-height: 500px; overflow-y: scroll; }
+#data { float: right; width: 28%; margin-left: 2%; }
+#components { float: left; width: 68%; margin-right: 2%; }
+#view { overflow: hidden; }
+#sc2demo { width: 250px; overflow: hidden; }
+script.demo { display: block; white-space: pre; font-family: monospace; background-color: #EEE; padding: 1em; margin: 1em 0; clear: both; }
+h2 { clear: both; }
+article#main { max-width: 780px; background-color: #FFF; padding: 20px; box-sizing: border-box; }
+#state { max-height: 300px; }
+p { clear: both; }

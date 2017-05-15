@@ -44,11 +44,19 @@ app.use(function(req,res,next){
   next();
 })
 
-// routes
+// ================================================================
+// setup routes
+// ================================================================
+
 app.use('/', require('./routes/home'));
 app.use('/users', require('./routes/users'));
 app.use('/posts', require('./routes/posts'));
 app.use('/gbooks', require('./routes/gbooks'));
+app.use('/rt_gbrackets_v2', require('./routes/rt_gbrackets_v2'));
+app.use('/rt_rankview', require('./routes/rt_rankview'));
+app.use('/rt_tbrackets_high32', require('./routes/rt_tbrackets_high32'));
+app.use('/rt_tbrackets_low32', require('./routes/rt_tbrackets_low32'));
+app.use('/rt_tbrackets_low16', require('./routes/rt_tbrackets_low16'));
 
 // start server
 var port = process.env.PORT || 3000;

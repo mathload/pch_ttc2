@@ -26,6 +26,12 @@ ul{
   list-style-type: none;
   padding:0;
 }
+li{
+  font-size: 15px;
+  padding:0;
+  color: #096cc1;
+  line-height:30px;
+}
 h1{
   color:tomato;
   text-align:center;
@@ -46,6 +52,10 @@ h3{
 }
 h4{
   margin: 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background-color: #F5F5F5;
+  padding: 5px 15px;
 }
 textarea, input{
   padding: 3px 7px;

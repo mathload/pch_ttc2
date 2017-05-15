@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/head2 %>
+
+<body>
+
+  <article id="main">
+    <div>
+      <input type="button" value="메인화면" onclick="window.location.href='/'" />
+      <input type="button" value="업데이트 보기" onclick="window.location.href='/rt_rankview/tview'" />
+    </div>
+
+  <h1>XX대회 조별 예선 현황 - A조</h1>
+      <div class="container-fluid">
+      	<div class="row">
+      		<div class="col-md-12">
+      			<table class="table table-bordered table-hover">
+      				<thead>
+      					<tr>
+                  <th>순위</th>
+                  <th>이름</th>
+                  <th>승점</th>
+                  <th>비고</th>
+      					</tr>
+      				</thead>
+      				<tbody>
+      					<tr class="info">
+                  <td>1</td>
+                  <td id = "aN0"></td>
+                  <td id = "aP0"></td>
+                  <td id = "aR0"></td>
+      					</tr>
+      					<tr class="success">
+                  <td>2</td>
+                  <td id = "aN1"></td>
+                  <td id = "aP1"></td>
+                  <td id = "aR1"></td>
+      					</tr>
+      					<tr class="success">
+                  <td>3</td>
+                  <td id = "aN2"></td>
+                  <td id = "aP2"></td>
+                  <td id = "aR2"></td>
+      					</tr>
+      					<tr class="success">
+                  <td>4</td>
+                  <td id = "aN3"></td>
+                  <td id = "aP3"></td>
+                  <td id = "aR3"></td>
+      					</tr>
+      					<tr class="active">
+                    <td>5</td>
+                    <td id = "aN4"></td>
+                    <td id = "aP4"></td>
+                    <td id = "aR4"></td>
+      					</tr>
+                <tr class="active">
+                    <td>6</td>
+                    <td id = "aN5"></td>
+                    <td id = "aP5"></td>
+                    <td id = "aR5"></td>
+                </tr>
+                <tr class="active">
+                    <td>7</td>
+                    <td id = "aN6"></td>
+                    <td id = "aP6"></td>
+                    <td id = "aR6"></td>
+                </tr>
+                <tr class="active">
+                    <td>8</td>
+                    <td id = "aN7"></td>
+                    <td id = "aP7"></td>
+                    <td id = "aR7"></td>
+                </tr>
+      				</tbody>
+      			</table>
+      		</div>
+      	</div>
+      </div>
+
+      <h1>XX대회 조별 예선 현황 - B조</h1>
+          <div class="container-fluid">
+          	<div class="row">
+          		<div class="col-md-12">
+          			<table class="table table-bordered table-hover">
+          				<thead>
+          					<tr>
+                      <th>순위</th>
+                      <th>이름</th>
+                      <th>승점</th>
+                      <th>비고</th>
+          					</tr>
+          				</thead>
+          				<tbody>
+          					<tr class="info">
+                      <td>1</td>
+                      <td id = "bN0"></td>
+                      <td id = "bP0"></td>
+                      <td id = "bR0"></td>
+          					</tr>
+          					<tr class="success">
+                      <td>2</td>
+                      <td id = "bN1"></td>
+                      <td id = "bP1"></td>
+                      <td id = "bR1"></td>
+          					</tr>
+          					<tr class="success">
+                      <td>3</td>
+                      <td id = "bN2"></td>
+                      <td id = "bP2"></td>
+                      <td id = "bR2"></td>
+          					</tr>
+          					<tr class="success">
+                      <td>4</td>
+                      <td id = "bN3"></td>
+                      <td id = "bP3"></td>
+                      <td id = "bR3"></td>
+          					</tr>
+          					<tr class="active">
+                        <td>5</td>
+                        <td id = "bN4"></td>
+                        <td id = "bP4"></td>
+                        <td id = "bR4"></td>
+          					</tr>
+                    <tr class="active">
+                        <td>6</td>
+                        <td id = "bN5"></td>
+                        <td id = "bP5"></td>
+                        <td id = "bR5"></td>
+                    </tr>
+                    <tr class="active">
+                        <td>7</td>
+                        <td id = "bN6"></td>
+                        <td id = "bP6"></td>
+                        <td id = "bR6"></td>
+                    </tr>
+                    <tr class="active">
+                        <td>8</td>
+                        <td id = "bN7"></td>
+                        <td id = "bP7"></td>
+                        <td id = "bR7"></td>
+                    </tr>
+          				</tbody>
+          			</table>
+          		</div>
+          	</div>
+          </div>
+
+          <h1>XX대회 조별 예선 현황 - C조</h1>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <table class="table table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th>순위</th>
+                          <th>이름</th>
+                          <th>승점</th>
+                          <th>비고</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="info">
+                          <td>1</td>
+                          <td id = "cN0"></td>
+                          <td id = "cP0"></td>
+                          <td id = "cR0"></td>
+                        </tr>
+                        <tr class="success">
+                          <td>2</td>
+                          <td id = "cN1"></td>
+                          <td id = "cP1"></td>
+                          <td id = "cR1"></td>
+                        </tr>
+                        <tr class="success">
+                          <td>3</td>
+                          <td id = "cN2"></td>
+                          <td id = "cP2"></td>
+                          <td id = "cR2"></td>
+                        </tr>
+                        <tr class="success">
+                          <td>4</td>
+                          <td id = "cN3"></td>
+                          <td id = "cP3"></td>
+                          <td id = "cR3"></td>
+                        </tr>
+                        <tr class="active">
+                            <td>5</td>
+                            <td id = "cN4"></td>
+                            <td id = "cP4"></td>
+                            <td id = "cR4"></td>
+                        </tr>
+                        <tr class="active">
+                            <td>6</td>
+                            <td id = "cN5"></td>
+                            <td id = "cP5"></td>
+                            <td id = "cR5"></td>
+                        </tr>
+                        <tr class="active">
+                            <td>7</td>
+                            <td id = "cN6"></td>
+                            <td id = "cP6"></td>
+                            <td id = "cR6"></td>
+                        </tr>
+                        <tr class="active">
+                            <td>8</td>
+                            <td id = "cN7"></td>
+                            <td id = "cP7"></td>
+                            <td id = "cR7"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <h1>XX대회 조별 예선 현황 - D조</h1>
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>순위</th>
+                              <th>이름</th>
+                              <th>승점</th>
+                              <th>비고</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="info">
+                              <td>1</td>
+                              <td id = "dN0"></td>
+                              <td id = "dP0"></td>
+                              <td id = "dR0"></td>
+                            </tr>
+                            <tr class="success">
+                              <td>2</td>
+                              <td id = "dN1"></td>
+                              <td id = "dP1"></td>
+                              <td id = "dR1"></td>
+                            </tr>
+                            <tr class="success">
+                              <td>3</td>
+                              <td id = "dN2"></td>
+                              <td id = "dP2"></td>
+                              <td id = "dR2"></td>
+                            </tr>
+                            <tr class="success">
+                              <td>4</td>
+                              <td id = "dN3"></td>
+                              <td id = "dP3"></td>
+                              <td id = "dR3"></td>
+                            </tr>
+                            <tr class="active">
+                                <td>5</td>
+                                <td id = "dN4"></td>
+                                <td id = "dP4"></td>
+                                <td id = "dR4"></td>
+                            </tr>
+                            <tr class="active">
+                                <td>6</td>
+                                <td id = "dN5"></td>
+                                <td id = "dP5"></td>
+                                <td id = "dR5"></td>
+                            </tr>
+                            <tr class="active">
+                                <td>7</td>
+                                <td id = "dN6"></td>
+                                <td id = "dP6"></td>
+                                <td id = "dR6"></td>
+                            </tr>
+                            <tr class="active">
+                                <td>8</td>
+                                <td id = "dN7"></td>
+                                <td id = "dP7"></td>
+                                <td id = "dR7"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h1>XX대회 조별 예선 현황 - E조</h1>
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <table class="table table-bordered table-hover">
+                              <thead>
+                                <tr>
+                                  <th>순위</th>
+                                  <th>이름</th>
+                                  <th>승점</th>
+                                  <th>비고</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="info">
+                                  <td>1</td>
+                                  <td id = "eN0"></td>
+                                  <td id = "eP0"></td>
+                                  <td id = "eR0"></td>
+                                </tr>
+                                <tr class="success">
+                                  <td>2</td>
+                                  <td id = "eN1"></td>
+                                  <td id = "eP1"></td>
+                                  <td id = "eR1"></td>
+                                </tr>
+                                <tr class="success">
+                                  <td>3</td>
+                                  <td id = "eN2"></td>
+                                  <td id = "eP2"></td>
+                                  <td id = "eR2"></td>
+                                </tr>
+                                <tr class="success">
+                                  <td>4</td>
+                                  <td id = "eN3"></td>
+                                  <td id = "eP3"></td>
+                                  <td id = "eR3"></td>
+                                </tr>
+                                <tr class="active">
+                                    <td>5</td>
+                                    <td id = "eN4"></td>
+                                    <td id = "eP4"></td>
+                                    <td id = "eR4"></td>
+                                </tr>
+                                <tr class="active">
+                                    <td>6</td>
+                                    <td id = "eN5"></td>
+                                    <td id = "eP5"></td>
+                                    <td id = "eR5"></td>
+                                </tr>
+                                <tr class="active">
+                                    <td>7</td>
+                                    <td id = "eN6"></td>
+                                    <td id = "eP6"></td>
+                                    <td id = "eR6"></td>
+                                </tr>
+                                <tr class="active">
+                                    <td>8</td>
+                                    <td id = "eN7"></td>
+                                    <td id = "eP7"></td>
+                                    <td id = "eR7"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      <h1>XX대회 조별 예선 현황 - F조</h1>
+                          <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <table class="table table-bordered table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th>순위</th>
+                                      <th>이름</th>
+                                      <th>승점</th>
+                                      <th>비고</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr class="info">
+                                      <td>1</td>
+                                      <td id = "fN0"></td>
+                                      <td id = "fP0"></td>
+                                      <td id = "fR0"></td>
+                                    </tr>
+                                    <tr class="success">
+                                      <td>2</td>
+                                      <td id = "fN1"></td>
+                                      <td id = "fP1"></td>
+                                      <td id = "fR1"></td>
+                                    </tr>
+                                    <tr class="success">
+                                      <td>3</td>
+                                      <td id = "fN2"></td>
+                                      <td id = "fP2"></td>
+                                      <td id = "fR2"></td>
+                                    </tr>
+                                    <tr class="success">
+                                      <td>4</td>
+                                      <td id = "fN3"></td>
+                                      <td id = "fP3"></td>
+                                      <td id = "fR3"></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>5</td>
+                                        <td id = "fN4"></td>
+                                        <td id = "fP4"></td>
+                                        <td id = "fR4"></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>6</td>
+                                        <td id = "fN5"></td>
+                                        <td id = "fP5"></td>
+                                        <td id = "fR5"></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>7</td>
+                                        <td id = "fN6"></td>
+                                        <td id = "fP6"></td>
+                                        <td id = "fR6"></td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>8</td>
+                                        <td id = "fN7"></td>
+                                        <td id = "fP7"></td>
+                                        <td id = "fR7"></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+
+  <script type="text/javascript">
+
+    var ardata = [];
+    var rdata_A;
+    var rdata_B;
+    var rdata_C;
+    var rdata_D;
+    var rdata_E;
+    var rdata_F;
+
+    ardata[0] = <%- JSON.stringify(data_0) %>;
+    ardata[1] = <%- JSON.stringify(data_1) %>;
+    ardata[2] = <%- JSON.stringify(data_2) %>;
+    ardata[3] = <%- JSON.stringify(data_3) %>;
+    ardata[4] = <%- JSON.stringify(data_4) %>;
+    ardata[5] = <%- JSON.stringify(data_5) %>;
+    for ( var k = 0 ; k < 6 ; k++ ){
+      if(ardata[k].gName%10 == 0){
+        rdata_A = ardata[k];
+      }
+      if(ardata[k].gName%10 == 1){
+        rdata_B = ardata[k];
+      }
+      if(ardata[k].gName%10 == 2){
+        rdata_C = ardata[k];
+      }
+      if(ardata[k].gName%10 == 3){
+        rdata_D = ardata[k];
+      }
+      if(ardata[k].gName%10 == 4){
+        rdata_E = ardata[k];
+      }
+      if(ardata[k].gName%10 == 5){
+        rdata_F = ardata[k];
+      }
+    }; // end of for k
+
+    var snA = [];
+    var snB = [];
+    var snC = [];
+    var snD = [];
+    var snE = [];
+    var snF = [];
+    var nameArrA = [];
+    var nameArrB = [];
+    var nameArrC = [];
+    var nameArrD = [];
+    var nameArrE = [];
+    var nameArrF = [];
+    var winArrA = [];
+    var winArrB = [];
+    var winArrC = [];
+    var winArrD = [];
+    var winArrE = [];
+    var winArrF = [];
+    var loseArrA = [];
+    var loseArrB = [];
+    var loseArrC = [];
+    var loseArrD = [];
+    var loseArrE = [];
+    var loseArrF = [];
+    var aN = [];
+    var bN = [];
+    var cN = [];
+    var dN = [];
+    var eN = [];
+    var fN = [];
+    var aP = [];
+    var bP = [];
+    var cP = [];
+    var dP = [];
+    var eP = [];
+    var fP = [];
+    var aR = [];
+    var bR = [];
+    var cR = [];
+    var dR = [];
+    var eR = [];
+    var fR = [];
+    var aPP = [];
+    var bPP = [];
+    var cPP = [];
+    var dPP = [];
+    var ePP = [];
+    var fPP = [];
+
+    for ( var i = 0 ; i < rdata_A.gnamePlus.length ; i++ ){
+      snA = rdata_A.gnamePlus[i].split('-');
+      nameArrA[i] = snA[2];
+      winArrA[i] = snA[3];
+      loseArrA[i] = snA[4];
+    };
+
+    for ( var i = 0 ; i < rdata_A.rankData.length ; i++ ){
+      var ndA = rdata_A.rankData[i]%100
+      aN[i] = nameArrA[ndA];
+      aPP[i] = parseInt(rdata_A.rankData[i]/1000000000)%100;
+      aP[i] = aPP[i]+"점("+winArrA[ndA]+"승"+loseArrA[ndA]+"패)"
+      aR[i] = parseInt(rdata_A.rankData[i]/100000000000);
+    };
+
+    $("#aN0").text(aN[0]);
+    $("#aP0").text(aP[0]);
+    $("#aR0").text(aR[0]);
+
+    $("#aN1").text(aN[1]);
+    $("#aP1").text(aP[1]);
+    $("#aR1").text(aR[1]);
+
+    $("#aN2").text(aN[2]);
+    $("#aP2").text(aP[2]);
+    $("#aR2").text(aR[2]);
+
+    $("#aN3").text(aN[3]);
+    $("#aP3").text(aP[3]);
+    $("#aR3").text(aR[3]);
+
+    $("#aN4").text(aN[4]);
+    $("#aP4").text(aP[4]);
+    $("#aR4").text(aR[4]);
+
+    $("#aN5").text(aN[5]);
+    $("#aP5").text(aP[5]);
+    $("#aR5").text(aR[5]);
+
+    $("#aN6").text(aN[6]);
+    $("#aP6").text(aP[6]);
+    $("#aR6").text(aR[6]);
+
+    $("#aN7").text(aN[7]);
+    $("#aP7").text(aP[7]);
+    $("#aR7").text(aR[7]);
+
+
+  for ( var i = 0 ; i < rdata_B.gnamePlus.length ; i++ ){
+    snB = rdata_B.gnamePlus[i].split('-');
+    nameArrB[i] = snB[2];
+    winArrB[i] = snB[3];
+    loseArrB[i] = snB[4];
+  };
+
+  for ( var i = 0 ; i < rdata_B.rankData.length ; i++ ){
+    var ndB = rdata_B.rankData[i]%100;
+    bN[i] = nameArrB[ndB];
+    bPP[i] = parseInt(rdata_B.rankData[i]/1000000000)%100;
+    bP[i] = bPP[i]+"점("+winArrB[ndB]+"승"+loseArrB[ndB]+"패)";
+    bR[i] = parseInt(rdata_B.rankData[i]/100000000000);
+  };
+
+  $("#bN0").text(bN[0]);
+  $("#bP0").text(bP[0]);
+  $("#bR0").text(bR[0]);
+
+  $("#bN1").text(bN[1]);
+  $("#bP1").text(bP[1]);
+  $("#bR1").text(bR[1]);
+
+  $("#bN2").text(bN[2]);
+  $("#bP2").text(bP[2]);
+  $("#bR2").text(bR[2]);
+
+  $("#bN3").text(bN[3]);
+  $("#bP3").text(bP[3]);
+  $("#bR3").text(bR[3]);
+
+  $("#bN4").text(bN[4]);
+  $("#bP4").text(bP[4]);
+  $("#bR4").text(bR[4]);
+
+  $("#bN5").text(bN[5]);
+  $("#bP5").text(bP[5]);
+  $("#bR5").text(bR[5]);
+
+  $("#bN6").text(bN[6]);
+  $("#bP6").text(bP[6]);
+  $("#bR6").text(bR[6]);
+
+  $("#bN7").text(bN[7]);
+  $("#bP7").text(bP[7]);
+  $("#bR7").text(bR[7]);
+
+  for ( var i = 0 ; i < rdata_C.gnamePlus.length ; i++ ){
+    snC = rdata_C.gnamePlus[i].split('-');
+    nameArrC[i] = snC[2];
+    winArrC[i] = snC[3];
+    loseArrC[i] = snC[4];
+  };
+
+  for ( var i = 0 ; i < rdata_C.rankData.length ; i++ ){
+    var ndC = rdata_C.rankData[i]%100
+    cN[i] = nameArrC[ndC];
+    cPP[i] = parseInt(rdata_C.rankData[i]/1000000000)%100;
+    cP[i] = cPP[i]+"점("+winArrC[ndC]+"승"+loseArrC[ndC]+"패)"
+    cR[i] = parseInt(rdata_C.rankData[i]/100000000000);
+  };
+
+  $("#cN0").text(cN[0]);
+  $("#cP0").text(cP[0]);
+  $("#cR0").text(cR[0]);
+
+  $("#cN1").text(cN[1]);
+  $("#cP1").text(cP[1]);
+  $("#cR1").text(cR[1]);
+
+  $("#cN2").text(cN[2]);
+  $("#cP2").text(cP[2]);
+  $("#cR2").text(cR[2]);
+
+  $("#cN3").text(cN[3]);
+  $("#cP3").text(cP[3]);
+  $("#cR3").text(cR[3]);
+
+  $("#cN4").text(cN[4]);
+  $("#cP4").text(cP[4]);
+  $("#cR4").text(cR[4]);
+
+  $("#cN5").text(cN[5]);
+  $("#cP5").text(cP[5]);
+  $("#cR5").text(cR[5]);
+
+  $("#cN6").text(cN[6]);
+  $("#cP6").text(cP[6]);
+  $("#cR6").text(cR[6]);
+
+  $("#cN7").text(cN[7]);
+  $("#cP7").text(cP[7]);
+  $("#cR7").text(cR[7]);
+
+  for ( var i = 0 ; i < rdata_D.gnamePlus.length ; i++ ){
+    snD = rdata_D.gnamePlus[i].split('-');
+    nameArrD[i] = snD[2];
+    winArrD[i] = snD[3];
+    loseArrD[i] = snD[4];
+  };
+
+  for ( var i = 0 ; i < rdata_D.rankData.length ; i++ ){
+    var ndD = rdata_D.rankData[i]%100
+    dN[i] = nameArrD[ndD];
+    dPP[i] = parseInt(rdata_D.rankData[i]/1000000000)%100;
+    dP[i] = dPP[i]+"점("+winArrD[ndD]+"승"+loseArrD[ndD]+"패)"
+    dR[i] = parseInt(rdata_D.rankData[i]/100000000000);
+  };
+
+  $("#dN0").text(dN[0]);
+  $("#dP0").text(dP[0]);
+  $("#dR0").text(dR[0]);
+
+  $("#dN1").text(dN[1]);
+  $("#dP1").text(dP[1]);
+  $("#dR1").text(dR[1]);
+
+  $("#dN2").text(dN[2]);
+  $("#dP2").text(dP[2]);
+  $("#dR2").text(dR[2]);
+
+  $("#dN3").text(dN[3]);
+  $("#dP3").text(dP[3]);
+  $("#dR3").text(dR[3]);
+
+  $("#dN4").text(dN[4]);
+  $("#dP4").text(dP[4]);
+  $("#dR4").text(dR[4]);
+
+  $("#dN5").text(dN[5]);
+  $("#dP5").text(dP[5]);
+  $("#dR5").text(dR[5]);
+
+  $("#dN6").text(dN[6]);
+  $("#dP6").text(dP[6]);
+  $("#dR6").text(dR[6]);
+
+  $("#dN7").text(dN[7]);
+  $("#dP7").text(dP[7]);
+  $("#dR7").text(dR[7]);
+
+  for ( var i = 0 ; i < rdata_E.gnamePlus.length ; i++ ){
+    snE = rdata_E.gnamePlus[i].split('-');
+    nameArrE[i] = snE[2];
+    winArrE[i] = snE[3];
+    loseArrE[i] = snE[4];
+  };
+
+  for ( var i = 0 ; i < rdata_E.rankData.length ; i++ ){
+    var ndE = rdata_E.rankData[i]%100
+    eN[i] = nameArrE[ndE];
+    ePP[i] = parseInt(rdata_E.rankData[i]/1000000000)%100;
+    eP[i] = ePP[i]+"점("+winArrE[ndE]+"승"+loseArrE[ndE]+"패)"
+    eR[i] = parseInt(rdata_E.rankData[i]/100000000000);
+  };
+
+  $("#eN0").text(eN[0]);
+  $("#eP0").text(eP[0]);
+  $("#eR0").text(eR[0]);
+
+  $("#eN1").text(eN[1]);
+  $("#eP1").text(eP[1]);
+  $("#eR1").text(eR[1]);
+
+  $("#eN2").text(eN[2]);
+  $("#eP2").text(eP[2]);
+  $("#eR2").text(eR[2]);
+
+  $("#eN3").text(eN[3]);
+  $("#eP3").text(eP[3]);
+  $("#eR3").text(eR[3]);
+
+  $("#eN4").text(eN[4]);
+  $("#eP4").text(eP[4]);
+  $("#eR4").text(eR[4]);
+
+  $("#eN5").text(eN[5]);
+  $("#eP5").text(eP[5]);
+  $("#eR5").text(eR[5]);
+
+  $("#eN6").text(eN[6]);
+  $("#eP6").text(eP[6]);
+  $("#eR6").text(eR[6]);
+
+  $("#eN7").text(eN[7]);
+  $("#eP7").text(eP[7]);
+  $("#eR7").text(eR[7]);
+
+  for ( var i = 0 ; i < rdata_F.gnamePlus.length ; i++ ){
+    snF = rdata_F.gnamePlus[i].split('-');
+    nameArrF[i] = snF[2];
+    winArrF[i] = snF[3];
+    loseArrF[i] = snF[4];
+  };
+
+  for ( var i = 0 ; i < rdata_F.rankData.length ; i++ ){
+    var ndF = rdata_F.rankData[i]%100
+    fN[i] = nameArrF[ndF];
+    fPP[i] = parseInt(rdata_F.rankData[i]/1000000000)%100;
+    fP[i] = fPP[i]+"점("+winArrF[ndF]+"승"+loseArrF[ndF]+"패)"
+    fR[i] = parseInt(rdata_F.rankData[i]/100000000000);
+  };
+
+  $("#fN0").text(fN[0]);
+  $("#fP0").text(fP[0]);
+  $("#fR0").text(fR[0]);
+
+  $("#fN1").text(fN[1]);
+  $("#fP1").text(fP[1]);
+  $("#fR1").text(fR[1]);
+
+  $("#fN2").text(fN[2]);
+  $("#fP2").text(fP[2]);
+  $("#fR2").text(fR[2]);
+
+  $("#fN3").text(fN[3]);
+  $("#fP3").text(fP[3]);
+  $("#fR3").text(fR[3]);
+
+  $("#fN4").text(fN[4]);
+  $("#fP4").text(fP[4]);
+  $("#fR4").text(fR[4]);
+
+  $("#fN5").text(fN[5]);
+  $("#fP5").text(fP[5]);
+  $("#fR5").text(fR[5]);
+
+  $("#fN6").text(fN[6]);
+  $("#fP6").text(fP[6]);
+  $("#fR6").text(fR[6]);
+
+  $("#fN7").text(fN[7]);
+  $("#fP7").text(fP[7]);
+  $("#fR7").text(fR[7]);
+
+  </script>
+
+
+
+
+
+</article>
+    <% include ../partials/scripts2 %>
+
+    </script> %>
+</body>
+
+</html>

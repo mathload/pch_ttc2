@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/head_bkt %>
+</head>
+
+<body>
+  <article id="main">
+  <h1>XX대회 조별 예선 현황 - <%= gname %></h1>
+
+  <script type='text/javascript'>
+  var participants = []
+  var p = _(participants)
+  var roundCount = p.size() - 1 + (p.size() % 2)
+  var matches = p.map(function(_, i) {
+    return p.filter(function(_, j) { return j < i }).map(function(_, i2) {
+      return { round: ~~(Math.random()*10)%(roundCount + 1),
+              a: { team: i,  score: ~~(Math.random()*10)%10 },
+              b: { team: i2, score: ~~(Math.random()*10)%10 } }
+    }).value()
+  }).flatten(true).value()
+
+  var testData = {
+    teams: participants,
+    matches: matches
+  }
+  </script>
+
+  <script type="text/javascript">
+    rdata = <%- JSON.stringify(sdata) %>;
+    if(rdata){
+      viewData = rdata;
+    };
+
+  </script>
+
+
+
+  <div style="float: left; width: 45%;">
+    <div>
+    <h2>Admin view</h2>
+    <form action="/rt_gbrackets_v2/<%= gameID %>" method="post">
+      <input type="button" value="메인화면" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
+      <input type="button" value="업데이트 보기" onclick="window.location.href='/rt_gbrackets_v2/view/<%= gameID %>'" />
+      <input type="hidden" id="data_save" name="gdata" value="">
+      <input type="submit" value="저장">
+    </form>
+
+    <form action="/rt_gbrackets_v2/<%= gameID %>" method="post">
+      <input type="hidden" id="resetdata" name="gdata" value="">
+      <input type="submit" style="float: right" onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
+    </form>
+  </div>
+
+  <script type="text/javascript">
+    var nullData = {
+      teams: participants,
+      matches: matches
+    }
+    $('#resetdata').val(JSON.stringify(nullData, undefined, 2));
+  </script>
+
+  <div id="editor"></div>
+  </div>
+
+  <div style="float: right; width: 45%;">
+    <h2>Visitor view</h2>
+    <input type="button" value="보기" onclick="window.location.href='/rt_gbrackets_v2/view/<%= gameID %>'" />
+    <div id="view"></div>
+  </div>
+
+  <script class="demo" type="text/javascript">
+    $('#editor').group({
+      init: viewData,
+      save: function(state) {
+        // console.log(JSON.stringify(state, undefined, 2));
+        $('#data_save').val(JSON.stringify(state, undefined, 2));
+        $('pre').text(JSON.stringify(state, undefined, 2));
+        $('#view').empty().group({
+          init: state
+        })
+     }
+    });
+ </script>
+
+</article>
+
+</body>
+
+</html>
