@@ -20,7 +20,11 @@ router.get("/", isLoggedIn, function(req, res){
 
 
 router.post('/', isLoggedIn, function(req,res){
-  var jsondata = JSON.parse(req.body.tdata);
+  //console.log('req.body.tdata='+req.body.tdata);
+  try {    
+      var jsondata = JSON.parse(req.body.tdata);
+
+  //console.log('정상=');
   var data = new mtnt_high;
   data.gid = 21
   data.tnt_h = jsondata;
@@ -35,6 +39,11 @@ router.post('/', isLoggedIn, function(req,res){
        ts = mtnt_highs.tnt_h;
        res.render("gbrackets/vw_tnt_high32", {sdata:ts, user:req.user});
     });
+  }
+  catch(err) {    
+    console.log('에러=');
+    return res.redirect("rt_tbrackets_high32");
+  };
 });
 
 router.post('/uinput', isLoggedIn, function(req,res){
@@ -180,6 +189,7 @@ router.post('/uinput', isLoggedIn, function(req,res){
    var e3= eN[2];
    var e4= eN[3];
 
+   try {
    var jsondata = JSON.parse(req.body.tdata);
    var t32_even = [a1,c4,b2,bye,e1,bye,a3,bye,c1,a4,b3,bye,a2,bye,d3,bye];
    var t32_odd = [bye,d4,bye,e2,bye,c3,b4,d1,bye,e3,bye,d2,bye,c2,e4,b1];
@@ -187,7 +197,6 @@ router.post('/uinput', isLoggedIn, function(req,res){
       jsondata.teams[k1][0] =t32_even[k1];
       jsondata.teams[k1][1] =t32_odd[k1];
    };
-
   var data2 = new mtnt_high;
   data2.gid = 21
   data2.tnt_h = jsondata;
@@ -202,14 +211,22 @@ router.post('/uinput', isLoggedIn, function(req,res){
        ts = mtnt_highs.tnt_h;
        res.render("gbrackets/vw_tnt_high32", {sdata:ts, user:req.user});
     });
+
+  } // end of try
+  catch(err) {    
+    console.log('에러=');
+    return res.redirect("rt_tbrackets_high32");
+  };
 });
 });  // end of find
+
+
+
 router.get("/view", isLoggedIn, function(req, res){
   mtnt_high.find({}, {_id:0, tnt_h:1}, function(err, mtnt_highs){
     if(err) return res.status(500).send({error: 'database find failure'});
     var ts;
     ts = mtnt_highs[0].tnt_h;
-     var jts = json.stringify(ts);
     res.render("gbrackets/vw_tnt_high32", {sdata:ts, user:req.user});
     });
 });

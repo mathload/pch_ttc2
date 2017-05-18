@@ -7,7 +7,7 @@ var async    = require('async');
 var User     = require('../models/User');
 
 // index
-router.get('/', function(req,res){
+router.get('/', isLoggedIn, function(req,res){
   var vistorCounter = null;
   var page = Math.max(1,req.query.page)>1?parseInt(req.query.page):1;
   var limit = Math.max(1,req.query.limit)>1?parseInt(req.query.limit):10;
@@ -156,7 +156,7 @@ function isLoggedIn(req, res, next) {
     return next();
   }
   req.flash("gbooksMessage","Please login first.");
-  res.redirect('/gbooks');
+  res.redirect('/login');
 }
 
 module.exports = router;

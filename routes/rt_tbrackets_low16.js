@@ -22,6 +22,7 @@ router.get("/", isLoggedIn, function(req, res){
 
 
 router.post('/', isLoggedIn, function(req,res){
+  try {  
   var jsondata = JSON.parse(req.body.tdata);
   var data = new mtnt_low16;
   data.gid = 32;
@@ -37,6 +38,11 @@ router.post('/', isLoggedIn, function(req,res){
        ts = mtnt_low16s.tnt_l16;
        res.render("gbrackets/vw_tnt_low16", {sdata:ts, user:req.user});
     });
+  }
+  catch(err) {    
+    console.log('에러=');
+    return res.redirect("rt_tbrackets_low16");
+  };
 });
 
 router.post('/uinput', isLoggedIn, function(req,res){
@@ -182,6 +188,7 @@ router.post('/uinput', isLoggedIn, function(req,res){
    var e3= eN[6];
   // var e4= eN[7];
 
+   try {
    var jsondata = JSON.parse(req.body.tdata);
    var t32_even = [a1,b2,e1,a3,c1,b3,e2,d3];
    var t32_odd = [bye,d2,c3,d1,e3,a2,c2,b1];
@@ -204,6 +211,11 @@ router.post('/uinput', isLoggedIn, function(req,res){
        ts = mtnt_low16s.tnt_l16;
        res.render("gbrackets/vw_tnt_low16", {sdata:ts, user:req.user});
     });
+  }
+  catch(err) {    
+    console.log('에러=');
+    return res.redirect("rt_tbrackets_low16");
+  };
 }); // end of find
 });  // end of router
 

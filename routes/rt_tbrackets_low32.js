@@ -22,6 +22,7 @@ router.get("/", isLoggedIn, function(req, res){
 
 
 router.post('/', isLoggedIn, function(req,res){
+  try {
   var jsondata = JSON.parse(req.body.tdata);
   var data = new mtnt_low32;
   data.gid = 31;
@@ -37,6 +38,11 @@ router.post('/', isLoggedIn, function(req,res){
        ts = mtnt_low32s.tnt_l32;
        res.render("gbrackets/vw_tnt_low32", {sdata:ts, user:req.user});
     });
+  }
+  catch(err) {    
+    console.log('에러=');
+    return res.redirect("rt_tbrackets_low32");
+  };
 });
 
 router.post('/uinput', isLoggedIn, function(req,res){
@@ -182,6 +188,7 @@ router.post('/uinput', isLoggedIn, function(req,res){
    var e3= eN[6];
    var e4= eN[7];
 
+   try {
    var jsondata = JSON.parse(req.body.tdata);
    var t32_even = [a1,c4,b2,bye,e1,bye,a3,bye,c1,a4,b3,bye,a2,bye,d3,bye];
    var t32_odd = [bye,d4,bye,e2,bye,c3,b4,d1,bye,e3,bye,d2,bye,c2,e4,b1];
@@ -204,8 +211,15 @@ router.post('/uinput', isLoggedIn, function(req,res){
        ts = mtnt_low32s.tnt_l32;
        res.render("gbrackets/vw_tnt_low32", {sdata:ts, user:req.user});
     });
+  }
+  catch(err) {    
+    console.log('에러=');
+    return res.redirect("rt_tbrackets_low32");
+  };
 });
 });  // end of find
+
+
 router.get("/view", isLoggedIn, function(req, res){
   mtnt_low32.find({}, {_id:0, tnt_l32:1}, function(err, mtnt_low32s){
     if(err) return res.status(500).send({error: 'database find failure'});
