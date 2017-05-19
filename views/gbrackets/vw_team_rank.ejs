@@ -6,15 +6,19 @@
   <% include ../partials/navbar %>
   <% include ../partials/header %>
   <article id="main">
-    <div>
-      <input type="button" value="메인화면" onclick="window.location.href='/'" />
-      <input type="button" value="업데이트 보기" onclick="window.location.href='/rt_rankview/tmview'" />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <input class="btn btn-primary" type="button" value="메인화면" onclick="window.location.href='/'" />
+          <input class="btn btn-success" type="button" value="업데이트 보기" onclick="window.location.href='/rt_rankview/tmview'" />
+        </div>
+    </div>
     </div>
 
-  <h1>XX대회 단체전 순위표 </h1>
-      <div class="container-fluid">
       	<div class="row">
       		<div class="col-md-12">
+              <h1>XX대회 단체전 순위표 </h1>
       			<table class="table table-bordered table-hover">
       				<thead>
       					<tr>
@@ -148,7 +152,7 @@
     ardata[11] = <%- JSON.stringify(data_11) %>;
     ardata[12] = <%- JSON.stringify(data_12) %>;
 
-    // alert(ardata[1]);
+    //alert(ardata[1]);
     // console.log(ardata[1]);
     //alert('ardata[0].gName='+ardata[0].gName);
     // 단식과 복식으로 원본 데이터 분류
@@ -160,7 +164,7 @@
        rdata_dm.push(ardata[kf]);
      }
    };
-  // alert('rdata_sm[0].gnamePlus='+rdata_sm[0].gnamePlus); ok
+  // alert('rdata_sm[0].gnamePlus='+rdata_sm[0].gnamePlus);
   for ( var sm = 0 ; sm < rdata_sm.length ; sm++ ){
     rdata_gpsa.push(rdata_sm[sm].gnamePlus[0]);
     rdata_gpsb.push(rdata_sm[sm].gnamePlus[1]);

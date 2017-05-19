@@ -72,6 +72,7 @@ router.get("/tmview/", function(req, res){
                                       data_5:ts5, data_6:ts6, data_7:ts7, data_8:ts8, data_9:ts9,
                                       data_10:ts10, data_11:ts11, data_12:ts12});
   });
+    //console.log('여기 ts0='+ts0);
 });
 
 module.exports = router;

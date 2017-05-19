@@ -20,11 +20,8 @@ router.get("/", isLoggedIn, function(req, res){
 
 
 router.post('/', isLoggedIn, function(req,res){
-  //console.log('req.body.tdata='+req.body.tdata);
   try {    
       var jsondata = JSON.parse(req.body.tdata);
-
-  //console.log('정상=');
   var data = new mtnt_high;
   data.gid = 21
   data.tnt_h = jsondata;
@@ -41,7 +38,6 @@ router.post('/', isLoggedIn, function(req,res){
     });
   }
   catch(err) {    
-    console.log('에러=');
     return res.redirect("rt_tbrackets_high32");
   };
 });
@@ -214,7 +210,6 @@ router.post('/uinput', isLoggedIn, function(req,res){
 
   } // end of try
   catch(err) {    
-    console.log('에러=');
     return res.redirect("rt_tbrackets_high32");
   };
 });

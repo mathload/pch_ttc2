@@ -12,6 +12,14 @@ body {
   padding-top: 70px;
 }
 
+.jumbotron {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #e5eab1;
+}
+
 header, footer{
   display:block;
 }

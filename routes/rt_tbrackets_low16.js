@@ -40,7 +40,6 @@ router.post('/', isLoggedIn, function(req,res){
     });
   }
   catch(err) {    
-    console.log('에러=');
     return res.redirect("rt_tbrackets_low16");
   };
 });
@@ -213,7 +212,6 @@ router.post('/uinput', isLoggedIn, function(req,res){
     });
   }
   catch(err) {    
-    console.log('에러=');
     return res.redirect("rt_tbrackets_low16");
   };
 }); // end of find

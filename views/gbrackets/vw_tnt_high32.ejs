@@ -21,6 +21,17 @@
 <link rel="stylesheet" type="text/css" href="/css/jquery.bracket-site.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.bracket.min.css" />
 
+<!-- Bootstrap core CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="/css/master.css">
+<link rel="stylesheet" href="/css/normalize.css">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 
 <script type="text/javascript">
 $(function() {
@@ -51,44 +62,51 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 </head>
 
 <body>
-
+  <% include ../partials/navbar %>
+  <% include ../partials/header %>
   <!-- <div style="float: left; width: 45%;"> -->
-    <h2>상위부 결선 토너먼트</h2>
+  <div class="container" id="about">
+    <div class="row">
+        <div class="col-xs-12">
+    <h2>상위부 결선 토너먼트 32강전</h2>
     <% if(user.username == 'admin') {%>
     <h3>Admin view</h3>
-    <div>
     <form action="/rt_tbrackets_high32" method="post">
       <input type="hidden" id="resetdata" name="tdata" value="">
-      <input type="submit" style="float: right" onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
+      <input class="btn btn-danger active" type="submit" style="float: right" onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
     </form>
     <form action="/rt_tbrackets_high32/uinput" method="post">
       <input type="hidden" id="savedata2" name="tdata" value="">
-      <input type="submit" style="float: right" onclick="return confirm('예선리그 결과를 바탕으로 대진표를 자동생성합니다')" value="자동생성">
+      <input class="btn btn-success active" type="submit" style="float: right" onclick="return confirm('예선리그 결과를 바탕으로 대진표를 자동생성합니다')" value="자동생성">
     </form>
     <form action="/rt_tbrackets_high32" method="post">
         <input type="hidden" id="savedata" name="tdata" value="">
-        <input type="button" value="메인화면" onclick="window.location.href='/'" />
-        <input type="submit" value="저장">
-        <input type="button" value="업데이트보기" onclick="window.location.href='/rt_tbrackets_high32'" />
+        <input class="btn btn-info active" type="button" value="메인화면" onclick="window.location.href='/'" />
+        <input class="btn btn-warning active" type="submit" value="저장">
+        <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/rt_tbrackets_high32'" />
     </form>
-    </div>
   <hr>
-  <div id="save">
-
+  <div id="save"></div>
+  </div>
+  </div>
+  </div>
     <% } %>
     <%  if(user.username == 'guest') { %>
+      <div class="container" id="about">
+        <div class="row">
+            <div class="col-xs-12">
         <h3>guest view</h3>
-        <div>
         <form action="/rt_tbrackets_high32" method="post">
             <input type="hidden" id="savedata" name="tdata" value="">
-            <input type="button" value="메인화면" onclick="window.location.href='/'" />
-            <input type="button" value="업데이트보기" onclick="window.location.href='/rt_tbrackets_high32'" />
+            <input class="btn btn-info active" type="button" value="메인화면" onclick="window.location.href='/'" />
+            <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/rt_tbrackets_high32'" />
         </form>
-        </div>
       <hr>
-      <div id="save">
+      <div id="save"> </div>
   <% } %>
-
+</div>
+</div>
+</div>
   <script type="text/javascript">
   var viewData = {
     teams: [

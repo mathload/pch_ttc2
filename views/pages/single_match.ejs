@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <% include ../partials/head2 %>
+    <% include ../partials/head %>
 
 <body>
   <% include ../partials/navbar %>
@@ -9,9 +9,12 @@
 
 
         <!-- content for about page -->
-        <input type="button" value="홈으로" onclick="window.location.href='/'" />
+
         <div class="container" id="about">
           <div class="row">
+                  <div class="col-xs-12">
+                   <input class="btn btn-primary active" type="button" value="홈으로" onclick="window.location.href='/'" />
+                  </div>
                   <div class="col-xs-12">
                     <h2>대회 개인전 메인페이지</h2>
                   </div>   <!-- end of row -->
@@ -23,14 +26,14 @@
                         <li><a href="/rt_gbrackets_v2/view/sm-12">group_C</a></li>
                         <li><a href="/rt_gbrackets_v2/view/sm-13">group_D</a></li>
                         <li><a href="/rt_gbrackets_v2/view/sm-14">group_E</a></li>
-                        <li><a href="/rt_gbrackets_v2/view/sm-15">group_F</a></li>
+                        <li><a href="/rt_gbrackets_v2/view/sm-15">group_F</a></li><br><br>
                     </div>
             </div>   <!-- end of row -->
 
             <div class="row">
                     <div class="col-xs-12">
                         <h3>예선리그 각조별 상세 순위표</h3>
-                        <li><a href="/rt_rankview/smview">예선 리그 상세순위표</a></li>
+                        <li><a href="/rt_rankview/smview">예선 리그 상세순위표</a></li><br><br>
                     </div>
             </div> <!-- end of row -->
 
@@ -39,7 +42,7 @@
                         <h3>결선 토너먼트 대진표</h3>
                         <li><a href="/rt_tbrackets_high32">상위부 결선 토너먼트 32강</a></li>
                         <li><a href="/rt_tbrackets_low16">하위부 결선 토너먼트 16강</a></li>
-                        <li><a href="/rt_tbrackets_low32">하위부 결선 토너먼트 32강</a></li>
+                        <li><a href="/rt_tbrackets_low32">하위부 결선 토너먼트 32강</a></li><br><br>
                     </div>
             </div> <!-- end of row -->
         </div><!-- end of content -->

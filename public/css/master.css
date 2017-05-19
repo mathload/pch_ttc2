@@ -5,6 +5,23 @@ body {
   padding-top: 70px;
 }
 
+.jumbotron {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #e5eab1;
+}
+
+.table td,th {
+   text-align: center;
+   font-size: 16px;
+}
+
+.table th {
+   color: #e67f15;
+}
+
 form label{
   padding: 3px;
   margin-bottom: 0;
@@ -79,6 +96,18 @@ form .form-group{
   padding: 6px 15px;
 }
 
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 1;
+    color: #347dbd;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
 /* home style */
 .home h1{
   color: darkseagreen;

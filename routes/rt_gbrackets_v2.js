@@ -8,7 +8,7 @@ var gbkt_each = require('../models/gbkt_each');
 var md_gRank = require('../models/md_groupRank');
 
 
-router.get('/:id', function(req, res){
+router.get('/:id',isLoggedIn, function(req, res){
   var ts = "aaa";
   var gameID = req.params.id;
   var strArr = gameID.split('-');
@@ -33,7 +33,7 @@ router.get('/:id', function(req, res){
           };
      };
   };
-  res.render("gbrackets/vw_eachgroup", {sdata:ts, gname:gname, gameID:gameID});
+  res.render("gbrackets/vw_eachgroup", {sdata:ts, gname:gname, gameID:gameID, user:req.user});
 });
 
 router.get('/main/teamEvent', function(req, res){
@@ -49,47 +49,14 @@ router.post('/:id',isLoggedIn, function(req,res){
 //  console.log("라우터도착");
   var gameID = req.params.id;
   var strArr = gameID.split('-');
+  try {   
   var jsondata = JSON.parse(req.body.gdata);
   var data = new gbkt_each;
-  //  console.log("라우터도착 id=" + req.params.id);
-  //data.gid = 10;
   var tid = 0;
   var fid = 0;
-  if(req.params.id == 'A'){
-    tid = 10;
-  }
-  if(req.params.id == 'B'){
-    tid = 11;
-  }
-  if(req.params.id == 'C'){
-    tid = 12;
-  }
-  if(req.params.id == 'D'){
-    tid = 13;
-  }
-  if(req.params.id == 'E'){
-    tid = 14;
-  }
-  if(req.params.id == 'F'){
-    tid = 15;
-  }
-
   tid = strArr[1];
-  // var gt = strArr[1]%10;
-  // var ot = strArr[1];
-  // console.log('gt='+gt);
-  // for ( var nt = 0 ; nt < 10 ; nt++ ){
-  //   if(gt == nt){
-  //     tid = Number(strArr[1])+nt;
-  //   };
-  // };
-
-
   data.gid = tid;
   var fid = 60+Number(tid);
-    //console.log('tid='+tid);
-    //console.log('fid='+fid);
-//  console.log("gid=" + data.gid);
   data.group_each = jsondata;
   gbkt_each.findOneAndUpdate({gid: data.gid},
     {group_each:jsondata},
@@ -1520,48 +1487,38 @@ router.post('/:id',isLoggedIn, function(req,res){
       // console.log("user=" + user);
       res.render("gbrackets/vw_eachgroup", {sdata:ts,  gname:gname, gameID:gameID, user:req.user});
     }); // end of findOneAndUpdate  router.post('/:id', function(req,res){
+
+    }
+    catch(err) {    
+      return res.redirect("rt_gbrackets_v2");
+    };
+
 }); // end of router post/id
 
-// router.post('/null', function(req,res){
-//     var jsondata = JSON.parse(req.body.gdata);
-//   var data = new gbracketA;
-//   data.gid = 10
-//   data.groupA = jsondata;
-//   gbracketA.findOneAndUpdate({gid: data.gid},
-//     {groupA:jsondata},
-//     {new: true, upsert: true, setDefaultsOnInsert: true},
-//     function(error, gbracketAs) {
-//       if(error){
-//           console.log("Something wrong when updating data!");
-//       }
-//        var ts;
-//        ts = gbracketAs.groupA;
-//        res.render("gbrackets/vw_eachgroup", {sdata:ts});
-//     });
-// });
+
 
 router.get("/view/:id", isLoggedIn, function(req, res){
   var tid = 0;
   var gameID = req.params.id;
   var strArr = gameID.split('-');
-  if(req.params.id == 'A'){
-    tid = 10;
-  }
-  if(req.params.id == 'B'){
-    tid = 11;
-  }
-  if(req.params.id == 'C'){
-    tid = 12;
-  }
-  if(req.params.id == 'D'){
-    tid = 13;
-  }
-  if(req.params.id == 'E'){
-    tid = 14;
-  }
-  if(req.params.id == 'F'){
-    tid = 15;
-  }
+  // if(req.params.id == 'A'){
+  //   tid = 10;
+  // }
+  // if(req.params.id == 'B'){
+  //   tid = 11;
+  // }
+  // if(req.params.id == 'C'){
+  //   tid = 12;
+  // }
+  // if(req.params.id == 'D'){
+  //   tid = 13;
+  // }
+  // if(req.params.id == 'E'){
+  //   tid = 14;
+  // }
+  // if(req.params.id == 'F'){
+  //   tid = 15;
+  // }
   tid = strArr[1];
 
   gbkt_each.find({gid:tid}, {_id:0, group_each:1}, function(err, gbkt_eachs){
