@@ -34,12 +34,18 @@ ul{
   list-style-type: none;
   padding:0;
 }
+
 li{
-  font-size: 15px;
-  padding:0;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: sans-serif;
+  padding: 0px;
   color: #096cc1;
   line-height:30px;
+  margin-left: 30px;
+  margin-top: 10px;
 }
+
 h1{
   color:tomato;
   text-align:center;
