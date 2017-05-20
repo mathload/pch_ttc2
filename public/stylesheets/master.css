@@ -140,6 +140,7 @@ table tbody tr:nth-child(odd){
 }
 table tbody td:first-child+td{
   text-align: left;
+  font-size: 15px;
 }
 .floats:after{
   content: "";
@@ -312,11 +313,19 @@ form .form-group{
 .post .post-body {
   white-space: pre-line;
   padding: 6px 15px 20px;
+  font-size: 15px;
 }
 
 .gbook .post-body {
   white-space: pre-line;
   padding: 6px 15px 20px;
+  font-size: 15px;
+}
+
+.gbook-mesg {
+    white-space: pre-line;
+    padding: 6px 15px 20px;
+    font-size: 16px;
 }
 
 .posts .index,
@@ -417,6 +426,7 @@ select::-ms-expand { /* for IE 11 */
   word-break: break-all;
   margin-left: 5px;
   width: 650px;
+  font-size: 15px;
 }
 .posts .show .comment .delete button{
   position:relative;
