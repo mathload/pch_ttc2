@@ -58,26 +58,30 @@
         <input class="btn btn-primary active" type="button" value="홈페이지"  onclick="window.location.href='/'" />
         <input class="btn btn-danger active" type="submit"
           onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
-      </div>
-
         </form>
-          </div>
-          <div class="row">
-              <div class="col-xs-12">
-      <div id="editor"></div>
       </div>
+    </div>
+          <div class="row">
+            <div class="col-xs-12">
+                <div id="editor"></div>
+           </div>
         </div>
     <% } %>
     <%  if(user.username == 'guest') { %>
+      <div class="row">
+        <div class="col-xs-12">
         <h2>Visitor view</h2>
         <input class="btn btn-info active" type="button" value="메인화면" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
         <input class="btn btn-success active" type="button" value="업데이트 보기" onclick="window.location.href='/rt_gbrackets_v2/view/<%= gameID %>'" />
         <input class="btn btn-primary active" type="button" value="홈페이지" style="float: right" onclick="window.location.href='/'" />
-        <div class="row">
+      </div>
+      </div>
+      <div class="row">
             <div class="col-xs-12">
             <div id="view"></div>
             </div>
       </div>
+
     <% } %>
   </div>
     </div>

@@ -97,7 +97,7 @@
 }
 
 .jqgroup .standings input[type=submit] {
-
+    width: 100%
 }
 
 .jqgroup .standings input[type=text] {
@@ -137,7 +137,8 @@
 .jqgroup .rounds {
     background-color: #ddd;
     border-top: 1px solid #999;
-
+    float: left;
+    width: 100%
 }
 
 .jqgroup .roundsHeader {
