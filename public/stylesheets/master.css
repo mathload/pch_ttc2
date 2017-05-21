@@ -61,7 +61,7 @@ h3{
   margin: 0;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  background-color: #F5F5F5;
+  background-color: #e0deb2;
   padding: 5px 15px;
 }
 h4{
@@ -237,7 +237,7 @@ button[disabled]:hover{
 .form-horizontal .control-label {
   padding-top: 5px;
   text-align: right;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .contentBox{
@@ -250,7 +250,7 @@ button[disabled]:hover{
   font-weight: 600;
   margin: 0;
   border-bottom: 1px solid #ccc;
-  background-color: #F5F5F5;
+  background-color: #9dc9ef;
   padding: 6px 15px;
 }
 

@@ -39,7 +39,7 @@
     };
 
   </script>
-
+  <div class="container" id="about">
   <div class="buttons">
     <% if(user.username == 'admin') {%>
       <div class="row">
@@ -66,8 +66,11 @@
 
         </form>
           </div>
+          <div class="row">
+              <div class="col-xs-12">
       <div id="editor"></div>
       </div>
+        </div>
     <% } %>
     <%  if(user.username == 'guest') { %>
       <div style="">
@@ -75,14 +78,20 @@
         <input class="btn btn-info active" type="button" value="메인화면" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
         <input class="btn btn-success active" type="button" value="업데이트 보기" onclick="window.location.href='/rt_gbrackets_v2/view/<%= gameID %>'" />
         <input class="btn btn-primary active" type="button" value="홈페이지" style="float: right" onclick="window.location.href='/'" />
+        <div class="row">
+            <div class="col-xs-12">
         <div id="view"></div>
+      </div>
+        </div>
       </div>
     <% } %>
   </div>
-  </div>
-  </div>
+    </div>
 
-  </div> <!-- content for about page -->
+
+
+
+
 
 
 
