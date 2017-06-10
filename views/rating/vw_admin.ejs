@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+    <% include ../partials/head %>
+  <body>
+
+    <% include ../partials/navbar %>
+    <% include ../partials/header %>
+
+    <div class="container home home-about">
+
+    </div>
+
+    <div class="container player player-new">
+
+      <div class="container home home-welcome">
+        <h3>관리자 메뉴</h3>
+        <li><a href="/admin/newmember">회원등록</a></li>
+        <li><a href="/rt_resultset">리그전결과산출</a></li>
+        <li><a href="/rt_resultset/tnt32">토너먼트32강전 결과산출</a></li>
+        <li><a href="/rt_updateRanking">레이팅업데이트</a></li>
+        <li><a href="/rt_viewRating/all">회원레이팅보기</a></li>
+      </div>
+    <!-- main start-->
+
+    <!-- views/users/new.ejs -->
+
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+      <% include ../partials/scripts %>
+  </body>
+</html>

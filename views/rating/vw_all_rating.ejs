@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/head %>
+
+<body>
+  <% include ../partials/navbar %>
+  <% include ../partials/header %>
+  <article id="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <input class="btn btn-primary" type="button" value="메인화면" onclick="window.location.href='/'" />
+          <input class="btn btn-success" type="button" value="업데이트 보기" onclick="window.location.href='/rt_rankview/tmview'" />
+        </div>
+    </div>
+    </div>
+
+      	<div class="row">
+      		<div class="col-md-12">
+              <h1>박세훈 탁구동호회 회원 레이팅 </h1>
+      			<table class="table table-bordered table-hover">
+      				<thead>
+      					<tr class="danger">
+                  <th>순위</th>
+                  <th>이름</th>
+                  <th>부수</th>
+                  <th>레이팅</th>
+                  <th>전적</th>
+                  <th>승률</th>
+                  <th>레이팅내역-상대전적</th>
+      					</tr>
+      				</thead>
+      				<tbody>
+              <% for(var i=0; i < memberList.length; i++) { %>
+               <tr class="success">
+                   <td><%= i+1 %></td>
+                   <td><%= memberList[i].myname %></td>
+                    <td><%= memberList[i].grade %></td>
+                    <td><%= parseInt(memberList[i].myCurrentRating) %></td>
+                    <td><%= memberList[i].no_win %>승<%= memberList[i].no_loss %>패</td>
+                    <td><%= parseInt(memberList[i].winRate) %>%</td>
+                    <td>
+                      <input class="btn btn-primary" type="button" value="레이팅내역"
+                        onclick="window.location.href='/rt_viewRating/each/<%= memberList[i].myname %>'" />
+                      <input class="btn btn-success" type="button" value="상대전적"
+                        onclick="window.location.href='/rt_viewRating/relative/<%= memberList[i].myname %>'" />
+                    </td>
+                 </tr>
+                <% } %>
+      				</tbody>
+      			</table>
+      		</div>
+      	</div>
+      </div>
+</article>
+    <% include ../partials/scripts %>
+
+    </script> %>
+</body>
+
+</html>

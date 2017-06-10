@@ -519,8 +519,9 @@
     for ( var i = 0 ; i < rdata_A.rankData.length ; i++ ){
       var ndA = rdata_A.rankData[i]%100
       aN[i] = nameArrA[ndA];
-      aPP[i] = parseInt(rdata_A.rankData[i]/1000000000)%100;
-      aP[i] = aPP[i]+"점("+winArrA[ndA]+"승"+loseArrA[ndA]+"패)"
+      //aPP[i] = parseInt(rdata_A.rankData[i]/1000000000)%100;
+      aPP[i] = Number(winArrA[ndA])*2 + Number(loseArrA[ndA]);
+      aP[i] = aPP[i]+"점("+winArrA[ndA]+"승"+loseArrA[ndA]+"패)";
       aR[i] = parseInt(rdata_A.rankData[i]/100000000000);
     };
 
@@ -567,7 +568,8 @@
   for ( var i = 0 ; i < rdata_B.rankData.length ; i++ ){
     var ndB = rdata_B.rankData[i]%100;
     bN[i] = nameArrB[ndB];
-    bPP[i] = parseInt(rdata_B.rankData[i]/1000000000)%100;
+    //bPP[i] = parseInt(rdata_B.rankData[i]/1000000000)%100;
+    bPP[i] = Number(winArrB[ndB])*2 + Number(loseArrB[ndB]);
     bP[i] = bPP[i]+"점("+winArrB[ndB]+"승"+loseArrB[ndB]+"패)";
     bR[i] = parseInt(rdata_B.rankData[i]/100000000000);
   };
@@ -614,7 +616,8 @@
   for ( var i = 0 ; i < rdata_C.rankData.length ; i++ ){
     var ndC = rdata_C.rankData[i]%100
     cN[i] = nameArrC[ndC];
-    cPP[i] = parseInt(rdata_C.rankData[i]/1000000000)%100;
+    //cPP[i] = parseInt(rdata_C.rankData[i]/1000000000)%100;
+    cPP[i] = Number(winArrC[ndC])*2 + Number(loseArrC[ndC]);
     cP[i] = cPP[i]+"점("+winArrC[ndC]+"승"+loseArrC[ndC]+"패)"
     cR[i] = parseInt(rdata_C.rankData[i]/100000000000);
   };
@@ -661,7 +664,8 @@
   for ( var i = 0 ; i < rdata_D.rankData.length ; i++ ){
     var ndD = rdata_D.rankData[i]%100
     dN[i] = nameArrD[ndD];
-    dPP[i] = parseInt(rdata_D.rankData[i]/1000000000)%100;
+    //dPP[i] = parseInt(rdata_D.rankData[i]/1000000000)%100;
+    dPP[i] = Number(winArrD[ndD])*2 + Number(loseArrD[ndD]);
     dP[i] = dPP[i]+"점("+winArrD[ndD]+"승"+loseArrD[ndD]+"패)"
     dR[i] = parseInt(rdata_D.rankData[i]/100000000000);
   };
@@ -708,7 +712,8 @@
   for ( var i = 0 ; i < rdata_E.rankData.length ; i++ ){
     var ndE = rdata_E.rankData[i]%100
     eN[i] = nameArrE[ndE];
-    ePP[i] = parseInt(rdata_E.rankData[i]/1000000000)%100;
+    //ePP[i] = parseInt(rdata_E.rankData[i]/1000000000)%100;
+    ePP[i] = Number(winArrE[ndE])*2 + Number(loseArrE[ndE]);
     eP[i] = ePP[i]+"점("+winArrE[ndE]+"승"+loseArrE[ndE]+"패)"
     eR[i] = parseInt(rdata_E.rankData[i]/100000000000);
   };
@@ -755,7 +760,8 @@
   for ( var i = 0 ; i < rdata_F.rankData.length ; i++ ){
     var ndF = rdata_F.rankData[i]%100
     fN[i] = nameArrF[ndF];
-    fPP[i] = parseInt(rdata_F.rankData[i]/1000000000)%100;
+    //fPP[i] = parseInt(rdata_F.rankData[i]/1000000000)%100;
+    fPP[i] = Number(winArrF[ndF])*2 + Number(loseArrF[ndF]);
     fP[i] = fPP[i]+"점("+winArrF[ndF]+"승"+loseArrF[ndF]+"패)"
     fR[i] = parseInt(rdata_F.rankData[i]/100000000000);
   };

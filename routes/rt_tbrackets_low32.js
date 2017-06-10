@@ -27,8 +27,9 @@ router.post('/', isLoggedIn, function(req,res){
   var data = new mtnt_low32;
   data.gid = 31;
   data.tnt_l32 = jsondata;
+  var d = new Date();
   mtnt_low32.findOneAndUpdate({gid: data.gid},
-    {tnt_l32:jsondata},
+    {tnt_l32:jsondata,gameDate:d},
     {new: true, upsert: true, setDefaultsOnInsert: true},
     function(error, mtnt_low32s) {
       if(error){

@@ -11,10 +11,14 @@
   <% include partials/top %>
 <!-- main start-->
 
+
   <div class="container post post-index">
     <div class="message">
       <%= postsMessage %>
     </div>
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
   <div class="buttons">
     <button class="float_left" onclick="location.href='/posts/new'">New</button>
     <% if(user) {%>
@@ -25,6 +29,10 @@
       <button class="float_right" onclick="location.href='/users/new'">Sign Up</button>
     <% } %>
   </div>
+    </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
   <table>
     <colgroup>
       <col class="num"/>
@@ -62,6 +70,8 @@
       <% }) %>
     </tbody>
   </table>
+  </div>
+  </div>
   <ul class="pagination">
     <%
       var offset = 3;
@@ -122,6 +132,9 @@
 
 <!-- main end -->
     </div><!--posts end -->
+
+  </div>
+
     <footer>
       <% include ../partials/footer %>
     </footer>

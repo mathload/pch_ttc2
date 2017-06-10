@@ -13,13 +13,15 @@
   <style>
 
   </style>
+  <div class="container-fluid">
 
   <div class="container gbook gbook-index">
     <div class="contentBox">
-    <h3 class="contentBoxTop">방명록 글남기기</h3>
+    <h3 class="contentBoxTop">한줄메모 글남기기</h3>
     <form class="post-form form-horizontal" action="/gbooks" method="post">
 
-
+      <div class="row">
+        <div class="col-md-12">
         <div class="form-group">
           <label for="Author" class="col-sm-2 control-label">작성자</label>
           <div class="col-sm-2">
@@ -36,7 +38,8 @@
         </div> <!-- form-group end -->
 
     </div>  <!-- contentBox end -->
-
+      </div>
+        </div>
         <div class="buttons">
           <button class="btn btn-success" type="submit">작성완료</button>
         </div>
@@ -143,6 +146,9 @@
 
 </div>  <!-- contentBox end -->
 </div><!--gbooks container end -->
+
+
+</div>
 <footer>
     <% include ../partials/footer %>
 </footer>

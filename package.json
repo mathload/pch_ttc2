@@ -26,8 +26,10 @@
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "express-session": "^1.15.2",
+    "glicko2-lite": "^1.0.1",
     "method-override": "^2.3.5",
     "mongoose": "^4.1.7",
+    "mongoose-auto-increment": "^5.0.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0"
   }

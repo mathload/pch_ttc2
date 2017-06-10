@@ -56,10 +56,11 @@ router.post('/:id',isLoggedIn, function(req,res){
   var fid = 0;
   tid = strArr[1];
   data.gid = tid;
+  gameDate = new Date();
   var fid = 60+Number(tid);
   data.group_each = jsondata;
   gbkt_each.findOneAndUpdate({gid: data.gid},
-    {group_each:jsondata},
+    {group_each:jsondata, gameDate:gameDate},
     {new: true, upsert: true, setDefaultsOnInsert: true},
     function(error, gbkt_eachs) {
       if(error){

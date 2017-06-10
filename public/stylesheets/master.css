@@ -114,8 +114,16 @@ table colgroup .author {
 table tr{
   border-bottom: 1px solid #ccc;
 }
-table td, th{
+table td{
   padding: 7px 15px;
+  text-align: center;
+  font-size: 16px;
+}
+table  th{
+  padding: 7px 15px;
+  text-align: center;
+  font-size: 16px;
+  color: #0b9c98;
 }
 table thead tr{
   background-color: #F5F5F5;

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+    <% include ../partials/head %>
+  <body>
+
+    <% include ../partials/navbar %>
+    <% include ../partials/header %>
+
+    <div class="container home home-about">
+      <h1>About</h1>
+
+      <P>이 사이트는 준비중입니다.....</p>
+    </div>
+
+    <div class="container player player-new">
+
+      <div class="container home home-welcome">
+        <h3>회원등록</h3>
+
+      </div>
+    <!-- main start-->
+
+    <!-- views/users/new.ejs -->
+    <div class="contentBox">>
+    <div class="buttons">
+    <button class="btn btn-default" onclick="location.href='/'">Home</button>
+    </div>
+    <h3 class="contentBoxTop">선수등록</h3>
+
+    <form class="user-form form-horizontal" action="/rt_resistMember" method="post">
+
+    <fieldset>
+    <div class="form-group">
+      <label for="playerName_e" class="col-sm-4 control-label">이름*</label>
+      <div class="col-sm-8">
+      <input class="form-control" type="text" name="playerName_e" >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email" class="col-sm-4 control-label">부수*</label>
+      <div class="col-sm-8">
+      <input class="form-control" type="text" name="playerGrade_e" >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="col-sm-4 control-label">성별*</label>
+      <div class="col-sm-8">
+      <input class="form-control" type="text" name="sex_e" >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username" class="col-sm-4 control-label">회원구분*</label>
+      <div class="col-sm-8">
+      <input class="form-control" type="text" name="membership_e" >
+      </div>
+    </div>
+
+    <p><small>*필수기입항목</small></p>
+    </div>
+    <div class="buttons">
+    <button class="btn btn-default" type="submit">가입</button>
+
+    </div>
+    </form>
+    </div>
+        <input type="button" value="보기" onclick="window.location.href='/rt_playerRanking/view/' " />
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+      <% include ../partials/scripts %>
+  </body>
+</html>

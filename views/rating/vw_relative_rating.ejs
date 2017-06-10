@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/head %>
+
+<body>
+  <% include ../partials/navbar %>
+  <% include ../partials/header %>
+  <article id="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <input class="btn btn-primary" type="button" value="메인화면" onclick="window.location.href='/'" />
+          <input class="btn btn-success" type="button" value="업데이트 보기" onclick="window.location.href='/rt_rankview/tmview'" />
+        </div>
+    </div>
+    </div>
+
+      	<div class="row">
+      		<div class="col-md-12">
+              <h2><%= myname %>님의 상대전적(레이팅포인트:<%= parseInt(myrating) %>) </h2>
+      			<table class="table table-bordered table-hover">
+      				<thead>
+      					<tr class="danger">
+                  <th>상대명</th>
+                  <th>승/패</th>
+                  <th>승률</th>
+      					</tr>
+      				</thead>
+      				<tbody>
+              <% for(var i=0; i < relativeList.length; i++) { %>
+               <tr class="success">
+                 <td><%= relativeList[i].oppname %></td>
+                 <td><%= relativeList[i].rv_win %>승:<%= relativeList[i].rv_loss %>패</td>
+                 <td><%= parseInt(relativeList[i].rv_winrate) %>%</td>
+             </tr>
+            <% } %>
+            <tr class="danger">
+              <td>합계</td>
+              <td><%= total_win %>승:<%= total_loss %>패</td>
+              <td><%= parseInt(total_winrate) %>%</td>
+            </tr>
+      				</tbody>
+      			</table>
+      		</div>
+      	</div>
+      </div>
+
+  <script type="text/javascript">
+
+  </script>
+
+  <script type="text/javascript">
+
+
+
+
+
+  </script>
+
+</article>
+    <% include ../partials/scripts %>
+
+    </script> %>
+</body>
+
+</html>

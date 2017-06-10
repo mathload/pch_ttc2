@@ -8,12 +8,14 @@ var bodyParser     = require('body-parser');
 var cookieParser   = require('cookie-parser');
 var methodOverride = require('method-override');
 var passport       = require("./config/passport");
+var autoIncrement = require('mongoose-auto-increment');
 
 // database
 mongoose.connect(process.env.MONGO_DB);
 var db = mongoose.connection;
+autoIncrement.initialize(db);
 db.once("open",function () {
-  console.log("DB connected!");
+  console.log("DB connected! ");
 });
 db.on("error",function (err) {
   console.log("DB ERROR :", err);
@@ -51,12 +53,18 @@ app.use(function(req,res,next){
 app.use('/', require('./routes/home'));
 app.use('/users', require('./routes/users'));
 app.use('/posts', require('./routes/posts'));
+app.use('/rating', require('./routes/rating'));
+app.use('/admin', require('./routes/admin'));
 app.use('/gbooks', require('./routes/gbooks'));
 app.use('/rt_gbrackets_v2', require('./routes/rt_gbrackets_v2'));
 app.use('/rt_rankview', require('./routes/rt_rankview'));
 app.use('/rt_tbrackets_high32', require('./routes/rt_tbrackets_high32'));
 app.use('/rt_tbrackets_low32', require('./routes/rt_tbrackets_low32'));
 app.use('/rt_tbrackets_low16', require('./routes/rt_tbrackets_low16'));
+app.use('/rt_resultset', require('./routes/rt_resultset'));
+app.use('/rt_resistMember', require('./routes/rt_resistMember'));
+app.use('/rt_updateRanking', require('./routes/rt_updateRanking'));
+app.use('/rt_viewRating', require('./routes/rt_viewRating'));
 
 // start server
 var port = process.env.PORT || 3000;
