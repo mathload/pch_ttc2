@@ -5,7 +5,7 @@ var passport = require('../config/passport.js');// to use passport authenticate 
 
 // Home
 router.get("/", function(req, res){
-  res.render("home/welcome");
+  res.render("home/gamehome");
 });
 router.get("/about", function(req, res){
   res.render("gbooks/index");

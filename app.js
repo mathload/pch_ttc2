@@ -9,6 +9,7 @@ var cookieParser   = require('cookie-parser');
 var methodOverride = require('method-override');
 var passport       = require("./config/passport");
 var autoIncrement = require('mongoose-auto-increment');
+mongoose.Promise = require('bluebird');
 
 // database
 mongoose.connect(process.env.MONGO_DB);
@@ -31,7 +32,10 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(methodOverride("_method"));
 app.use(flash());
-app.use(session({secret:'MySecret'}));
+//app.use(session({secret:'MySecret'}));
+app.use(session({secret: '<mysecret>',
+                 saveUninitialized: true,
+                 resave: true}));
 app.use(countVisitors);
 
 // passport //after session setting

@@ -30,11 +30,6 @@ router.post('/tview/:id', function(req,res){
       if(error){
           console.log("Something wrong when updating data!");
       }
-       var ts;
-       ts = md_gRanks.group_rank;
-      // var jts = json.parse(ts);
-      console.log(ts);
-       // res.render("tbrackets/tnt_high", {sdata:ts});
     });
 });
 
@@ -72,7 +67,6 @@ router.get("/tmview/", function(req, res){
                                       data_5:ts5, data_6:ts6, data_7:ts7, data_8:ts8, data_9:ts9,
                                       data_10:ts10, data_11:ts11, data_12:ts12});
   });
-    //console.log('여기 ts0='+ts0);
 });
 
 module.exports = router;

@@ -7,13 +7,12 @@
 
 <% include ../partials/navbar %>
 <% include ../partials/header %>
-  <div class="container post post-show">
+
+    <div class="container-fluid">
+
     <div class="posts">
     <% include partials/top %>
 <!-- main start-->
-
-
-<div class="show">
 
   <div class="buttons floats">
   <div class="buttons">
@@ -25,7 +24,7 @@
         </form>
         <button class="btn btn-default float_right"  onclick="location.href='/posts/<%=post._id%>/edit'">수정</button>
       <% } %>
-      <button class="btn btn-default float_left" onclick="location.href='/posts?<%= urlQuery %>'">목록보기</button>
+      <button class="btn btn-info float_left" onclick="location.href='/posts?<%= urlQuery %>'">목록보기</button>
     </div>
     </div>
   </div>

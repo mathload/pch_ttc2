@@ -57,18 +57,13 @@ router.get("/relative/:id", function(req, res){
         for ( var op = 0 ; op < listsets.length ; op++ ){
           oppList.push(listsets[op].oppname);
         };
-          //console.log('function-1'+oppList);
           callback(null, listsets, oppList);
     },
     function(listsets, oppList, callback){
-            //  console.log('oppList-1='+oppList);
-            //  console.log('listsets-1='+listsets);
             var myrating = listsets[0].myCurrentRating;
-
             var rvlist = [];
             var total_win = [];
             var total_loss = [];
-
             var totaldata={
               total_win : 0,
               total_loss : 0,
@@ -85,16 +80,13 @@ router.get("/relative/:id", function(req, res){
                   if(oppList[op2] == listsets[rt].oppname){
                     oppdata.oppname = listsets[rt].oppname;
                      if(listsets[rt].myScore > listsets[rt].oppScore){
-                      // oppdata.oppname = listsets[rt].oppname;
                        oppdata.rv_win = oppdata.rv_win+1;
                        total_win.push(rt);
-                       //rvlist.push(oppdata);
                      }
                      if(listsets[rt].myScore < listsets[rt].oppScore){
                        //oppdata.oppname = listsets[rt].oppname;
                         oppdata.rv_loss = oppdata.rv_loss+1;
                         total_loss.push(rt);
-                        //rvlist.push(oppdata);
                      }
                   } // end if if(oppList[op] == listRankings[rt])
                 }; // end for ( var rt = 0 ; rt < listRankings.length ; rt++ )
@@ -107,11 +99,8 @@ router.get("/relative/:id", function(req, res){
     }
 
   ], function (err, rvlist, total_win, total_loss, myrating) {
-        // console.log('total_win-1'+total_win);
-        // console.log('rvlist-1'+JSON.stringify(rvlist));
         var t_win = total_win.length;
         var t_loss = total_loss.length;
-        console.log('myrating-1='+myrating);
         var total_winrate = t_win/(t_win+t_loss)*100;
         res.render("rating/vw_relative_rating", {relativeList:rvlist, myname:req.params.id, myrating:myrating,
                             total_win:t_win, total_loss:t_loss,total_winrate:total_winrate });

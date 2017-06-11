@@ -264,7 +264,6 @@ router.get('/', function(req,res){
 
 
     }, function(err){
-        //console.log("User For Loop Completed");
     });
   }); //   ResultSet.find({},
 res.redirect("/");
@@ -288,8 +287,6 @@ router.get('/view', function(req,res){
       myranking = glicko2(me.rating, me.rd, me.vol, [
         [you.rating, you.rd, 0]
       ], {tau: 0.5});
-
-      console.log('myranking='+myranking.rating);
       res.render("vw_app/resistPlayer", {data_A:ts});
       });
   });
