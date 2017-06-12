@@ -271,48 +271,4 @@ res.redirect("/");
 
 
 
-
-router.get('/view', function(req,res){
-  var vname = "홍길동";
-  memberList.find({"name": vname}, {_id:0,}, function(err, memberLists){
-      if(err) return res.status(500).send({error: 'database find failure'});
-      var  ts;
-      var me = {
-        rating: memberLists[0].rating,
-        rd: memberLists[0].rd,
-        vol: memberLists[0].vol
-      };
-      var you = {rating: 1400, rd: 30, vol: 0.06};
-
-      myranking = glicko2(me.rating, me.rd, me.vol, [
-        [you.rating, you.rd, 0]
-      ], {tau: 0.5});
-      res.render("vw_app/resistPlayer", {data_A:ts});
-      });
-  });
-
-
-
-    // GET SINGLE BOOK
-    router.get('/api/books/:book_id', function(req, res){
-        res.end();
-    });
-
-    // GET BOOK BY AUTHOR
-    router.get('/api/books/author/:author', function(req, res){
-        res.end();
-    });
-
-
-
-    // UPDATE THE BOOK
-    router.put('/api/books/:book_id', function(req, res){
-        res.end();
-    });
-
-    // DELETE BOOK
-    router.delete('/api/books/:book_id', function(req, res){
-        res.end();
-    });
-
     module.exports = router;

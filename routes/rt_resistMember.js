@@ -13,16 +13,11 @@ res.render("vw_app/resistPlayer");
 }); // end of  router
 
 
-// CREATE BOOK
 router.post('/', function(req, res){
-  // console.log('plauername='+req.body.playerName_e);
-  // nameq = req.body.playerName_e;
-  // var playerRT = {
   nameq = req.body.playerName_e;
   gradeq = req.body.playerGrade_e;
   sexq = req.body.sex_e;
   memberShipq = req.body.membership_e;
-
 
   var pRanking = new memberList;
       pRanking.myname = nameq;
@@ -44,28 +39,6 @@ router.post('/', function(req, res){
   res.render("rating/vw_memberResist");
 });
 
-
-
-router.get('/view', function(req,res){
-  var vname = "홍길동";
-  memberList.find({"name": vname}, {_id:0,}, function(err, memberLists){
-      if(err) return res.status(500).send({error: 'database find failure'});
-      var  ts;
-      var me = {
-        rating: memberLists[0].rating,
-        rd: memberLists[0].rd,
-        vol: memberLists[0].vol
-      };
-      var you = {rating: 1400, rd: 30, vol: 0.06};
-
-      myranking = glicko2(me.rating, me.rd, me.vol, [
-        [you.rating, you.rd, 0]
-      ], {tau: 0.5});
-
-      console.log('myranking='+myranking.rating);
-      res.render("vw_app/resistPlayer", {data_A:ts});
-      });
-  });
 
 
 
