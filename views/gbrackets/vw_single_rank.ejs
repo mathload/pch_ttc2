@@ -14,7 +14,7 @@
       <input class="btn btn-success active" type="button" value="업데이트 보기" onclick="window.location.href='/rt_rankview/smview'" />
     </div>
 
-  <h1>06월례대회 조별 예선 현황 - A조</h1>
+  <h1>06월례대회 조별 리그 현황 - 1조</h1>
 
       			<table class="table table-bordered table-hover">
       				<thead>
@@ -74,6 +74,12 @@
                     <td id = "aP7"></td>
                     <td id = "aR7"></td>
                 </tr>
+                <tr class="active">
+                    <td>9</td>
+                    <td id = "aN8"></td>
+                    <td id = "aP8"></td>
+                    <td id = "aR8"></td>
+                </tr>
       				</tbody>
       			</table>
       		</div>
@@ -82,7 +88,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
-      <h1>06월례대회 조별 예선 현황 - B조</h1>
+      <h1>06월례대회 조별 리그 현황 - 2조</h1>
 
           			<table class="table table-bordered table-hover">
           				<thead>
@@ -142,6 +148,12 @@
                         <td id = "bP7"></td>
                         <td id = "bR7"></td>
                     </tr>
+                    <tr class="active">
+                        <td>9</td>
+                        <td id = "bN8"></td>
+                        <td id = "bP8"></td>
+                        <td id = "bR8"></td>
+                    </tr>
           				</tbody>
           			</table>
           		</div>
@@ -152,7 +164,7 @@
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-md-12">
-          <h1>06월례대회 조별 예선 현황 - C조</h1>
+          <h1>06월례대회 조별 리그 현황 - 3조</h1>
                     <table class="table table-bordered table-hover">
                       <thead>
                         <tr>
@@ -211,12 +223,18 @@
                             <td id = "cP7"></td>
                             <td id = "cR7"></td>
                         </tr>
+                        <tr class="active">
+                            <td>9</td>
+                            <td id = "cN8"></td>
+                            <td id = "cP8"></td>
+                            <td id = "cR8"></td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-
+<!--
 
                   <div class="container-fluid">
                     <div class="row">
@@ -286,7 +304,7 @@
                     </div>
                   </div>
 
-<!--
+
                       <div class="container-fluid">
                         <div class="row">
                           <div class="col-md-12">
@@ -557,6 +575,10 @@
     $("#aP7").text(aP[7]);
     $("#aR7").text(aR[7]);
 
+    $("#aN8").text(aN[8]);
+    $("#aP8").text(aP[8]);
+    $("#aR8").text(aR[8]);
+
 
   for ( var i = 0 ; i < rdata_B.gnamePlus.length ; i++ ){
     snB = rdata_B.gnamePlus[i].split('-');
@@ -606,6 +628,10 @@
   $("#bP7").text(bP[7]);
   $("#bR7").text(bR[7]);
 
+  $("#bN8").text(bN[8]);
+  $("#bP8").text(bP[8]);
+  $("#bR8").text(bR[8]);
+
   for ( var i = 0 ; i < rdata_C.gnamePlus.length ; i++ ){
     snC = rdata_C.gnamePlus[i].split('-');
     nameArrC[i] = snC[2];
@@ -653,6 +679,10 @@
   $("#cN7").text(cN[7]);
   $("#cP7").text(cP[7]);
   $("#cR7").text(cR[7]);
+
+  $("#cN8").text(cN[8]);
+  $("#cP8").text(cP[8]);
+  $("#cR8").text(cR[8]);
 
   for ( var i = 0 ; i < rdata_D.gnamePlus.length ; i++ ){
     snD = rdata_D.gnamePlus[i].split('-');
