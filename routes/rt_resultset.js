@@ -13,7 +13,7 @@ router.get('/', function(req,res){
   var gd;
   var sidc;
   var p_name = [];
-  gbkt_each.find({gid : 10}, {_id:0, group_each:1, gameDate:1, gid :1}, function(err, gbkt_eachs){
+  gbkt_each.find({gid : 12}, {_id:0, group_each:1, gameDate:1, gid :1}, function(err, gbkt_eachs){
     if(err) return res.status(500).send({error: 'database find failure'});
     ts = gbkt_eachs[0].group_each;
     gd = gbkt_eachs[0].gameDate;

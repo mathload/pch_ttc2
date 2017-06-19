@@ -45,7 +45,7 @@ router.get('/', function(req,res){
                       my_id1= pl2;
                       for ( var pl3 = 0 ; pl3 < playerList.length ; pl3++ ){
                         if(rsets[rst].pName2 == memberLists[pl3].myname){
-                          your_id1=pl3
+                          your_id1=pl3;
                         }// end of if(ResultSets[rs].pName2
                       }// end of for ( var pl3
 
