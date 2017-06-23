@@ -69,6 +69,7 @@ app.use('/rt_resultset', require('./routes/rt_resultset'));
 app.use('/rt_resistMember', require('./routes/rt_resistMember'));
 app.use('/rt_updateRanking', require('./routes/rt_updateRanking'));
 app.use('/rt_viewRating', require('./routes/rt_viewRating'));
+app.use('/rbtable', require('./routes/rt_rbtable/rt_rbtable'));
 
 // start server
 var port = process.env.PORT || 3000;

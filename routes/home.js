@@ -7,6 +7,15 @@ var passport = require('../config/passport.js');// to use passport authenticate 
 router.get("/", function(req, res){
   res.render("home/gamehome");
 });
+
+router.get("/test1", function(req, res){
+  res.render("htable/test1");
+});
+
+router.get("/test9", function(req, res){
+  res.render("htable/test9");
+});
+
 router.get("/about", function(req, res){
   res.render("gbooks/index");
 });
