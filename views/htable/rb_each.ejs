@@ -4,7 +4,8 @@
     <% include ../partials/head3 %>
 
     <script src="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.js"></script>
-    <link href="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/handsontable.full.css" rel="stylesheet" type="text/css">
+    <!-- <link href="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.min.css" rel="stylesheet" type="text/css"> -->
   </head>
   <body>
     <% include ../partials/navbar %>
@@ -18,32 +19,88 @@
       <div class="contentBox">
 
       <div class="buttons">
-      <button class="btn btn-default" onclick="location.href='/'">Home</button>
+      <button class="btn btn-primary" onclick="location.href='/'">Home</button>
       <div class="col-xs-7">
         <form action="/rbtable/savedata/<%= gameID %>" method="post">
         <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
-        <input class="btn btn-success active" type="button" value="업데이트 보기" onclick="window.location.href='/rt_gbrackets_v2/view/<%= gameID %>'" />
+        <input class="btn btn-success active" type="button" value="초기화" onclick="window.location.href='/rbtable/init/<%= gameID %>'" />
         <input class="btn btn-primary active" type="hidden" id="savedata" name="savedata" value="">
-        <input class="btn btn-warning active" type="submit" onclick="submitForm()" value="저장">
         </form>
         </div>
       </div>
-     <div class="handsontable" id="example"></div>
-     <!-- <input type="button" name="submit" value="submit" onclick="submitForm()" /> -->
+      </div>
+      </div>
+           <br>
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="handsontable" id="example"></div>
+            </div>
+        </div>
+     </div>
+    <br>
+  <form action="/rbtable/savescore/<%= gameID %>" method="post"">
+     <div class="container-fluid">
+       <div class="row">
+           <div class="col-md-6-push-6 col-md-offset-1">
+             <select name="player1">
+               <option value="">이름선택1</option>
+                <% for(var i=0; i < pList.length; i++) { %>
+               <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                 <% } %>
+             </select>
+             <select name="point1">
+               <option value="">점수1</option>
+               <option value="0">0</option>
+               <option value="1">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+             </select>
+           </div>
+           <div class="col-md-6-pull-6 col-md-offset-1">
+             <select name="player2">
+               <option value="">이름선택2</option>
+               <% for(var i=0; i < pList.length; i++) { %>
+              <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                <% } %>
+             </select>
+             <select name="point2">
+               <option value="">점수2</option>
+               <option value="0">0</option>
+               <option value="1">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+             </select>
+       <input type="submit" class="btn btn-info btn-sm " value="점수등록">
+           </div>
+       </div>
+    </div>
+    <br>
+</form>
 
-     <h3 class="contentBoxTop">선수등록</h3>
+     <h4 >선수등록</h4>
 
      <form class="user-form form-horizontal" action="/rbtable/<%= gameID %>" method="post">
-
-     <fieldset>
-     <div class="form-group">
-       <input class="form-control" type="text" name="playerName" >
-     </div>
-     <div class="buttons">
-     <button class="btn btn-default" type="submit">선수등록</button>
-     </div>
+       <div class="container-fluid">
+         <div class="row">
+             <div class="col-md-2 ">
+                 <input  type="text" name="playerName" >
+               </div>  
+             <div  class="col-md-10 ">
+                <button class="btn btn-warning btn-sm pull-left" type="submit" >선수등록</button>
+                </div>
+               </div>
+               </div>
 
      </form>
+     <h4>게임순서및 진행현황</h4>
+     <div class="container-fluid">
+       <div class="row">
+           <div class="col-md-12">
+    <div id="example1" class="hot1 hot handsontable"></div>
+           </div>
+       </div>
+    </div>
 
      <script type='text/javascript'>
        var list = <%- JSON.stringify(pList) %>;
@@ -68,25 +125,80 @@
            rowHeaders: lowh,
            colHeaders: colh,
            contextMenu: true,
+           className: "htCenter",
+           readOnly: true
       });
   });
 
-  function submitForm(){
-       var $container = $('#example');
-       var sdata = JSON.stringify($container.handsontable('getData'));
-       //var sdata = $container.handsontable('getData');
-       $("#savedata").val(sdata);
-      //  var tdata =[["","가나다",null]];
-      //  alert("tdata="+tdata[0][1]);
+  // function submitForm(){
+  //      var $container = $('#example');
+  //      var sdata = JSON.stringify($container.handsontable('getData'));
+  //      //var sdata = $container.handsontable('getData');
+  //      $("#savedata").val(sdata);
+  //     //  var tdata =[["","가나다",null]];
+  //      alert(sdata);
+  //     //  alert("tdata="+tdata[0][1]);
+  //  }
+
+ </script>
+
+ <script type='text/javascript'>
+  var orderlist = <%- JSON.stringify(gordermulti) %>;
+  var donelist = <%- JSON.stringify(doneArr) %>;
+ document.addEventListener("DOMContentLoaded", function() {
+
+   var data = [
+       ['', 'Kia', 'Nissan', 'Toyota', 'Honda'],
+       ['2014', -5, '', 12, 13],
+       ['2015', '', -11, 14, 13],
+       ['2016', '', 15, -12, 'readOnly']
+     ],
+     container,
+     hot1;
+
+   function firstRowRenderer(instance, td, row, col, prop, value, cellProperties) {
+     Handsontable.renderers.TextRenderer.apply(this, arguments);
+     //td.style.fontWeight = 'bold';
+     // td.style.color = 'green';
+     // td.style.background = '#CEC';
+     td.style.color = 'green';
+     td.style.background = '#EEE';
    }
+      //  var donelist = [[2,1],[1,1]];
+   container = document.getElementById('example1');
+   hot1 = new Handsontable(container, {
+     data: orderlist,
+     className: "htCenter",
+     readOnly: true,
+     cells: function (row, col, prop) {
+       var cellProperties = {};
 
- </script>
+       for (i=0 ; i < donelist.length ; i++){
+         if (row === donelist[i][0] && col === donelist[i][1]) {
+           cellProperties.renderer = firstRowRenderer; // uses function directly
+         }
+       }
+       // if (row === 2 && col === 2) {
+       //   cellProperties.renderer = firstRowRenderer; // uses function directly
+       // }
+       // if (row === 1 && col === 1) {
+       //   cellProperties.renderer = firstRowRenderer; // uses function directly
+       // }
+       return cellProperties;
+     }
+   });
 
 
 
-<script type='text/javascript'>
+ });
 
- </script>
+  </script>
+
+  <script>
+function myFunction() {
+    location.reload();
+}
+</script>
     </div>
   </body>
 </html>
