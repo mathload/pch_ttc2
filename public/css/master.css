@@ -236,10 +236,3 @@ form .form-group{
   margin-top: 5px;
   margin-bottom: 11px;
 }
-
-button, input, select, textarea {
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    font-size: 15px;
-}
