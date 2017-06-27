@@ -42,7 +42,7 @@
   <form action="/rbtable/savescore/<%= gameID %>" method="post"">
      <div class="container-fluid">
        <div class="row">
-           <div class="col-md-6">
+           <div class="col-md-12">
              <select name="player1">
                <option value="">이름선택1</option>
                 <% for(var i=0; i < pList.length; i++) { %>
@@ -56,8 +56,7 @@
                <option value="2">2</option>
                <option value="3">3</option>
              </select>
-           </div>
-           <div class="col-md-6">
+
              <select name="player2">
                <option value="">이름선택2</option>
                <% for(var i=0; i < pList.length; i++) { %>
@@ -83,11 +82,11 @@
      <form class="user-form form-horizontal" action="/rbtable/<%= gameID %>" method="post">
        <div class="container-fluid">
          <div class="row">
-             <div class="col-md-2 ">
+             <div class="col-md-12 ">
                  <input  type="text" name="playerName" >
-               </div>
-             <div  class="col-md-10 ">
-                <button class="btn btn-warning btn-sm pull-left" type="submit" >선수등록</button>
+
+             <!-- <div  class="col-md-10 "> -->
+                <button class="btn btn-warning btn-sm " type="submit" >선수등록</button>
                 </div>
                </div>
                </div>
