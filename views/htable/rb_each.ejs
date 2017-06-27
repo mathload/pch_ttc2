@@ -42,7 +42,7 @@
   <form action="/rbtable/savescore/<%= gameID %>" method="post"">
      <div class="container-fluid">
        <div class="row">
-           <div class="col-md-6-push-6 col-md-offset-1">
+           <div class="col-md-6">
              <select name="player1">
                <option value="">이름선택1</option>
                 <% for(var i=0; i < pList.length; i++) { %>
@@ -57,7 +57,7 @@
                <option value="3">3</option>
              </select>
            </div>
-           <div class="col-md-6-pull-6 col-md-offset-1">
+           <div class="col-md-6">
              <select name="player2">
                <option value="">이름선택2</option>
                <% for(var i=0; i < pList.length; i++) { %>
@@ -126,6 +126,7 @@
            colHeaders: colh,
            contextMenu: true,
            className: "htCenter",
+           stretchH: 'all',
            readOnly: true
       });
   });
@@ -161,6 +162,7 @@
      data: orderlist,
      className: "htCenter",
      readOnly: true,
+     stretchH: 'all',
      cells: function (row, col, prop) {
        var cellProperties = {};
 
