@@ -39,10 +39,11 @@
         </div>
      </div>
     <br>
-  <form action="/rbtable/savescore/<%= gameID %>" method="post"">
+
      <div class="container-fluid">
        <div class="row">
            <div class="col-md-12">
+             <form action="/rbtable/savescore/<%= gameID %>" method="post"">
              <select name="player1">
                <option value="">이름선택1</option>
                 <% for(var i=0; i < pList.length; i++) { %>
@@ -71,11 +72,12 @@
                <option value="3">3</option>
              </select>
        <input type="submit" class="btn btn-info btn-sm " value="점수등록">
+            </form>
            </div>
        </div>
     </div>
     <br>
-</form>
+
 
      <h4 >선수등록</h4>
 
@@ -186,11 +188,6 @@
 
   </script>
 
-  <script>
-function myFunction() {
-    location.reload();
-}
-</script>
     </div>
   </body>
 </html>

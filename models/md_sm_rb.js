@@ -3,8 +3,8 @@ var bcrypt   = require("bcrypt-nodejs");
 autoIncrement = require('mongoose-auto-increment');
 
 var rbsmSchema = mongoose.Schema({
-  // email: {type:String, required:true, unique:true},
-    rbsmid: {type:Number},
+    matchid: {type:String, required:true, unique:true},
+    //rbsmid: {type:Number},
     rbsmplist: {type:Array},
     gameDate: {type:Date, default:Date.now}
     });
