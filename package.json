@@ -28,6 +28,7 @@
     "express-session": "^1.15.2",
     "glicko2-lite": "^1.0.1",
     "handsontable": "^0.32.0",
+    "jquery-bracket": "^0.11.0",
     "method-override": "^2.3.5",
     "mongoose": "^4.1.7",
     "mongoose-auto-increment": "^5.0.1",

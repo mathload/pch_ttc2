@@ -70,22 +70,22 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   <div class="container" id="about">
     <div class="row">
         <div class="col-xs-12">
-    <h2>하위부 결선 토너먼트16강전</h2>
+    <h2>토너먼트 테스트<%= tntid %></h2>
     <% if(user.username == 'admin') {%>
     <h3>Admin view</h3>
-    <form action="/rt_tbrackets_low16ff" method="post">
+    <form action="/tbrackets/<%= tntid %>" method="post">
       <input type="hidden" id="resetdata" name="tdata" value="">
       <input class="btn btn-danger active" type="submit" style="float: right" onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
     </form>
-    <form action="/rt_tbrackets_low16ff/uinput" method="post">
+    <form action="/tbrackets/uinput/<%= tntid %>" method="post">
       <input type="hidden" id="savedata2" name="tdata" value="">
       <input class="btn btn-success active" type="submit" style="float: right" onclick="return confirm('예선리그 결과를 바탕으로 대진표를 자동생성합니다')" value="자동생성">
     </form>
-    <form action="/rt_tbrackets_low16ff" method="post">
+    <form action="/tbrackets/<%= tntid %>" method="post">
         <input type="hidden" id="savedata" name="tdata" value="">
         <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
         <input class="btn btn-warning active" type="submit" value="저장">
-        <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/rt_tbrackets_low16ff'" />
+        <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/tbrackets/<%= tntid %>'" />
     </form>
   <hr>
   <div id="save"></div>
@@ -96,10 +96,10 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
     <% } %>
     <%  if(user.username == 'guest') { %>
         <h3>guest view</h3>
-        <form action="/rt_tbrackets_low16ff" method="post">
+        <form action="/tbrackets/<%= tntid %>" method="post">
             <input type="hidden" id="savedata" name="tdata" value="">
             <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
-            <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/rt_tbrackets_low16ff'" />
+            <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/tbrackets'" />
         </form>
       <hr>
       <div id="save"></div>
@@ -108,7 +108,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   </div>
   <% } %>
   <script type="text/javascript">
-  alert('도착 =' );
+  //alert('도착 =' );
   var viewData = {
     teams: [
       [null, null],
@@ -129,10 +129,28 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   //$('#resetdata').val(viewData);
   rdata = <%- JSON.stringify(sdata) %>;
 
-  if(rdata){
-    viewData = rdata;
-  };
+  // if(rdata.teams){
+  //   alert(' 여기=' + );
+  //   viewData = rdata;
+  // };
 
+  var viewData = {
+    teams: [
+      ['가나다', null],
+      [null, null],
+      [null, null],
+      [null, null]
+    ],
+    results: [
+        [
+          [[null, null], [null, null], [null, null], [null, null]],
+          [[null, null], [null, null]],
+          [[null, null], [null, null]]
+        ]
+    ]
+  }
+  // alert(' rdata=' + rdata.teams);
+  // alert(' viewData=' + viewData.teams);
   function saveFn(data, userData) {
     var json = jQuery.toJSON(data);
     $('#savedata').val(JSON.stringify(data, undefined, 2));
@@ -143,9 +161,8 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   $(function() {
       var container = $('div#save .demo')
       container.bracket({
-        init: viewData,
+        init: rdata,
         save: saveFn,
-        // userData : viewData2
         userData:  <%- JSON.stringify(sdata) %>
       })
 
@@ -155,9 +172,6 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
     })
   </script>
 </div>
-
-
-
 
 
 </script>

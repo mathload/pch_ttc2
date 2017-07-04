@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+    <% include ../partials/head %>
+  <body>
+
+    <% include ../partials/navbar %>
+    <% include ../partials/header %>
+
+    <div class="container home home-about">
+
+    </div>
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+           <h1>리스트보기 </h1>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="danger">
+               <th>번호</th>
+               <th>TODO_list</th>
+               <th>DONE_list</th>
+            </tr>
+          </thead>
+          <tbody>
+           <% for(var i=0; i < 10; i++) { %>
+            <tr class="success">
+                <td><%= i+1 %></td>
+                <td><%= todolist[i] %></td>
+                 <td><%= donelist[i] %></td>
+              </tr>
+             <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+   </div>
+
+   <div class="contentBox">>
+   <div class="buttons">
+   <button class="btn btn-default" onclick="location.href='/'">Home</button>
+   </div>
+   <h3 class="contentBoxTop">게임등록</h3>
+
+   <form class="user-form form-horizontal" action="/admin/todolist" method="post">
+
+   <fieldset>
+   <div class="form-group">
+     <label for="playerName_e" class="col-sm-4 control-label">게임아이디</label>
+     <div class="col-sm-8">
+     <input class="form-control" type="text" name="todogameid" >
+     </div>
+   </div>
+
+   </div>
+   <div class="buttons">
+   <button class="btn btn-default" type="submit">기록</button>
+
+   </div>
+   </form>
+   </div>
+
+   <div class="row">
+       <div class="col-md-12">
+         <h3>리그전 레이팅처리 </h3>
+         <form action="/admin/dorating" method="post"">
+         <select name="gameID">
+           <option value="">게임선택</option>
+            <% for(var i=0; i < robinlist.length ; i++) { %>
+           <option value="<%= robinlist[i] %>"><%= robinlist[i] %></option>
+             <% } %>
+         </select>
+         <input type="submit" class="btn btn-info btn-sm " value="처리요청">
+       </form>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-md-12">
+        <h3>토너먼트 레이팅처리 </h3>
+        <form action="/admin/tntrating" method="post"">
+        <select name="gameID">
+          <option value="">게임선택</option>
+           <% for(var i=0; i < tntlist.length ; i++) { %>
+          <option value="<%= tntlist[i] %>"><%= tntlist[i] %></option>
+            <% } %>
+        </select>
+        <input type="submit" class="btn btn-info btn-sm " value="처리요청">
+      </form>
+     </div>
+ </div>
+
+    <div class="container player player-new">
+
+    <!-- main start-->
+
+        <!-- <input type="button" value="보기" onclick="window.location.href='/rt_playerRanking/view/' " /> -->
+    <!-- views/users/new.ejs -->
+    <div class="contentBox">>
+
+    <h3 class="contentBoxTop">리그전-다큐먼트만들기(rbsms)</h3>
+
+    <form class="user-form form-horizontal" action="/admin/docrbsms" method="post">
+
+    <fieldset>
+    <div class="form-group">
+      <label for="playerName_e" class="col-sm-4 control-label">게임아이디</label>
+      <div class="col-sm-8">
+      <input class="form-control" type="text" name="rbsmsid" >
+      </div>
+    </div>
+
+    </div>
+    <div class="buttons">
+    <button class="btn btn-default" type="submit">만들기</button>
+
+    </div>
+    </form>
+
+    <h3 class="contentBoxTop">토너먼트-디비다큐먼트만들기</h3>
+
+    <form class="user-form form-horizontal" action="/admin/createtnt" method="post">
+
+    <fieldset>
+    <div class="form-group">
+      <label for="playerName_e" class="col-sm-4 control-label">게임아이디</label>
+      <div class="col-sm-8">
+      <input class="form-control" type="text" name="tntid" >
+      </div>
+    </div>
+
+    </div>
+    <div class="buttons">
+    <button class="btn btn-default" type="submit">만들기</button>
+
+    </div>
+    </form>
+    </div>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+      <% include ../partials/scripts %>
+  </body>
+</html>

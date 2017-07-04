@@ -88,12 +88,34 @@
                  <input  type="text" name="playerName" >
 
              <!-- <div  class="col-md-10 "> -->
-                <button class="btn btn-warning btn-sm " type="submit" >선수등록</button>
+                <button class="btn btn-success btn-sm " type="submit" >선수등록</button>
                 </div>
                </div>
                </div>
 
      </form>
+
+
+     <div class="container-fluid">
+       <div class="row">
+           <div class="col-md-12">
+             <form action="/rbtable/remove/<%= gameID %>" method="post"">
+             <select name="rmvplayer">
+               <option value="">이름선택</option>
+                <% for(var i=0; i < pList.length; i++) { %>
+               <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                 <% } %>
+             </select>
+
+       <input type="submit" class="btn btn-danger btn-sm "
+       onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')" value="선수말소">
+            </form>
+           </div>
+       </div>
+    </div>
+    <br>
+
+
      <h4>게임순서및 진행 현황</h4>
      <div class="container-fluid">
        <div class="row">

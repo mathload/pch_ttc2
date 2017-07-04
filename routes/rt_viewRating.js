@@ -16,6 +16,7 @@ router.get("/all", function(req, res){
     npRemoved = memberLists.filter(function(el) {
       return el.myCurrentRating !== 1500;
     });
+    
     res.render("rating/vw_all_rating", {memberList:npRemoved, tid:70});
     });
 });

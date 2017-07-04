@@ -62,6 +62,7 @@ app.use('/admin', require('./routes/admin'));
 app.use('/gbooks', require('./routes/gbooks'));
 app.use('/rt_gbrackets_v2', require('./routes/rt_gbrackets_v2'));
 app.use('/rt_rankview', require('./routes/rt_rankview'));
+app.use('/tbrackets', require('./routes/rt_tbrackets_all'));
 app.use('/rt_tbrackets_low32', require('./routes/rt_tbrackets_low32'));
 app.use('/rt_tbrackets_high16ff', require('./routes/rt_tbrackets_high16ff'));
 app.use('/rt_tbrackets_low16ff', require('./routes/rt_tbrackets_low16ff'));

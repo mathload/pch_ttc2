@@ -4,6 +4,7 @@ autoIncrement = require('mongoose-auto-increment');
 
 var listRankingSchema = mongoose.Schema({
   // email: {type:String, required:true, unique:true},
+  gameid: {type:String},
   myname: {type:String},
   resisterDate: {type:Date},
   currentDate: {type:Date, default:Date.now},

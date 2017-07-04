@@ -148,6 +148,99 @@ router.post('/:id', function(req, res){
 
 });
 
+router.post('/remove/:id', function(req, res){
+  async.waterfall([
+  function(callback){
+    var namermv = req.body.rmvplayer;
+    var gameID = req.params.id;
+          var hcol = [];
+          var hlow = [];
+          var count;
+          var colno;
+          var nlist = [];
+          var rvno ;
+          rbsm.find({matchid : gameID}, {_id:0, rbsmplist:1}, function(err, pLists){
+            if(err) return res.status(500).send({error: 'database find failure'});
+            pListi = pLists[0].rbsmplist;
+            count = pListi.length;
+            colno = pListi[0].length;
+
+            for(var i=0; i<count-1; i++) {
+                nlist.push(pListi[i+1][0]);
+            }
+            for(var i=0; i<nlist.length; i++) {
+                if(nlist[i] == namermv){
+                  rvno = i;
+                }
+            }
+
+            var prelist = new Array();
+            for(var i=0; i<count-1; i++) {
+              prelist[i] = new Array();
+            }; // end for
+            for(var i=0; i<rvno+1; i++) {
+              for(var j=0; j<colno; j++) {
+                if(j !== rvno+1 ){
+                prelist[i].push(pListi[i][j]);
+                 //prelist[i][j]=pListi[i][j];
+               }
+              };
+            };
+
+            for(var i=rvno+1; i<count-1; i++) {
+              for(var j=0; j<colno; j++) {
+                if(j !== rvno+1 ){
+                prelist[i].push(pListi[i+1][j]);
+                 //prelist[i][j]=pListi[i][j];
+               }
+              };
+            };
+
+            // prelist[0][count] = nameq;
+            // prelist[count][0] = nameq;
+            // prelist[count][count] = '*';
+            hlow[0]='';
+            for(var i=0; i<count-1; i++) {
+              hlow[i+1]=i+1;
+              hcol[i] = '';
+            };
+            hcol[count] =  '';
+            hcol[count] = '승점(승-패)';
+            hcol[count+1] = '순위';
+            callback(null, prelist, hcol, hlow, gameID);
+          });
+    //callback(null, pListi,gameID);
+  },
+  function(pListi, hcol, hlow, gameID, callback){
+            var pListr = [];
+            rbsm.findOneAndUpdate({matchid : gameID},
+              {rbsmplist:pListi},
+              {new: true, upsert: true, setDefaultsOnInsert: true},
+              function(error, pLists) {
+                if(error){
+                    console.log("Something wrong when updating data!");
+                }
+
+                pListr = pLists.rbsmplist;
+                callback(null, pListr, hcol, hlow, gameID);
+            });
+    //callback(null, pListr,gameID);
+  },
+  function(pListr, hcol, hlow, gameID, callback){
+        var strArr = gameID.split('-');
+        var gname = strArr[3];
+        res.redirect('back');
+      //  console.log('pListr='+pListr);
+      //  res.render("htable/rb_each", {pList:pListr,  gname:gname, gameID:gameID,hcol:hcol, hlow:hlow});
+    callback(null, '끝');
+  }
+], function (err, result) {
+   // result에는 '끝'이 담겨 온다.
+});
+//res.redirect('back');
+
+});
+
 router.get("/init/:id", function(req, res){
   var gameID = req.params.id;
   var initdata = [["",null,null]];
@@ -172,6 +265,7 @@ router.post("/savescore/:id", function(req, res){
     rbsm.find({matchid : gameID}, {_id:0, rbsmplist:1}, function(err, pLists){
       if(err) return res.status(500).send({error: 'database find failure'});
       pListi = pLists[0].rbsmplist;
+        //console.log(' pListi=' +pListi[2] );
       var noplayer = pListi.length-1;
       var playerArr = [];
       var pindex1;
@@ -892,6 +986,17 @@ var sendArr = [];
   }; // [33-22-0]
 
 }; // end function same5
+
+
+  function same6(result6){
+        return result6;
+  };
+
+
+  function same7(result7){
+          return result7;
+  };
+
 
     f_arr2.sort(function(a,b){// 내림차순
             return a-b;
