@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/head2 %>
+
+<body>
+  <% include ../partials/navbar %>
+  <% include ../partials/header %>
+  <article id="main">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <input class="btn btn-primary" type="button" value="월례대회홈" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
+          <input class="btn btn-success" type="button" value="업데이트 보기" onclick="window.location.href='/rt_rankview/teamtotal'" />
+        </div>
+    </div>
+    </div>
+
+      	<div class="row">
+      		<div class="col-md-12">
+              <h1>XX대회 단체전 순위표 </h1>
+
+              <style type="text/css">
+              .tg  {border-collapse:collapse;border-spacing:0;border-color:#bbb;width: 100%;}
+              .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#bbb;color:#594F4F;background-color:#E0FFEB;}
+              .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#bbb;color:#493F3F;background-color:#9DE0AD;}
+              .tg .tg-cuvh{background-color:#e0ffeb;vertical-align:top;text-align: center;}
+              .tg .tg-baqh{text-align:center;vertical-align:top}
+              .tg .tg-ghku{background-color:#fec2ff;font-weight:bold;text-align:center;vertical-align:top}
+              .tg .tg-abev{background-color:#38fff8;font-weight:bold;text-align:center;vertical-align:top}
+              .tg .tg-0l6a{background-color:#C2FFD6;text-align:center;vertical-align:top}
+              .tg .tg-3md0{background-color:#c2ffd6;vertical-align:top;text-align: center}
+              .tg .tg-ofie{font-weight:bold;background-color:#629ff8;text-align:center;vertical-align:top}
+              .tg .tg-wrzn{background-color:#bbdaff;font-weight:bold;text-align:center;vertical-align:top}
+              .tg .tg-fjfd{background-color:#c2ffd6;vertical-align:top;text-align: center;}
+              .tg .tg-yw4l{vertical-align:top}
+              </style>
+              <table class="tg">
+                <tr>
+
+                  <th class="tg-ofie" colspan="2">구분</th>
+                  <% for(var i=0; i < pName[0].length; i++) { %>
+                    <th class="tg-ofie"><%= i+1 %>조</th>
+                    <th class="tg-ofie">승점</th>
+                  <% } %>
+                </tr>
+
+                <tr>
+                  <td class="tg-abev" rowspan="6"><br><br><br><br>단식</td>
+                  <td class="tg-0l6a">그룹1</td>
+                <% for(var i=0; i < pName[0].length; i++) { %>
+                  <td class="tg-0l6a"><%= pName[0][i] %></td>
+                  <td class="tg-0l6a"><%= pPoint[0][i] %></td>
+                <% } %>
+                </tr>
+                <tr>
+                  <td class="tg-baqh">그룹2</td>
+                  <td class="tg-baqh">나1</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">나2</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">나3</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">나4</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">나5</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">나6</td>
+                  <td class="tg-baqh"></td>
+                </tr>
+                <tr>
+                  <td class="tg-0l6a">그룹3</td>
+                  <td class="tg-0l6a">다1</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">다2</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">다3</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">다3</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">다5</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">다6</td>
+                  <td class="tg-0l6a"></td>
+                </tr>
+                <tr>
+                  <td class="tg-baqh">그룹4</td>
+                  <td class="tg-baqh">라1</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">라2</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">라3</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">라4</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">라5</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">라6</td>
+                  <td class="tg-baqh"></td>
+                </tr>
+                <tr>
+                  <td class="tg-0l6a">그룹5</td>
+                  <td class="tg-0l6a">마1</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">마2</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">마3</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">마4</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">마5</td>
+                  <td class="tg-0l6a"></td>
+                  <td class="tg-0l6a">마6</td>
+                  <td class="tg-0l6a"></td>
+                </tr>
+                <tr>
+                  <td class="tg-baqh">그룹6</td>
+                  <td class="tg-baqh">바1</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">바2</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">바3</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">바4</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">바5</td>
+                  <td class="tg-baqh"></td>
+                  <td class="tg-baqh">바6</td>
+                  <td class="tg-baqh"></td>
+                </tr>
+                <tr>
+                  <td class="tg-wrzn" rowspan="8"><br><br><br><br><br><br>복식<br></td>
+                  <td class="tg-0l6a" rowspan="2"><br>그룹1</td>
+                  <% for(var i=0; i < dPoint[0].length; i++) { %>
+                  <td class="tg-0l6a"><%= pdName[0][i][0] %></td>
+                  <td class="tg-0l6a" rowspan="2"><%= dPoint[0][i] %></td>
+                  <!-- <td class="tg-0l6a">tmC2</td>
+                  <td class="tg-0l6a" rowspan="2"></td>
+                  <td class="tg-0l6a">tmC3</td>
+                  <td class="tg-0l6a" rowspan="2"></td>
+                  <td class="tg-0l6a">tmC4</td>
+                  <td class="tg-0l6a" rowspan="2"></td>
+                  <td class="tg-0l6a">tmC5</td>
+                  <td class="tg-0l6a" rowspan="2"></td>
+                  <td class="tg-0l6a">tmC6</td>
+                  <td class="tg-0l6a" rowspan="2"></td> -->
+                  <% } %>
+                </tr>
+                <tr>
+                  <% for(var i=0; i < dPoint[0].length; i++) { %>
+                  <td class="tg-fjfd"><%= pdName[0][i][1] %></td>
+                  <!-- <td class="tg-fjfd"><%= dPoint[0][i] %></td> -->
+                  <!-- <td class="tg-fjfd"></td>
+                  <td class="tg-fjfd"></td>
+                  <td class="tg-fjfd"></td>
+                  <td class="tg-fjfd"></td> -->
+                  <% } %>
+                </tr>
+                <tr>
+                  <td class="tg-cuvh" rowspan="2"><br>그룹2</td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l"></td>
+                  <td class="tg-yw4l"></td>
+                  <td class="tg-yw4l"></td>
+                  <td class="tg-yw4l"></td>
+                  <td class="tg-yw4l"></td>
+                  <td class="tg-yw4l"></td>
+                </tr>
+                <tr>
+                  <td class="tg-3md0" rowspan="2"><br>그룹3</td>
+                  <td class="tg-3md0"></td>
+                  <td class="tg-3md0" rowspan="2"></td>
+                  <td class="tg-3md0"></td>
+                  <td class="tg-3md0" rowspan="2"></td>
+                  <td class="tg-3md0"></td>
+                  <td class="tg-3md0" rowspan="2"></td>
+                  <td class="tg-3md0"></td>
+                  <td class="tg-3md0" rowspan="2"></td>
+                  <td class="tg-3md0"></td>
+                  <td class="tg-3md0" rowspan="2"></td>
+                  <td class="tg-3md0"></td>
+                  <td class="tg-3md0" rowspan="2"></td>
+                </tr>
+                <tr>
+                  <td class="tg-fjfd"></td>
+                  <td class="tg-fjfd"></td>
+                  <td class="tg-fjfd"></td>
+                  <td class="tg-fjfd"></td>
+                  <td class="tg-fjfd"></td>
+                  <td class="tg-fjfd"></td>
+                </tr>
+                <tr>
+                  <td class="tg-cuvh" rowspan="2"><br>그룹4</td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                  <td class="tg-cuvh"></td>
+                  <td class="tg-cuvh" rowspan="2"></td>
+                </tr>
+                <tr>
+                  <td class="tg-baqh">tmD1</td>
+                  <td class="tg-baqh">tmD2</td>
+                  <td class="tg-baqh">tmD3</td>
+                  <td class="tg-baqh">tmD4</td>
+                  <td class="tg-baqh">tmD5</td>
+                  <td class="tg-baqh">tmD6</td>
+                </tr>
+                <tr>
+                  <td class="tg-ghku" colspan="2">종합(순위)</td>
+                  <% for(var i=0; i < totalPoint.length; i++) { %>
+                    <td class="tg-ghku"><%= i+1 %>조</td>
+                    <td class="tg-ghku"><%= totalPoint[i] %>(<%= ranks[i] %>)</td>
+                  <!-- <td class="tg-ghku">1조</td>
+                  <td class="tg-ghku"></td>
+                  <td class="tg-ghku">2조</td>
+                  <td class="tg-ghku"></td>
+                  <td class="tg-ghku">3조</td>
+                  <td class="tg-ghku"></td>
+                  <td class="tg-ghku">4조</td>
+                  <td class="tg-ghku"></td>
+                  <td class="tg-ghku">5조</td>
+                  <td class="tg-ghku"></td>
+                  <td class="tg-ghku">6조</td>
+                  <td class="tg-ghku"></td> -->
+                  <% } %>
+                </tr>
+              </table>
+      </div>
+      </div>
+      <br>
+      <p>◆ 순위별 승점방식</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;단식 : 1등-승점6 &nbsp;6등-승점1</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;복식 : 1등-승점12 &nbsp;6등-승점2</p>
+      <p>◆ 순위계산 순서</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;1 총승점</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;2 승점 동률시 다승우선</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;3 1,2 동률시 동률처리</p>
+
+  <script type="text/javascript">
+
+  </script>
+
+</article>
+    <% include ../partials/scripts2 %>
+
+    </script> %>
+</body>
+
+</html>

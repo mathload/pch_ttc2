@@ -6,30 +6,44 @@
     <script src="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.js"></script>
     <link href="/css/handsontable.full.css" rel="stylesheet" type="text/css">
     <!-- <link href="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.min.css" rel="stylesheet" type="text/css"> -->
+    <style type="text/css">
+    .fm-combo  {width: 100%;}
+    .div-ph {font-size: 15px;color: #2a78f1;}
+    </style>
   </head>
   <body>
     <% include ../partials/navbar %>
     <div class="container-fluid" id="about">
       <div class="row">
           <div class="col-xs-12">
-          <h1>06월례대회 조별 예선 현황 - <%= gname %></h1>
+          <h1>2017년 07월 월례대회 조별 예선리그 현황 - <%= gname %></h1>
           </div>
       </div>
 
-      <div class="contentBox">
+      <!-- <div class="contentBox"> -->
 
-      <div class="buttons">
-      <button class="btn btn-primary" onclick="location.href='/'">Home</button>
+      <!-- <div class="buttons"> -->
+
+      <div class="row">
+        <div class="col-xs-5">
+      <form action="/rbtable/init/<%= gameID %>" method="get">
+        <input type="hidden" id="resetdata" name="tdata" value="">
+        <input class="btn btn-danger active" type="submit"  onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
+      </form>
+      </div>
       <div class="col-xs-7">
-        <form action="/rbtable/savedata/<%= gameID %>" method="post">
+        <!-- <form action="/rbtable/savedata/<%= gameID %>" method="post"> -->
+        <button class="btn btn-primary" onclick="location.href='/'">Home</button>
         <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
-        <input class="btn btn-success active" type="button" value="초기화" onclick="window.location.href='/rbtable/init/<%= gameID %>'" />
-        <input class="btn btn-primary active" type="hidden" id="savedata" name="savedata" value="">
+        <!-- <input class="btn btn-success active" type="button" value="초기화" onclick="window.location.href='/rbtable/init/<%= gameID %>'" />
+        <input class="btn btn-primary active" type="hidden" id="savedata" name="savedata" value=""> -->
         </form>
-        </div>
+
       </div>
       </div>
       </div>
+      <!-- </div> -->
+      <!-- </div> -->
            <br>
       <div class="container-fluid">
         <div class="row">
@@ -42,8 +56,8 @@
 
      <div class="container-fluid">
        <div class="row">
-           <div class="col-md-12">
-             <form action="/rbtable/savescore/<%= gameID %>" method="post"">
+           <div class="col-md-6">
+             <form class="fm-combo" action="/rbtable/savescore/<%= gameID %>" method="post"">
              <select name="player1">
                <option value="">이름선택1</option>
                 <% for(var i=0; i < pList.length; i++) { %>
@@ -95,11 +109,11 @@
 
      </form>
 
-
+           <br>
      <div class="container-fluid">
        <div class="row">
            <div class="col-md-12">
-             <form action="/rbtable/remove/<%= gameID %>" method="post"">
+             <form class="fm-combo" action="/rbtable/remove/<%= gameID %>" method="post"">
              <select name="rmvplayer">
                <option value="">이름선택</option>
                 <% for(var i=0; i < pList.length; i++) { %>
@@ -194,22 +208,22 @@
            cellProperties.renderer = firstRowRenderer; // uses function directly
          }
        }
-       // if (row === 2 && col === 2) {
-       //   cellProperties.renderer = firstRowRenderer; // uses function directly
-       // }
-       // if (row === 1 && col === 1) {
-       //   cellProperties.renderer = firstRowRenderer; // uses function directly
-       // }
        return cellProperties;
      }
    });
-
-
-
  });
-
   </script>
 
+  <br>
+  <div class='div-ph'>
+  <p>◆ 순위계산 순서</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;1 총승점</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;2 총승점 동률시 &nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2인 동률 : 승자승</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3인이상 동률 : 동률자끼리 승점 다시 산출 - 승점우선 - 승점이 같으면 득실률순 - 득실률 같으면 동률처리</p>
+<p>◆ 참고</p>
+<p>>&nbsp;&nbsp;&nbsp;게임중 선수등록 또는 말소후에는 최초 점수등록시 승점 및 순위가 갱신됩니다.</p>
+  </div>
     </div>
   </body>
 </html>

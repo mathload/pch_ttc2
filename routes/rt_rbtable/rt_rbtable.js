@@ -11,7 +11,7 @@ var robin = require('roundrobin');
 router.get("/:id", function(req, res){
   var gameID = req.params.id;
   var strArr = gameID.split('-');
-  var gname = strArr[3];
+  var gname = strArr[4];
   var pListi = [];
   rbsm.find({matchid : gameID}, {_id:0, rbsmplist:1}, function(err, pLists){
     if(err) return res.status(500).send({error: 'database find failure'});
@@ -105,7 +105,7 @@ router.post('/:id', function(req, res){
             };
             prelist[0][count] = nameq;
             prelist[count][0] = nameq;
-            prelist[count][count] = '*';
+            prelist[count][count] = '***';
             hlow[0]='';
             for(var i=0; i<count; i++) {
               hlow[i+1]=i+1;
@@ -135,7 +135,7 @@ router.post('/:id', function(req, res){
   },
   function(pListr, hcol, hlow, gameID, callback){
         var strArr = gameID.split('-');
-        var gname = strArr[3];
+        var gname = strArr[4];
         res.redirect('back');
       //  console.log('pListr='+pListr);
       //  res.render("htable/rb_each", {pList:pListr,  gname:gname, gameID:gameID,hcol:hcol, hlow:hlow});
@@ -228,7 +228,7 @@ router.post('/remove/:id', function(req, res){
   },
   function(pListr, hcol, hlow, gameID, callback){
         var strArr = gameID.split('-');
-        var gname = strArr[3];
+        var gname = strArr[4];
         res.redirect('back');
       //  console.log('pListr='+pListr);
       //  res.render("htable/rb_each", {pList:pListr,  gname:gname, gameID:gameID,hcol:hcol, hlow:hlow});
@@ -998,13 +998,27 @@ var sendArr = [];
   };
 
 
-    f_arr2.sort(function(a,b){// 내림차순
-            return a-b;
-    });
+  var sortArr = [];
+  for ( var f = 0 ; f < f_arr2.length ; f++ ){
+    sortArr[f] = parseInt(f_arr2[f]/100);
+  }
+  var sorted = sortArr.slice().sort(function(a,b){return a-b})
+  var ranks = sortArr.slice().map(function(v){ return sorted.indexOf(v)+1 });
+
     for ( var f = 0 ; f < f_arr2.length ; f++ ){
        findx = f_arr2[f]%100;
-       pListi[findx+1][noplayer+2]=f+1
+       pListi[findx+1][noplayer+2]=ranks[f];
     }
+
+    // f_arr2.sort(function(a,b){// 내림차순
+    //         return a-b;
+    // });
+    //
+    //
+    // for ( var f = 0 ; f < f_arr2.length ; f++ ){
+    //    findx = f_arr2[f]%100;
+    //    pListi[findx+1][noplayer+2]=f+1
+    // }
 
     callback(null, pListi );
   },
