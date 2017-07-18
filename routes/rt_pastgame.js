@@ -3,7 +3,7 @@ var router   = express.Router();
 var mongoose = require('mongoose');
 var passport = require('../config/passport.js');// to use passport authenticate methods - include와 같은 개념
 var rbsm = require('../models/md_sm_rb');
-
+var mtnt_all = require('../models/md-tntbracket_all');
 
 // Home
 router.get("/:id", function(req, res){
@@ -30,12 +30,50 @@ router.get("/:id", function(req, res){
           hlow[i] = rsf[1];
     }
 
+
+
   res.render("pastgame/2017-06-18", {pList:pListi, hlow:hlow,hcol:hcol});
   });
 });
 
-router.get("/test1", function(req, res){
-  res.render("htable/test1");
+router.get("/2017/2017-07-16", function(req, res){
+  var pListi = [];
+  var hcol = [];
+  var hlow = [];
+  var rsf = [];
+  rbsm.find({ $or:[
+    {'matchid':'2004-rb-sm-170716-1조'},
+    {'matchid':'2005-rb-sm-170716-2조'}
+    ]},
+    {_id:0, rbsmplist:1}, function(err, results){
+    if(err) return res.status(500).send({error: 'database find failure'});
+    var sortingField = "matchid";
+    results.sort(function(a, b) { // 내림차순
+        return b[sortingField] - a[sortingField];
+    });
+
+    for(i=0; i<2; i++){
+          pListi[i] = results[i].rbsmplist;
+          rsf = maketableheader(pListi[i]);
+          hcol[i] = rsf[0];
+          hlow[i] = rsf[1];
+    }
+    mtnt_all.find({ $or:[
+      {'gameid':'2006-tnttm-8-170716-상위부'},
+      {'gameid':'2007-tnttm-8-170716-하위부'}
+      ]},
+      {_id:0, tnt_all:1}, function(err, tresults){
+      if(err) return res.status(500).send({error: 'database find failure'});
+      var sortingField = "gameid";
+      tresults.sort(function(a, b) { // 내림차순
+          return b[sortingField] - a[sortingField];
+      });
+
+        pListi[2] = tresults[0].tnt_all;
+        pListi[3] = tresults[1].tnt_all;
+  res.render("pastgame/2017-07-16", {pList:pListi, hlow:hlow,hcol:hcol});
+  });
+      });
 });
 
 router.get("/test9", function(req, res){
