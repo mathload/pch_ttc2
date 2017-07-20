@@ -31,6 +31,7 @@ router.post('/', function(req, res){
       pRanking.no_win = 0.;
       pRanking.no_loss = 0.;
       pRanking.winRate = 0.;
+      pRanking.beforerank = 100;
 
     pRanking.save(function(err, memberList){
         if(err) return console.error(err);

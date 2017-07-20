@@ -22,6 +22,9 @@ var playerRankingSchema = mongoose.Schema({
   no_win: {type:Number},
   no_loss: {type:Number},
   winRate: {type:Number},
+  beforerank: {type:Number},
+  currentrank: {type:Number},
+  rankupdown: {type:Number},
 });
 
 playerRankingSchema.plugin(autoIncrement.plugin, {

@@ -128,14 +128,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   }
 
   $('#resetdata').val(JSON.stringify(viewData, undefined, 2));
-  //$('#resetdata').val(viewData);
   rdata = <%- JSON.stringify(sdata) %>;
-  alert('rdata=' +rdata);
-  // if(rdata.teams){
-  //   alert(' 여기=' + );
-  //   viewData = rdata;
-  // };
-
   var viewData = {
     teams: [
       ['가나다', null],

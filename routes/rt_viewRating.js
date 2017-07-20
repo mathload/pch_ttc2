@@ -16,8 +16,64 @@ router.get("/all", function(req, res){
     npRemoved = memberLists.filter(function(el) {
       return el.myCurrentRating !== 1500;
     });
-    
+
     res.render("rating/vw_all_rating", {memberList:npRemoved, tid:70});
+    });
+});
+
+router.get("/rankchange", function(req, res){
+  memberList.find({}, {_id:0}, function(err, members){
+    if(err) return res.status(500).send({error: 'database find failure'});
+    var sortingField = "myCurrentRating";
+    members.sort(function(a, b) { // 내림차순
+        return b[sortingField] - a[sortingField];
+    });
+    var idx = 0;
+    async.forEachLimit(members, 1, function(member, userCallback){
+      idx = idx+1;
+    async.waterfall([
+        function(callback) {
+            var updownrank = new memberList;
+            updownrank.myname = member.myname;
+            updownrank.beforerank = member.currentrank;
+            updownrank.currentrank = idx;
+            updownrank.rankupdown = idx-member.currentrank;
+            callback(null, updownrank, 'two');
+        },
+        function(updownrank, arg2, callback) {
+            // arg1 now equals 'one' and arg2 now equals 'two'
+            // console.log('updownrank.myname=' +updownrank.myname );
+            // console.log('updownrank.beforerank=' +updownrank.beforerank );
+            memberList.findOneAndUpdate({myname: updownrank.myname},
+              {
+                beforerank:updownrank.beforerank,
+                currentrank:updownrank.currentrank,
+                rankupdown:updownrank.rankupdown
+              },
+              {new: true, upsert: true, setDefaultsOnInsert: true},
+              function(error, updownranks) {
+                if(error){
+                    console.log("Something wrong when updating data!");
+                }
+              });
+            callback(null, 'three');
+        },
+        function(arg1, callback) {
+            // arg1 now equals 'three'
+            callback(null, 'done');
+        }
+    ], function (err, result) {
+        // result now equals 'done'
+        // console.log('done')
+        userCallback();
+    });
+
+
+}, function(err){
+    // console.log("User For Loop Completed");
+});
+
+    res.redirect('back');
     });
 });
 

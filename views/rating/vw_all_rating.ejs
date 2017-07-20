@@ -28,6 +28,7 @@
                   <th>레이팅</th>
                   <th>전적</th>
                   <th>승률</th>
+                  <th>등락</th>
                   <th>레이팅내역-상대전적</th>
       					</tr>
       				</thead>
@@ -40,6 +41,15 @@
                     <td><%= parseInt(memberList[i].myCurrentRating) %></td>
                     <td><%= memberList[i].no_win %>승<%= memberList[i].no_loss %>패</td>
                     <td><%= parseInt(memberList[i].winRate) %>%</td>
+                  <% if(memberList[i].rankupdown > 0){ %>
+                    <td><img src = "/image/up.png" width="9" height="17">+<%= memberList[i].rankupdown %></td>
+                  <% } %>
+                  <% if(memberList[i].rankupdown < 0){ %>
+                  <td><img src = "/image/down.png" width="9" height="17"><%= memberList[i].rankupdown %></td>
+                  <% } %>
+                  <% if(memberList[i].rankupdown == 0){ %>
+                    <td><%= memberList[i].rankupdown %></td>
+                  <% } %>
                     <td>
                       <input class="btn btn-primary" type="button" value="레이팅내역"
                         onclick="window.location.href='/rt_viewRating/each/<%= memberList[i].myname %>'" />

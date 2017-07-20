@@ -71,6 +71,7 @@ app.use('/rt_resistMember', require('./routes/rt_resistMember'));
 app.use('/rt_updateRanking', require('./routes/rt_updateRanking'));
 app.use('/rt_viewRating', require('./routes/rt_viewRating'));
 app.use('/rbtable', require('./routes/rt_rbtable/rt_rbtable'));
+app.use('/rbtable_test', require('./routes/rt_rbtable/rt_rbtable_test'));
 app.use('/pastgame', require('./routes/rt_pastgame'));
 
 // start server
