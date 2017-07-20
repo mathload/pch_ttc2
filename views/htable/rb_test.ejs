@@ -10,6 +10,17 @@
     .fm-combo  {width: 100%;}
     .div-ph {font-size: 15px;color: #2a78f1;}
     </style>
+    <style>
+  .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+  </style>
   </head>
   <body>
     <% include ../partials/navbar %>
@@ -54,43 +65,92 @@
      </div>
     <br>
 
-     <div class="container-fluid">
-       <div class="row">
-           <div class="col-md-6">
-             <form class="fm-combo" action="/rbtable/savescore/<%= gameID %>" method="post"">
-             <select name="player1">
-               <option value="">이름선택1</option>
+
+
+    <div class="container">
+      <!-- <h2>Modal Login Example</h2> -->
+      <!-- Trigger the modal with a button -->
+      <button type="button" class="btn btn-info btn-lg" id="myBtn">점수입력</button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg" >
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" style="padding:35px 50px;">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4><span class="glyphicon glyphicon-list-alt"></span> 점수 입력 창</h4>
+            </div>
+            <div class="modal-body" style="padding:40px 50px;">
+              <form class="fm-combo" action="/rbtable/savescore/<%= gameID %>" method="post"">
+                <div class="form-group row">
+                <div class="col-xs-8">
+              <select class="form-control" id="player1" name="player1">
+                <option value="">이름선택1</option>
+                 <% for(var i=0; i < pList.length; i++) { %>
+                <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                  <% } %>
+              </select>
+              </div>
+              <div class="col-xs-4">
+              <select class="form-control" id="point1" name="point1">
+                <option value="">점수1</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              </div>
+              </div>
+              <div class="form-group row">
+              <div class="col-xs-8">
+              <select class="form-control" id="player2" name="player2">
+                <option value="">이름선택2</option>
                 <% for(var i=0; i < pList.length; i++) { %>
                <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
                  <% } %>
-             </select>
-             <select name="point1">
-               <option value="">점수1</option>
-               <option value="0">0</option>
-               <option value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-             </select>
+              </select>
+            </div>
+            <div class="col-xs-4">
+              <select class="form-control" id="point2" name="point2">
+                <option value="">점수2</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              </div>
+               </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-pencil"></span>점수입력</button>
+              </div>
+              <!-- </form>
 
-             <select name="player2">
-               <option value="">이름선택2</option>
-               <% for(var i=0; i < pList.length; i++) { %>
-              <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
-                <% } %>
-             </select>
-             <select name="point2">
-               <option value="">점수2</option>
-               <option value="0">0</option>
-               <option value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-             </select>
-       <input type="submit" class="btn btn-info btn-sm " value="점수등록">
-            </form>
-           </div>
-       </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="" checked>Remember me</label>
+                </div> -->
+
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+              <!-- <p>Not a member? <a href="#">Sign Up</a></p>
+              <p>Forgot <a href="#">Password?</a></p> -->
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
-    <br>
+
+    <script>
+    $(document).ready(function(){
+        $("#myBtn").click(function(){
+            $("#myModal").modal();
+        });
+    });
+    </script>
 
 
      <h4 >선수등록</h4>
@@ -198,7 +258,7 @@
                   </select>
                    </div>
                   <div class="form-group">
-            <input type="submit" class="btn btn-info  " value="점수등록">
+                    <input type="submit" class="btn btn-info  " value="점수등록">
                  </div>
                  </form>
 
