@@ -125,21 +125,12 @@
               <div class="form-group">
                 <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-pencil"></span>점수입력</button>
               </div>
-              <!-- </form>
-
-                <div class="checkbox">
-                  <label><input type="checkbox" value="" checked>Remember me</label>
-                </div> -->
-
               </form>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-              <!-- <p>Not a member? <a href="#">Sign Up</a></p>
-              <p>Forgot <a href="#">Password?</a></p> -->
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -167,24 +158,60 @@
      </form>
      <br>
 
-   <form class="fm-combo" action="/rbtable/remove/<%= gameID %>" method="post"">
-     <div class="form-group row">
-     <label class="control-label col-xs-1" for="rmvplayer">name:</label>
-     <div class="col-xs-10">
-     <select class="form-control" id="rmvplayer" name="rmvplayer">
-     <option value="">이름선택</option>
-      <% for(var i=0; i < pList.length; i++) { %>
-     <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
-       <% } %>
-    </select>
+         <div class="container">
+           <!-- <h2>Modal Login Example</h2> -->
+           <!-- Trigger the modal with a button -->
+           ......
+           <button type="button" class="btn btn-warning" id="myBtn2">선수 말소</button>
+           <== 버튼 클릭 하세요
+           <!-- Modal -->
+           <div class="modal fade" id="myModal2" role="dialog">
+             <div class="modal-dialog" >
 
-     <input type="submit" class="btn btn-danger"
-     onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')" value="선수말소">
-   </div>
-   </div>
-   </form>
+               <!-- Modal content-->
+               <div class="modal-content">
+                 <div class="modal-header" style="padding:10px 20px;">
+                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <h4><span class="glyphicon glyphicon-list-alt"></span> 선수 엔트리 제외</h4>
+                 </div>
+                 <div class="modal-body" style="padding:2px 3px;">
+                   <form class="fm-combo" action="/rbtable/remove/<%= gameID %>" method="post"">
+                     <div class="form-group row">
+                     <label class="control-label col-xs-1" for="rmvplayer"></label>
+                     <div class="col-xs-10">
+                     <select class="form-control" id="rmvplayer" name="rmvplayer">
+                     <option value="">이름선택</option>
+                      <% for(var i=0; i < pList.length; i++) { %>
+                     <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                       <% } %>
+                    </select>
+
+                     <!-- <input type="submit" class="btn btn-danger"
+                     onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')" value="선수말소"> -->
+                   </div>
+                   </div>
+                   <div class="form-group">
+                     <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')">
+                       <span class="glyphicon glyphicon-pencil"></span>선수말소</button>
+                   </div>
+                   </form>
+                 </div>
+                 <div class="modal-footer">
+                   <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+         <script>
+         $(document).ready(function(){
+             $("#myBtn2").click(function(){
+                 $("#myModal2").modal();
+             });
+         });
+         </script>
     <br>
-
 
      <h4>게임순서및 진행 현황</h4>
      <div class="container-fluid">
