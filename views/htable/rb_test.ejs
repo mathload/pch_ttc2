@@ -70,19 +70,19 @@
     <div class="container">
       <!-- <h2>Modal Login Example</h2> -->
       <!-- Trigger the modal with a button -->
-      <button type="button" class="btn btn-info btn-lg" id="myBtn">점수입력</button>
+      <button type="button" class="btn btn-info" id="myBtn">점수입력</button>
 
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog modal-lg" >
+        <div class="modal-dialog" >
 
           <!-- Modal content-->
           <div class="modal-content">
-            <div class="modal-header" style="padding:35px 50px;">
+            <div class="modal-header" style="padding:10px 20px;">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4><span class="glyphicon glyphicon-list-alt"></span> 점수 입력 창</h4>
             </div>
-            <div class="modal-body" style="padding:40px 50px;">
+            <div class="modal-body" style="padding:2px 3px;">
               <form class="fm-combo" action="/rbtable/savescore/<%= gameID %>" method="post"">
                 <div class="form-group row">
                 <div class="col-xs-8">
@@ -153,40 +153,36 @@
     </script>
 
 
-     <h4 >선수등록</h4>
+     <h4 >선수등록및 말소</h4>
 
-     <form class="user-form form-horizontal" action="/rbtable/<%= gameID %>" method="post">
-       <div class="container-fluid">
-         <div class="row">
-             <div class="col-md-12 ">
-                 <input  type="text" name="playerName" >
+     <form class="form-horizontal" action="/rbtable/<%= gameID %>" method="post">
+       <div class="form-group">
+       <label class="control-label col-xs-1" for="playerName">name:</label>
+       <div class="col-xs-10">
+       <input type="text" class="form-control" id="playerName" placeholder="선수이름입력" name="playerName">
 
-             <!-- <div  class="col-md-10 "> -->
-                <button class="btn btn-success btn-sm " type="submit" >선수등록</button>
-                </div>
-               </div>
-               </div>
-
+                <button class="btn btn-success" type="submit" >선수등록</button>
+     </div>
+     </div>
      </form>
+     <br>
 
-           <br>
-     <div class="container-fluid">
-       <div class="row">
-           <div class="col-md-12">
-             <form class="fm-combo" action="/rbtable/remove/<%= gameID %>" method="post"">
-             <select name="rmvplayer">
-               <option value="">이름선택</option>
-                <% for(var i=0; i < pList.length; i++) { %>
-               <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
-                 <% } %>
-             </select>
+   <form class="fm-combo" action="/rbtable/remove/<%= gameID %>" method="post"">
+     <div class="form-group row">
+     <label class="control-label col-xs-1" for="rmvplayer">name:</label>
+     <div class="col-xs-10">
+     <select class="form-control" id="rmvplayer" name="rmvplayer">
+     <option value="">이름선택</option>
+      <% for(var i=0; i < pList.length; i++) { %>
+     <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+       <% } %>
+    </select>
 
-       <input type="submit" class="btn btn-danger btn-sm "
-       onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')" value="선수말소">
-            </form>
-           </div>
-       </div>
-    </div>
+     <input type="submit" class="btn btn-danger"
+     onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')" value="선수말소">
+   </div>
+   </div>
+   </form>
     <br>
 
 
@@ -200,86 +196,7 @@
     </div>
 
     <br>
-    <!-- Button trigger modal -->
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalNorm">
-        모달 테스트
-    </button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog"
-         aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <button type="button" class="close"
-                       data-dismiss="modal">
-                           <span aria-hidden="true">&times;</span>
-                           <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        점수 등록 창
-                    </h4>
-                </div>
-
-                <!-- Modal Body -->
-                <div class="modal-body">
-
-                  <form class="fm-combo" action="/rbtable/savescore/<%= gameID %>" method="post"">
-                  <div class="form-group">
-                  <select name="player1">
-                    <option value="">이름선택1</option>
-                     <% for(var i=0; i < pList.length; i++) { %>
-                    <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
-                      <% } %>
-                  </select>
-                  <select name="point1">
-                    <option value="">점수1</option>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </select>
-
-                  </div>
-                  <div class="form-group">
-                  <select name="player2">
-                    <option value="">이름선택2</option>
-                    <% for(var i=0; i < pList.length; i++) { %>
-                   <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
-                     <% } %>
-                  </select>
-                  <select name="point2">
-                    <option value="">점수2</option>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                  </select>
-                   </div>
-                  <div class="form-group">
-                    <input type="submit" class="btn btn-info  " value="점수등록">
-                 </div>
-                 </form>
-
-
-                </div>
-
-                <!-- Modal Footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default"
-                            data-dismiss="modal">
-                                Close
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        Save changes
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-   <br>
 
      <script type='text/javascript'>
        var list = <%- JSON.stringify(pList) %>;
