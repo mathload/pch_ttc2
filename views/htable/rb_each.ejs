@@ -10,13 +10,25 @@
     .fm-combo  {width: 100%;}
     .div-ph {font-size: 15px;color: #2a78f1;}
     </style>
+    <style>
+  .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+  </style>
   </head>
   <body>
     <% include ../partials/navbar %>
     <div class="container-fluid" id="about">
       <div class="row">
           <div class="col-xs-12">
-          <h1>2017년 07월 월례대회 조별 예선리그 현황 - <%= gname %></h1>
+          <!-- <h1>2017년 07월 월례대회 조별 예선리그 현황 - <%= gname %></h1> -->
+
           </div>
       </div>
 
@@ -45,6 +57,39 @@
       <!-- </div> -->
       <!-- </div> -->
            <br>
+           <h4 >스코어 테이블</h4>
+           <div class="row">
+             <div class="col-xs-1">
+             </div>
+              <div class="col-xs-3">
+                <form action="/rbtable_test/<%= gameID %>" method="get">
+                  <input class="btn btn-default active" type="submit"  value="상세보기">
+                </form>
+              </div>
+              <div class="col-xs-3">
+                <form action="/rbtable_test/rankview/<%= gameID %>" method="get">
+                  <input class="btn btn-default active" type="submit"  value="순위보기">
+                </form>
+              </div>
+          </div>
+
+           <% if(viewtype == 'rank') {%>
+            <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-12">
+                  <div class="handsontable" id="example2"></div>
+                  </div>
+              </div>
+           </div>
+          <br>
+        <% } %>
+
+      <% if(viewtype == 'detail') {%>
+      <script type='text/javascript'>
+      var list2 = <%- JSON.stringify(ranklist) %>;
+      var lowh2 = <%- JSON.stringify(hlow) %>;
+      var colh2 = <%- JSON.stringify(hcol) %>;
+      </script>
       <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -53,82 +98,212 @@
         </div>
      </div>
     <br>
+    <% } %>
 
-     <div class="container-fluid">
-       <div class="row">
-           <div class="col-md-6">
-             <form class="fm-combo" action="/rbtable/savescore/<%= gameID %>" method="post"">
-             <select name="player1">
-               <option value="">이름선택1</option>
+
+    <div class="container">
+      <!-- <h2>Modal Login Example</h2> -->
+      <!-- Trigger the modal with a button -->
+      <button type="button" class="btn btn-info" id="myBtn">점수입력</button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog" >
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header" style="padding:10px 20px;">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4><span class="glyphicon glyphicon-list-alt"></span> 점수 입력 창</h4>
+            </div>
+            <div class="modal-body" style="padding:2px 3px;">
+              <form class="fm-combo" action="/rbtable/savescore/<%= gameID %>" method="post"">
+                <div class="form-group row">
+                <div class="col-xs-8">
+              <select class="form-control" id="player1" name="player1">
+                <option value="">이름선택1</option>
+                 <% for(var i=0; i < pList.length; i++) { %>
+                <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                  <% } %>
+              </select>
+              </div>
+              <div class="col-xs-4">
+              <select class="form-control" id="point1" name="point1">
+                <option value="">점수1</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              </div>
+              </div>
+              <div class="form-group row">
+              <div class="col-xs-8">
+              <select class="form-control" id="player2" name="player2">
+                <option value="">이름선택2</option>
                 <% for(var i=0; i < pList.length; i++) { %>
                <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
                  <% } %>
-             </select>
-             <select name="point1">
-               <option value="">점수1</option>
-               <option value="0">0</option>
-               <option value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-             </select>
-
-             <select name="player2">
-               <option value="">이름선택2</option>
-               <% for(var i=0; i < pList.length; i++) { %>
-              <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
-                <% } %>
-             </select>
-             <select name="point2">
-               <option value="">점수2</option>
-               <option value="0">0</option>
-               <option value="1">1</option>
-               <option value="2">2</option>
-               <option value="3">3</option>
-             </select>
-       <input type="submit" class="btn btn-info btn-sm " value="점수등록">
-            </form>
-           </div>
-       </div>
+              </select>
+            </div>
+            <div class="col-xs-4">
+              <select class="form-control" id="point2" name="point2">
+                <option value="">점수2</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              </div>
+               </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-pencil"></span>점수입력</button>
+              </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <br>
+
+    <script>
+    $(document).ready(function(){
+        $("#myBtn").click(function(){
+            $("#myModal").modal();
+        });
+    });
+    </script>
 
 
-     <h4 >선수등록</h4>
+     <h4 >선수등록, 교체및 말소</h4>
+       <!-- 선수등록 -->
+     <form class="form-horizontal" action="/rbtable/<%= gameID %>" method="post">
+       <div class="form-group">
+       <label class="control-label col-xs-1" for="playerName">name:</label>
+       <div class="col-xs-10">
+       <input type="text" class="form-control" id="playerName" placeholder="선수이름입력" name="playerName">
 
-     <form class="user-form form-horizontal" action="/rbtable/<%= gameID %>" method="post">
-       <div class="container-fluid">
-         <div class="row">
-             <div class="col-md-12 ">
-                 <input  type="text" name="playerName" >
-
-             <!-- <div  class="col-md-10 "> -->
-                <button class="btn btn-success btn-sm " type="submit" >선수등록</button>
-                </div>
-               </div>
-               </div>
-
+                <button class="btn btn-success" type="submit" >선수등록</button>
+     </div>
+     </div>
      </form>
+     <br>
+     <div class="row">
+        <div class="col-xs-6">
+          <!-- 선수교체 -->
+          <div class="container">
+            <button type="button" class="btn btn-info" id="myBtn3">선수 교체</button>
+            <== 클릭
+            <!-- Modal -->
+            <div class="modal fade" id="myModal3" role="dialog">
+              <div class="modal-dialog" >
 
-           <br>
-     <div class="container-fluid">
-       <div class="row">
-           <div class="col-md-12">
-             <form class="fm-combo" action="/rbtable/remove/<%= gameID %>" method="post"">
-             <select name="rmvplayer">
-               <option value="">이름선택</option>
-                <% for(var i=0; i < pList.length; i++) { %>
-               <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
-                 <% } %>
-             </select>
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header" style="padding:10px 20px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-list-alt"></span> 선수 교체</h4>
+                  </div>
+                  <div class="modal-body" style="padding:2px 3px;">
+                    <form class="fm-combo" action="/rbtable_test/substitute/<%= gameID %>" method="post"">
+                      <div class="form-group row">
+                      <label class="control-label col-xs-2" for="outplayer">out:</label>
+                      <div class="col-xs-10">
+                      <select class="form-control" id="outplayer" name="outplayer">
+                      <option value="">이름선택</option>
+                       <% for(var i=0; i < pList.length; i++) { %>
+                      <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                        <% } %>
+                     </select>
+                     <div class="form-group">
+                     <label class="control-label col-xs-2" for="inplayer">in:</label>
+                     <div class="col-xs-10">
+                     <input type="text" class="form-control" id="inplayer" placeholder="선수이름입력" name="inplayer">
+                   </div>
+                   </div>
 
-       <input type="submit" class="btn btn-danger btn-sm "
-       onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')" value="선수말소">
-            </form>
-           </div>
-       </div>
-    </div>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-info btn-block">
+                        <span class="glyphicon glyphicon-pencil"></span>선수교체</button>
+                      <!-- <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')">
+                        <span class="glyphicon glyphicon-pencil"></span>선수말소</button> -->
+                    </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+          $(document).ready(function(){
+              $("#myBtn3").click(function(){
+                  $("#myModal3").modal();
+              });
+          });
+          </script>
+        </div>
+        <div class="col-xs-6">
+          <!-- 선수말소 -->
+          <div class="container">
+            <button type="button" class="btn btn-warning" id="myBtn2">선수 말소</button>
+            <== 클릭
+            <!-- Modal -->
+            <div class="modal fade" id="myModal2" role="dialog">
+              <div class="modal-dialog" >
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header" style="padding:10px 20px;">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4><span class="glyphicon glyphicon-list-alt"></span> 선수 엔트리 제외</h4>
+                  </div>
+                  <div class="modal-body" style="padding:2px 3px;">
+                    <form class="fm-combo" action="/rbtable/remove/<%= gameID %>" method="post"">
+                      <div class="form-group row">
+                      <label class="control-label col-xs-1" for="rmvplayer"></label>
+                      <div class="col-xs-10">
+                      <select class="form-control" id="rmvplayer" name="rmvplayer">
+                      <option value="">이름선택</option>
+                       <% for(var i=0; i < pList.length; i++) { %>
+                      <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                        <% } %>
+                     </select>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-warning btn-block" onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')">
+                        <span class="glyphicon glyphicon-pencil"></span>선수말소</button>
+                    </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <script>
+          $(document).ready(function(){
+              $("#myBtn2").click(function(){
+                  $("#myModal2").modal();
+              });
+          });
+          </script>
+        </div>
+     </div>
+
     <br>
-
 
      <h4>게임순서및 진행 현황</h4>
      <div class="container-fluid">
@@ -139,11 +314,30 @@
        </div>
     </div>
 
+    <br>
+
+
      <script type='text/javascript'>
        var list = <%- JSON.stringify(pList) %>;
        var lowh = <%- JSON.stringify(hlow) %>;
        var colh = <%- JSON.stringify(hcol) %>;
-       </script>
+    </script>
+
+  <!-- <script type='text/javascript'>
+       $(document).ready(function () {
+           $('#example2').handsontable({
+               data: list,
+               rowHeaders: lowh,
+               colHeaders: colh,
+               contextMenu: true,
+               className: "htCenter",
+               stretchH: 'all',
+               readOnly: true
+           });
+       });
+
+        </script> -->
+
   <script type='text/javascript'>
 
   var
@@ -161,13 +355,24 @@
            data: list,
            rowHeaders: lowh,
            colHeaders: colh,
-           contextMenu: true,
+          //  contextMenu: true,
            className: "htCenter",
            stretchH: 'all',
            readOnly: true
       });
   });
 
+  $(document).ready(function () {
+      $('#example2').handsontable({
+           data: <%- JSON.stringify(ranklist) %>,
+           rowHeaders: <%- JSON.stringify(hlow) %>,
+           colHeaders: <%- JSON.stringify(hcol) %>,
+           contextMenu: true,
+           className: "htCenter",
+           stretchH: 'all',
+           readOnly: true
+      });
+  });
 
  </script>
 

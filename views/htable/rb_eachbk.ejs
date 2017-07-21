@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include ../partials/head3 %>
+
+    <script src="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.js"></script>
+    <link href="/css/handsontable.full.css" rel="stylesheet" type="text/css">
+    <!-- <link href="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.min.css" rel="stylesheet" type="text/css"> -->
+    <style type="text/css">
+    .fm-combo  {width: 100%;}
+    .div-ph {font-size: 15px;color: #2a78f1;}
+    </style>
+  </head>
+  <body>
+    <% include ../partials/navbar %>
+    <div class="container-fluid" id="about">
+      <div class="row">
+          <div class="col-xs-12">
+          <h1>2017년 07월 월례대회 조별 예선리그 현황 - <%= gname %></h1>
+          </div>
+      </div>
+
+      <!-- <div class="contentBox"> -->
+
+      <!-- <div class="buttons"> -->
+
+      <div class="row">
+        <div class="col-xs-5">
+      <form action="/rbtable/init/<%= gameID %>" method="get">
+        <input type="hidden" id="resetdata" name="tdata" value="">
+        <input class="btn btn-danger active" type="submit"  onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
+      </form>
+      </div>
+      <div class="col-xs-7">
+        <!-- <form action="/rbtable/savedata/<%= gameID %>" method="post"> -->
+        <button class="btn btn-primary" onclick="location.href='/'">Home</button>
+        <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
+        <!-- <input class="btn btn-success active" type="button" value="초기화" onclick="window.location.href='/rbtable/init/<%= gameID %>'" />
+        <input class="btn btn-primary active" type="hidden" id="savedata" name="savedata" value=""> -->
+        </form>
+
+      </div>
+      </div>
+      </div>
+      <!-- </div> -->
+      <!-- </div> -->
+           <br>
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="handsontable" id="example"></div>
+            </div>
+        </div>
+     </div>
+    <br>
+
+     <div class="container-fluid">
+       <div class="row">
+           <div class="col-md-6">
+             <form class="fm-combo" action="/rbtable/savescore/<%= gameID %>" method="post"">
+             <select name="player1">
+               <option value="">이름선택1</option>
+                <% for(var i=0; i < pList.length; i++) { %>
+               <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                 <% } %>
+             </select>
+             <select name="point1">
+               <option value="">점수1</option>
+               <option value="0">0</option>
+               <option value="1">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+             </select>
+
+             <select name="player2">
+               <option value="">이름선택2</option>
+               <% for(var i=0; i < pList.length; i++) { %>
+              <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                <% } %>
+             </select>
+             <select name="point2">
+               <option value="">점수2</option>
+               <option value="0">0</option>
+               <option value="1">1</option>
+               <option value="2">2</option>
+               <option value="3">3</option>
+             </select>
+       <input type="submit" class="btn btn-info btn-sm " value="점수등록">
+            </form>
+           </div>
+       </div>
+    </div>
+    <br>
+
+
+     <h4 >선수등록</h4>
+
+     <form class="user-form form-horizontal" action="/rbtable/<%= gameID %>" method="post">
+       <div class="container-fluid">
+         <div class="row">
+             <div class="col-md-12 ">
+                 <input  type="text" name="playerName" >
+
+             <!-- <div  class="col-md-10 "> -->
+                <button class="btn btn-success btn-sm " type="submit" >선수등록</button>
+                </div>
+               </div>
+               </div>
+
+     </form>
+
+           <br>
+     <div class="container-fluid">
+       <div class="row">
+           <div class="col-md-12">
+             <form class="fm-combo" action="/rbtable/remove/<%= gameID %>" method="post"">
+             <select name="rmvplayer">
+               <option value="">이름선택</option>
+                <% for(var i=0; i < pList.length; i++) { %>
+               <option value="<%= pList[0][i+1] %>"><%= pList[0][i+1] %></option>
+                 <% } %>
+             </select>
+
+       <input type="submit" class="btn btn-danger btn-sm "
+       onclick="return confirm('명단에서 선수가 제외됩니다.. 제외하시겠습니까?')" value="선수말소">
+            </form>
+           </div>
+       </div>
+    </div>
+    <br>
+
+
+     <h4>게임순서및 진행 현황</h4>
+     <div class="container-fluid">
+       <div class="row">
+           <div class="col-md-12">
+    <div id="example1" class="hot1 hot handsontable"></div>
+           </div>
+       </div>
+    </div>
+
+     <script type='text/javascript'>
+       var list = <%- JSON.stringify(pList) %>;
+       var lowh = <%- JSON.stringify(hlow) %>;
+       var colh = <%- JSON.stringify(hcol) %>;
+       </script>
+  <script type='text/javascript'>
+
+  var
+    data1 = [
+      ['', 'Kia', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
+      ['2012', 10, 11, 12, 13, 15, 16],
+      ['2013', 10, 11, 12, 13, 15, 16],
+      ['2014', 10, 11, 12, 13, 15, 16],
+      ['2015', 10, 11, 12, 13, 15, 16],
+      ['2016', 10, 11, 12, 13, 15, 16]
+    ]
+
+  $(document).ready(function () {
+      $('#example').handsontable({
+           data: list,
+           rowHeaders: lowh,
+           colHeaders: colh,
+           contextMenu: true,
+           className: "htCenter",
+           stretchH: 'all',
+           readOnly: true
+      });
+  });
+
+
+ </script>
+
+ <script type='text/javascript'>
+  var orderlist = <%- JSON.stringify(gordermulti) %>;
+  var donelist = <%- JSON.stringify(doneArr) %>;
+ document.addEventListener("DOMContentLoaded", function() {
+
+   var data = [
+       ['', 'Kia', 'Nissan', 'Toyota', 'Honda'],
+       ['2014', -5, '', 12, 13],
+       ['2015', '', -11, 14, 13],
+       ['2016', '', 15, -12, 'readOnly']
+     ],
+     container,
+     hot1;
+
+   function firstRowRenderer(instance, td, row, col, prop, value, cellProperties) {
+     Handsontable.renderers.TextRenderer.apply(this, arguments);
+     //td.style.fontWeight = 'bold';
+     // td.style.color = 'green';
+     // td.style.background = '#CEC';
+     td.style.color = 'green';
+     td.style.background = '#EEE';
+   }
+      //  var donelist = [[2,1],[1,1]];
+   container = document.getElementById('example1');
+   hot1 = new Handsontable(container, {
+     data: orderlist,
+     className: "htCenter",
+     readOnly: true,
+     stretchH: 'all',
+     cells: function (row, col, prop) {
+       var cellProperties = {};
+
+       for (i=0 ; i < donelist.length ; i++){
+         if (row === donelist[i][0] && col === donelist[i][1]) {
+           cellProperties.renderer = firstRowRenderer; // uses function directly
+         }
+       }
+       return cellProperties;
+     }
+   });
+ });
+  </script>
+
+  <br>
+  <div class='div-ph'>
+  <p>◆ 순위계산 순서</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;1 총승점</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;2 총승점 동률시 &nbsp;</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-2인 동률 : 승자승</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-3인이상 동률 : 동률자끼리 승점 다시 산출 - 승점우선 - 승점이 같으면 득실률순 - 득실률 같으면 동률처리</p>
+<p>◆ 참고</p>
+<p>>&nbsp;&nbsp;&nbsp;게임중 선수등록 또는 말소후에는 최초 점수등록시 승점 및 순위가 갱신됩니다.</p>
+  </div>
+    </div>
+  </body>
+</html>
