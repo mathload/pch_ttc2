@@ -114,7 +114,7 @@ router.get("/rankview/:id", function(req, res){
     hcol2[2] = '승점(승-패)';
     for(var i=0; i<count-1; i++) {
       hlow2[i+1]='';
-      ranklist[i][0] = i+1;
+      ranklist[i][0] = pListi[i+1][count+1];
       ranklist[i][1] = pListi[i+1][0];
       ranklist[i][2] = pListi[i+1][count];
     }

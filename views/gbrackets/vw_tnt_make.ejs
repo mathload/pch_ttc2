@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>jQuery Bracket</title>
+<title>tournament Bracket</title>
 <meta name="description" content="jQuery plugin for visualizing and editing single and double elimination tournament brackets" />
 <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui-1.8.16.custom.min.js"></script>
@@ -60,7 +60,21 @@ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 </script>
-
+<style type="text/css">
+.fm-combo  {width: 100%;}
+.div-ph {font-size: 15px;color: #2a78f1;}
+</style>
+<style>
+.modal-header, h4, .close {
+  background-color: #5cb85c;
+  color:white !important;
+  text-align: center;
+  font-size: 30px;
+}
+.modal-footer {
+  background-color: #f9f9f9;
+}
+</style>
 </head>
 
 <body>
@@ -70,22 +84,21 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   <div class="container" id="about">
     <div class="row">
         <div class="col-xs-12">
-    <h2>토너먼트 테스트></h2>
+    <h2>토너먼트 대진표 작성</h2>
 
-    <h3>Admin view</h3>
-    <form action="/tbrackets/test/makebarcket" method="post">
+    <form action="/tbrackets_make/test/makebarcket" method="post">
       <input type="hidden" id="resetdata" name="tdata" value="">
       <input class="btn btn-danger active" type="submit" style="float: right" onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
     </form>
-    <form action="/tbrackets/test/autofill" method="post">
+    <!-- <form action="/tbrackets_make/test/autofill" method="post">
       <input type="hidden" id="savedata2" name="tdata" value="">
       <input class="btn btn-success active" type="submit" style="float: right" onclick="return confirm('예선리그 결과를 바탕으로 대진표를 자동생성합니다')" value="자동생성">
-    </form>
-    <form action="/tbrackets/test/makebarcket" method="post">
+    </form> -->
+    <form action="/tbrackets_make/test/makebarcket" method="post">
         <input type="hidden" id="savedata" name="tdata" value="">
         <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
         <input class="btn btn-warning active" type="submit" value="저장">
-        <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/tbrackets/test/makebarcket'" />
+        <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/tbrackets_make/test/makebarcket'" />
     </form>
 
          <hr>
@@ -95,44 +108,188 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
     <div id="save"></div>
 
     <div class="row">
-        <div class="col-xs-12">
-    <form action="/tbrackets/test/automake" method="post">
-      <select name="noGroup">
-               <option value="">조</option>
-               <option value="1">1조</option>
-               <option value="2">2조</option>
-               <option value="3">3조</option>
-               <option value="4">4조</option>
-               <option value="5">5조</option>
-               <option value="6">6조</option>
-               <option value="7">7조</option>
-               <option value="8">8조</option>
-               <option value="16">16조</option>
-               <option value="32">32조</option>
-               <option value="64">64조</option>
-               <option value="128">128조</option>
-     </select>
-     <select name="noRank">
-              <option value="">순위</option>
-              <option value="1">1위</option>
-              <option value="2">2위</option>
-              <option value="3">3위</option>
-              <option value="4">4위</option>
-              <option value="5">5위</option>
-              <option value="6">6위</option>
-              <option value="7">7위</option>
-              <option value="8">8위</option>
-              <option value="16">16위</option>
-              <option value="32">32위</option>
-              <option value="64">64위</option>
-              <option value="128">128위</option>
-    </select>
-    <input type="submit" class="btn btn-info btn-sm " value="대진표생성">
-    </form>
+       <div class="col-xs-6">
+         <div class="container">
+           <button type="button" class="btn btn-info" id="myBtn">대진표 생성</button>
 
-    </div>
+           <!-- Modal -->
+           <div class="modal fade" id="myModal" role="dialog">
+             <div class="modal-dialog" >
 
-      </div>
+               <!-- Modal content-->
+               <div class="modal-content">
+                 <div class="modal-header" style="padding:10px 20px;">
+                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <h4><span class="glyphicon glyphicon-list-alt"></span> 대진표 생성</h4>
+                 </div>
+                 <div class="modal-body" style="padding:2px 3px;">
+                   <form action="/tbrackets_make/test/automake" method="post">
+                     <div class="form-group row">
+                     <div class="col-xs-12">
+                   <select class="form-control" id="noGroup" name="noGroup">
+                              <option value="">조</option>
+                              <option value="1">1조</option>
+                              <option value="2">2조</option>
+                              <option value="3">3조</option>
+                              <option value="4">4조</option>
+                              <option value="5">5조</option>
+                              <option value="6">6조</option>
+                              <option value="7">7조</option>
+                              <option value="8">8조</option>
+                              <option value="16">16조</option>
+                              <option value="32">32조</option>
+                              <option value="64">64조</option>
+                              <option value="128">128조</option>
+                    </select>
+                  </div>
+                  </div>
+                    <div class="form-group row">
+                    <div class="col-xs-12">
+                  <select class="form-control" id="noRank" name="noRank">
+                             <option value="">순위</option>
+                             <option value="1">1위</option>
+                             <option value="2">2위</option>
+                             <option value="3">3위</option>
+                             <option value="4">4위</option>
+                             <option value="5">5위</option>
+                             <option value="6">6위</option>
+                             <option value="7">7위</option>
+                             <option value="8">8위</option>
+                             <option value="16">16위</option>
+                             <option value="32">32위</option>
+                             <option value="64">64위</option>
+                             <option value="128">128위</option>
+                   </select>
+                 </div>
+                 </div>
+                   <div class="form-group">
+                     <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-pencil"></span>대진표생성</button>
+                   </div>
+                   </form>
+                 </div>
+                 <div class="modal-footer">
+                   <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+
+         <script>
+         $(document).ready(function(){
+             $("#myBtn").click(function(){
+                 $("#myModal").modal();
+             });
+         });
+         </script>
+       </div>
+       <div class="col-xs-6">
+         <!-- 자동완성 -->
+         <div class="container">
+           <button type="button" class="btn btn-warning" id="myBtn3">대진표 자동완성</button>
+           <!-- Modal -->
+           <div class="modal fade" id="myModal3" role="dialog">
+             <div class="modal-dialog" >
+
+               <!-- Modal content-->
+               <div class="modal-content">
+                 <div class="modal-header" style="padding:10px 20px;">
+                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <h4><span class="glyphicon glyphicon-list-alt"></span>예선성적 반영 대진표 자동완성</h4>
+                 </div>
+                 <div class="modal-body" style="padding:2px 3px;">
+                   <form class="fm-combo" action="/tbrackets_make/test/autofill/<%= tntid %>" method="post">
+                     <div class="form-group row">
+                     <div class="col-xs-12">
+                   <select class="form-control" id="noGroup" name="noGroup">
+                              <option value="">예선리그 조갯수</option>
+                              <option value="1">1조</option>
+                              <option value="2">2조</option>
+                              <option value="3">3조</option>
+                              <option value="4">4조</option>
+                              <option value="5">5조</option>
+                              <option value="6">6조</option>
+                              <option value="7">7조</option>
+                              <option value="8">8조</option>
+                              <option value="16">16조</option>
+                              <option value="32">32조</option>
+                              <option value="64">64조</option>
+                              <option value="128">128조</option>
+                    </select>
+                  </div>
+                  </div>
+                    <div class="form-group row">
+                    <div class="col-xs-12">
+                  <select class="form-control" id="noRankhigh" name="noRankhigh">
+                             <option value="">상위부 순위</option>
+                             <option value="1">1위</option>
+                             <option value="2">2위</option>
+                             <option value="3">3위</option>
+                             <option value="4">4위</option>
+                             <option value="5">5위</option>
+                             <option value="6">6위</option>
+                             <option value="7">7위</option>
+                             <option value="8">8위</option>
+                             <option value="16">16위</option>
+                             <option value="32">32위</option>
+                             <option value="64">64위</option>
+                             <option value="128">128위</option>
+                   </select>
+                 </div>
+                 </div>
+                 <div class="form-group row">
+                 <div class="col-xs-12">
+               <select class="form-control" id="noRanklow" name="noRanklow">
+                          <option value="">하위부 순위</option>
+                          <option value="1">1위</option>
+                          <option value="2">2위</option>
+                          <option value="3">3위</option>
+                          <option value="4">4위</option>
+                          <option value="5">5위</option>
+                          <option value="6">6위</option>
+                          <option value="7">7위</option>
+                          <option value="8">8위</option>
+                          <option value="16">16위</option>
+                          <option value="32">32위</option>
+                          <option value="64">64위</option>
+                          <option value="128">128위</option>
+                </select>
+              </div>
+              </div>
+              <div class="form-group row">
+              <div class="col-xs-12">
+            <select class="form-control" id="highlow" name="highlow">
+                       <option value="">상하위부 선택</option>
+                       <option value="상위부">상위부</option>
+                       <option value="하위부">하위부</option>
+             </select>
+           </div>
+           </div>
+                   <div class="form-group">
+                     <button type="submit" class="btn btn-info btn-block">
+                       <span class="glyphicon glyphicon-pencil"></span>대진표 자동 작성</button>
+                   </div>
+                   </form>
+                 </div>
+                 <div class="modal-footer">
+                   <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+             <script>
+             $(document).ready(function(){
+                 $("#myBtn3").click(function(){
+                     $("#myModal3").modal();
+                 });
+             });
+             </script>
+       </div>
+   </div>
+
+
+
 
 
   <script type="text/javascript">
@@ -189,6 +346,10 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   $(function() {
       var container = $('div#save .demo')
       container.bracket({
+        teamWidth: 100,
+        scoreWidth: 30,
+        matchMargin: 10,
+        roundMargin: 50,
         init: rdata,
         save: saveFn,
         userData:  <%- JSON.stringify(sdata) %>
