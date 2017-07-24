@@ -17,7 +17,7 @@ body {
     padding-bottom: 20px;
     margin-bottom: 30px;
     color: inherit;
-    background-color: #e5eab1;
+    background-color: #65b2f1;
 }
 
 header, footer{
@@ -40,7 +40,7 @@ li{
   font-weight: bold;
   font-family: sans-serif;
   padding: 0px;
-  color: #096cc1;
+  color: #4541ec
   line-height:30px;
   margin-left: 30px;
   margin-top: 10px;
@@ -61,7 +61,7 @@ h3{
   margin: 0;
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  background-color: #e0deb2;
+  background-color: #08af8e;
   padding: 5px 15px;
 }
 h4{
@@ -454,4 +454,17 @@ select::-ms-expand { /* for IE 11 */
 .posts .show .addComment button{
   margin-left: 5px;
   float:right;
+}
+
+.label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 1;
+    color: #347dbd;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
 }

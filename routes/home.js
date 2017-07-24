@@ -8,6 +8,10 @@ router.get("/", function(req, res){
   res.render("home/gamehome");
 });
 
+router.get('/main/singleMatch', function(req, res){
+  res.render("pages/single_match");
+});
+
 router.get("/test1", function(req, res){
   res.render("htable/test1");
 });

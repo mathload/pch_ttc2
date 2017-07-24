@@ -1,65 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--[if ie]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><![endif]-->
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>tournament Bracket</title>
-<meta name="description" content="jQuery plugin for visualizing and editing single and double elimination tournament brackets" />
-<script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="/js/jquery-ui-1.8.16.custom.min.js"></script>
-
-<script type="text/javascript" src="/js/shCore.js"></script>
-<script type="text/javascript" src="/js/shBrushJScript.js"></script>
-<script type="text/javascript" src="/js/shBrushXml.js"></script>
-<script type="text/javascript" src="/js/Bacon-1ab32ffb.min.js"></script>
-<script type="text/javascript" src="/js/lodash-2.2.1.min.js"></script>
-<script type="text/javascript" src="/js/live.js"></script>
-<script type="text/javascript" src="/js/handlebars.1.0.0.js"></script>
-<!-- <script type="text/javascript" src="/js/jquery.bracket.min.js"></script> -->
-<link rel="stylesheet" type="text/css" href="/css/shCoreDefault.css"/>
-<link rel="stylesheet" type="text/css" href="/css/jquery-ui-1.8.16.custom.css" />
-<link rel="stylesheet" type="text/css" href="/css/jquery.bracket-site.css" />
-<link rel="stylesheet" type="text/css" href="/css/jquery.bracket.min.css" />
-
-<!-- Bootstrap core CSS -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link rel="stylesheet" href="/css/master.css">
-<link rel="stylesheet" href="/css/normalize.css">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-
-<script type="text/javascript">
-$(function() {
-    var demos = ['save', 'minimal', 'resize', 'matches', 'customHandlers', 'autoComplete', 'doubleElimination', 'noSecondaryFinal', 'noConsolationRound', 'noGrandFinalComeback', 'reverseBracket', 'big', 'connectorStyles']
-    $.each(demos, function(i, d){
-      var demo = $('div#'+d)
-      $('<div class="demo"></div>').appendTo(demo)
-      var pre = $('<pre name="code" class="js"></pre>').appendTo(demo)
-      var script = demo.find('script')
-      demo.find("h3").append($('<a href="#' + d + '">¶</a>'))
-    //pre.text(script.html())  소스코드 보이는것 비활성화 ㅎㅎㅎㅎ
-    })
-  })
-</script>
-
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-1488867-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
+  <% include ../partials/headforall %>
 <style type="text/css">
 .fm-combo  {width: 100%;}
 .div-ph {font-size: 15px;color: #2a78f1;}
@@ -79,8 +21,6 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 
 <body>
   <% include ../partials/navbar %>
-  <% include ../partials/header %>
-  <!-- <div style="float: left; width: 45%;"> -->
   <div class="container" id="about">
     <div class="row">
         <div class="col-xs-12">
@@ -360,14 +300,11 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
       $('#dataOutput').text(jQuery.toJSON(data))
     })
   </script>
-</div>
+
+  <% include ../partials/scripts %>
 
 
-</script>
-<script src="https://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="/js/jquery.bracket.min.js"></script> <!-- 반드시 헤드가 아닌 이쪽아래에 둘것 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-<script type="text/javascript" src="/js/jquery.json-2.2.min.js"></script>
+
+
 </body>
 </html>

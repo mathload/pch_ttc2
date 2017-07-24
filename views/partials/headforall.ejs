@@ -1,0 +1,49 @@
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tournament Bracket</title>
+<meta name="description" content="jQuery plugin for visualizing and editing single and double elimination tournament brackets" />
+<!-- jquery -->
+<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+
+<script src="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.js"></script>
+<link href="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.min.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" type="text/css" href="/css/shCoreDefault.css"/>
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui-1.8.16.custom.css" />
+<link rel="stylesheet" type="text/css" href="/css/jquery.bracket-site.css" />
+<link rel="stylesheet" type="text/css" href="/css/jquery.bracket.min.css" />
+
+<!-- Bootstrap core CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link rel="stylesheet" href="/stylesheets/master.css">
+<link rel="stylesheet" href="/stylesheets/normalize.css">
+
+<script type="text/javascript">
+$(function() {
+    var demos = ['save', 'tnthigh', 'tntlow', 'matches', 'customHandlers', 'autoComplete', 'doubleElimination', 'noSecondaryFinal', 'noConsolationRound', 'noGrandFinalComeback', 'reverseBracket', 'big', 'connectorStyles']
+    $.each(demos, function(i, d){
+      var demo = $('div#'+d)
+      $('<div class="demo"></div>').appendTo(demo)
+      var pre = $('<pre name="code" class="js"></pre>').appendTo(demo)
+      var script = demo.find('script')
+      demo.find("h3").append($('<a href="#' + d + '">¶</a>'))
+    })
+  })
+</script>
+
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1488867-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>

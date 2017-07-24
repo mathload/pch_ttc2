@@ -1,68 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="jQuery plugin for visualizing and editing single and double elimination tournament brackets" />
 
-    <!-- jquery -->
-    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <% include ../partials/headforall %>
 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-    <!-- web font -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet" type="text/css">
-
-    <!-- my css -->
-    <link rel="stylesheet" href="/css/master.css">
-
-    <title>My Website</title>
-    <script src="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.js"></script>
-    <link href="https://docs.handsontable.com/0.32.0/bower_components/handsontable/dist/handsontable.full.min.css" rel="stylesheet" type="text/css">
-
-    <script type="text/javascript" src="/js/shCore.js"></script>
-    <script type="text/javascript" src="/js/shBrushJScript.js"></script>
-    <script type="text/javascript" src="/js/shBrushXml.js"></script>
-    <script type="text/javascript" src="/js/Bacon-1ab32ffb.min.js"></script>
-    <script type="text/javascript" src="/js/lodash-2.2.1.min.js"></script>
-    <script type="text/javascript" src="/js/live.js"></script>
-    <script type="text/javascript" src="/js/handlebars.1.0.0.js"></script>
-    <!-- <script type="text/javascript" src="/js/jquery.bracket.min.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="/css/shCoreDefault.css"/>
-    <!-- <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="/css/jquery-ui-1.8.16.custom.css" />
-    <link rel="stylesheet" type="text/css" href="/css/jquery.bracket-site.css" />
-    <link rel="stylesheet" type="text/css" href="/css/jquery.bracket.min.css" />
-
-
-    <script type="text/javascript">
-    $(function() {
-        var demos = ['save', 'tnthigh', 'tntlow', 'matches', 'customHandlers', 'autoComplete', 'doubleElimination', 'noSecondaryFinal', 'noConsolationRound', 'noGrandFinalComeback', 'reverseBracket', 'big', 'connectorStyles']
-        $.each(demos, function(i, d){
-          var demo = $('div#'+d)
-          $('<div class="demo"></div>').appendTo(demo)
-          var pre = $('<pre name="code" class="js"></pre>').appendTo(demo)
-          var script = demo.find('script')
-          demo.find("h3").append($('<a href="#' + d + '">¶</a>'))
-        //pre.text(script.html())  소스코드 보이는것 비활성화 ㅎㅎㅎㅎ
-        })
-      })
-    </script>
-
-    <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-1488867-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    </script>
   </head>
   <body>
     <% include ../partials/navbar %>
@@ -131,9 +72,6 @@ $(document).ready(function () {
         readOnly: true
     });
 });
-
- </script>
-
 </script>
 <script type="text/javascript">
 rdata = <%- JSON.stringify(pList[2]) %>;
@@ -162,11 +100,8 @@ $(function() {
       })
     })
 </script>
-<!-- <script src="https://code.jquery.com/jquery.js"></script> -->
-<script type="text/javascript" src="/js/jquery.bracket.min.js"></script> <!-- 반드시 헤드가 아닌 이쪽아래에 둘것 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
-<script type="text/javascript" src="/js/jquery.json-2.2.min.js"></script>
-    </div>
+  <% include ../partials/scripts %>
+
+
   </body>
 </html>

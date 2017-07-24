@@ -8,18 +8,8 @@ var md_gRank = require('../models/md_groupRank');
 var mtnt_all = require('../models/md-tntbracket_all');
 var rbsm = require('../models/md_sm_rb');
 
-router.get("/:id", isLoggedIn, function(req, res){
-
-  // var starter = new mtnt_all;
-  // starter.gameid = req.params.id;
-  // var snt ={
-  //   teams : 'mone',
-  //   results : 'win'
-  // }
-  // starter.tnt_all = snt;
-  // starter.save(function(err, starters){
-  //     if(err) return console.error(err);
-  // }); // resultSet.save
+// router.get("/:id", isLoggedIn, function(req, res){
+router.get("/:id", function(req, res){
   mtnt_all.find({gameid: req.params.id}, {_id:0, tnt_all:1, gameid:1}, function(err, mtnt_alls){
     if(err) return res.status(500).send({error: 'database find failure'});
     var ts;
@@ -33,17 +23,8 @@ router.get("/:id", isLoggedIn, function(req, res){
 });
 
 
-router.get("/", isLoggedIn, function(req, res){
-  // var starter = new tntbrkt_low16ff;
-  // starter.gid = 31;
-  // var snt ={
-  //   teams : 'mone',
-  //   results : 'win'
-  // }
-  // starter.tnt_l16ff = snt;
-  // starter.save(function(err, starters){
-  //     if(err) return console.error(err);
-  // }); // resultSet.save
+// router.get("/", isLoggedIn, function(req, res){
+router.get("/", function(req, res){
   tntbrkt_low16ff.find({}, {_id:0}, function(err, tntbrkt_low16ffs){
     if(err) return res.status(500).send({error: 'database find failure'});
     var ts;
@@ -70,29 +51,23 @@ router.post('/:id', isLoggedIn, function(req,res){
     });
   }
   catch(err) {
-    //console.log('라우터data오류'+jsondata);
-    // return res.redirect("tbrackets");
     return res.redirect("back");
   };
 });
 
 // router.get("/:id", isLoggedIn, function(req, res){
-  router.get("/test/makebarcket", function(req, res){
+  router.get("/test/makebarcket/:id", function(req, res){
     mtnt_all.find({gameid: '9993-tnt-32-170710-테스트'}, {_id:0, tnt_all:1, gameid:1}, function(err, mtnt_alls){
       if(err) return res.status(500).send({error: 'database find failure'});
       var ts;
      ts = mtnt_alls[0].tnt_all;
-    //  tntid = req.params.id;
-     //console.log('ts= ' + JSON.stringify(ts));
-
-    //  console.log('seedArr= ' + seedArr);
-    //  console.log('orderArr= ' + orderArr);
-    //   console.log('coupledArr= ' + coupledArr);
-      res.render("gbrackets/vw_tnt_make", {sdata:ts});
+     tntid = req.params.id;
+      res.render("gbrackets/vw_tnt_make", {sdata:ts,tntid:tntid});
       });
 });
 
-router.post("/test/makebarcket", isLoggedIn, function(req,res){
+// router.post("/test/makebarcket", isLoggedIn, function(req,res){
+  router.post("/test/makebarcket", function(req,res){
   try {
   var jsondata = JSON.parse(req.body.tdata);
   //console.log('라우터'+req.body.tdata);
@@ -110,14 +85,13 @@ router.post("/test/makebarcket", isLoggedIn, function(req,res){
     });
   }
   catch(err) {
-    //console.log('라우터data오류'+jsondata);
-    // return res.redirect("tbrackets");
     return res.redirect("back");
   };
 });
 
 
-router.post("/test/automake", isLoggedIn, function(req,res){
+// router.post("/test/automake", isLoggedIn, function(req,res){
+  router.post("/test/automake",function(req,res){
   var numGroup = req.body.noGroup;
   var numRank = req.body.noRank;
   var size_tnt;
@@ -125,17 +99,12 @@ router.post("/test/automake", isLoggedIn, function(req,res){
   var seedArr=[];
   var orderArr=[];
   var coupledArr=[];
-  // console.log('numGroup =' +numGroup);
-  // console.log('numRank =' +numRank);
   for (i=0; i<10; i++){
     if (numGroup*numRank > Math.pow(2, i) && numGroup*numRank <= Math.pow(2, i+1)){
        size_tnt = Math.pow(2, i+1);
        no_power = i+1;
     }
   }
-  // console.log('Math.pow(2, 3) =' +Math.pow(2, 3));
-  // console.log('size_tnt =' +size_tnt);
-  // console.log('no_power =' +no_power);
   var seedArr = seeding(size_tnt);
   if(numGroup==1){
      orderArr = order_group1(numRank);
@@ -173,11 +142,11 @@ router.post("/test/automake", isLoggedIn, function(req,res){
   if(numGroup==128){
      orderArr = order_group128(numRank);
   }
-  // console.log('orderArr=' +orderArr);
+
   var coupledArr = coupling(seedArr,orderArr);
   var preTeams = [];
   var preResults = [];
-  // console.log('size_tnt/2 =' +size_tnt/2);
+
   preTeams = new Array(size_tnt/2);
   for (i=0; i<size_tnt/2; i++){
     preTeams[i] = new Array(2);
@@ -221,6 +190,8 @@ router.post("/test/automake", isLoggedIn, function(req,res){
 
 }); // 라우터
 
+
+// #####################자동완성################
 // router.post('/autofill', isLoggedIn, function(req,res){
   router.post('/test/autofill/:id',function(req,res){
   var pListi = [];
@@ -240,9 +211,10 @@ router.post("/test/automake", isLoggedIn, function(req,res){
     var strarr = req.params.id.split('-');
     gamename = strarr[4]
     tntid = req.params.id ;
-    if(gamename=='상위부'){
-    var numGroup = 2;
-    var numRank = 4;
+
+    if(req.body.highlow =='상위부'){
+    var numGroup = req.body.noGroup;
+    var numRank = req.body.noRankhigh;
     var size_tnt;
     var no_power;
     var seedArr=[];
@@ -330,12 +302,15 @@ router.post("/test/automake", isLoggedIn, function(req,res){
          var strarr = req.params.id.split('-');
          gamename = strarr[4]
          tntid = req.params.id ;
-          res.render("gbrackets/vw_tnt_all", {sdata:ts,gamename:gamename, tntid:tntid, user:req.user});
+          res.render("gbrackets/vw_tnt_make", {sdata:ts,gamename:gamename, tntid:tntid, user:req.user});
       });
   }
-  if(gamename=='하위부'){
-  var numGroup = 2;
-  var numRank = 3;
+
+
+  if(req.body.highlow =='하위부'){
+  var numGroup = req.body.noGroup;
+  var numRank = req.body.noRanklow;
+  var numhigh = req.body.noRankhigh;
   var size_tnt;
   var no_power;
   var seedArr=[];
@@ -396,9 +371,10 @@ router.post("/test/automake", isLoggedIn, function(req,res){
   for (i=0; i<size_tnt; i++){
     if(coupledArr[i]){
     strarr=coupledArr[i].split('-');
-    playerArr[i]=sorted_namelistarr[Number(strarr[0])-1][Number(strarr[1])+3];
+    playerArr[i]=sorted_namelistarr[Number(strarr[0])-1][Number(strarr[1])+(numhigh-1)];
     }
   }
+
   for (i=0; i<size_tnt/2; i++){
     preTeams[i][0]=playerArr[2*i];
     preTeams[i][1]=playerArr[2*i+1];
@@ -422,7 +398,7 @@ router.post("/test/automake", isLoggedIn, function(req,res){
        var strarr = req.params.id.split('-');
        gamename = strarr[4]
        tntid = req.params.id ;
-        res.render("gbrackets/vw_tnt_all", {sdata:ts,gamename:gamename, tntid:tntid, user:req.user});
+        res.render("gbrackets/vw_tnt_make", {sdata:ts,gamename:gamename, tntid:tntid, user:req.user});
     });
 }
     });
@@ -430,150 +406,6 @@ router.post("/test/automake", isLoggedIn, function(req,res){
 
 }); // 라우터
 
-router.post('/uinput', isLoggedIn, function(req,res){
-   var a1= "1조5위";
-   var a2= "1조6위";
-   var a3= "1조7위";
-   var a4= "1조8위";
-   var b1= "2조5위";
-   var b2= "2조6위";
-   var b3= "2조7위";
-   var b4= "2조8위";
-   var c1= "3조5위";
-   var c2= "3조6위";
-   var c3= "3조7위";
-   var c4= "3조8위";
-   var d1= "4조5위";
-   var d2= "4조6위";
-   var d3= "4조7위";
-   var d4= "4조8위";
-   var bye;
-   var rdata_A;
-   var rdata_B;
-   var rdata_C;
-   var rdata_D;
-   var ts = [];
-   var nameArrA = [];
-   var nameArrB = [];
-   var nameArrC = [];
-   var nameArrD = [];
-   var aN = [];
-   var bN = [];
-   var cN = [];
-   var dN = [];
-
-   md_gRank.find({rid: { $gt: 69, $lt: 79 }}, {_id:0, group_rank:1}, function(err, md_gRanks){
-     if(err) return res.status(500).send({error: 'database find failure'});
-     ts[0] = md_gRanks[0].group_rank;
-     ts[1] = md_gRanks[1].group_rank;
-     ts[2] = md_gRanks[2].group_rank;
-     ts[3] = md_gRanks[3].group_rank;
-     ts[4] = md_gRanks[4].group_rank;
-     ts[5] = md_gRanks[5].group_rank;
-        //console.log('ts[0]='+ts[0]);
-     for ( var ku = 0 ; ku < 6 ; ku++ ){
-       if(ts[ku].gName == 10){
-         rdata_A = ts[ku];
-       }
-       if(ts[ku].gName == 11){
-         rdata_B = ts[ku];
-       }
-       if(ts[ku].gName == 12){
-         rdata_C = ts[ku];
-       }
-       if(ts[ku].gName == 13){
-         rdata_D = ts[ku];
-       }
-  }; // end of for ku
-
-   for ( var ia = 0 ; ia < rdata_A.gnamePlus.length ; ia++ ){
-     var snA = rdata_A.gnamePlus[ia].split('-');
-     nameArrA[ia] = snA[2];
-   };
-
-   for ( var i = 0 ; i < rdata_A.rankData.length ; i++ ){
-     var ndA = rdata_A.rankData[i]%100
-     aN[i] = nameArrA[ndA];
-   };
-
-   for ( var ia = 0 ; ia < rdata_B.gnamePlus.length ; ia++ ){
-     var snB = rdata_B.gnamePlus[ia].split('-');
-     nameArrB[ia] = snB[2];
-   };
-
-   for ( var i = 0 ; i < rdata_B.rankData.length ; i++ ){
-     var ndB = rdata_B.rankData[i]%100
-     bN[i] = nameArrB[ndB];
-   };
-
-   for ( var ia = 0 ; ia < rdata_C.gnamePlus.length ; ia++ ){
-     var snC = rdata_C.gnamePlus[ia].split('-');
-     nameArrC[ia] = snC[2];
-   };
-
-   for ( var i = 0 ; i < rdata_C.rankData.length ; i++ ){
-     var ndC = rdata_C.rankData[i]%100
-     cN[i] = nameArrC[ndC];
-   };
-
-   for ( var ia = 0 ; ia < rdata_D.gnamePlus.length ; ia++ ){
-     var snD = rdata_D.gnamePlus[ia].split('-');
-     nameArrD[ia] = snD[2];
-   };
-
-   for ( var i = 0 ; i < rdata_D.rankData.length ; i++ ){
-     var ndD = rdata_D.rankData[i]%100
-     dN[i] = nameArrD[ndD];
-   };
-
-
-   var a1= aN[4];
-   var a2= aN[5];
-   var a3= aN[6];
-   var a4= aN[7];
-   var b1= bN[4];
-   var b2= bN[5];
-   var b3= bN[6];
-   var b4= bN[7];
-   var c1= cN[4];
-   var c2= cN[5];
-   var c3= cN[6];
-   var c4= cN[7];
-   var d1= dN[4];
-   var d2= dN[5];
-   var d3= dN[6];
-   var d4= dN[7];
-
-   try {
-   var jsondata = JSON.parse(req.body.tdata);
-   var t16_even = [a1,c3,a2,c4,c1,a3,c2,a4];
-   var t16_odd =  [b4,d2,b3,d1,d4,b2,d3,b1];
-   for ( var k1 = 0 ; k1 < 8 ; k1++ ){
-      jsondata.teams[k1][0] =t16_even[k1];
-      jsondata.teams[k1][1] =t16_odd[k1];
-   };
-
-  //var data2 = new mtnt_low16;
-  var target  = 31;
-  //data2.tnt_h16_ff = jsondata;
-  tntbrkt_low16ff.findOneAndUpdate({gid: target},
-    {tnt_l16ff:jsondata},
-    {new: true, upsert: true, setDefaultsOnInsert: true},
-    function(error, tntbrkt_low16ffs) {
-      if(error){
-          console.log("Something wrong when updating data!");
-      }
-       var ts;
-       ts = tntbrkt_low16ffs.tnt_l16ff;
-       //console.log('ts='+ts);
-       res.render("gbrackets/vw_tnt_all", {sdata:ts, user:req.user});
-    });
-  }
-  catch(err) {
-    return res.redirect("vw_tnt_all/");
-  };
-}); // end of find
-});  // end of router
 
 router.get("/view", isLoggedIn, function(req, res){
   tntbrkt_low16ff.find({}, {_id:0, tnt_l16:1}, function(err, tntbrkt_low16ffs){
@@ -653,10 +485,6 @@ function coupling(sarr,oarr){
 }
 
 function sortbyrank(parr){
- // var sarr = [];
- // for(i=0; i<sarr.length-1; i++){
- //   sarr[i] = new Array();
- // }
  parr.shift();
  var out=[];
  idx = parr.length+2;

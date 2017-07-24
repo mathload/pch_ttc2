@@ -2,8 +2,32 @@
 <html>
   <% include ../partials/head %>
   <style>
-body {
+/*body {
     background-image: url("/image/bk1.png");
+}*/
+/*html {
+  background: url(/image/bk1.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}*/
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+}
+#bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
 }
 </style>
 
@@ -12,10 +36,16 @@ body {
   <% include ../partials/navbar %>
   <% include ../partials/header %>
 
-<!-- main start-->
+  <div class="container" id="about">
 
-            <!-- content for about page -->
-            <div class="container" id="about">
+<!-- main start-->
+  <!-- <div class="container-fluid"> -->
+            <div id="bg">
+            <img src="/image/bk1.png" alt="">
+            </div>
+                        <!-- content for about page -->
+
+
               <div class="row">
                       <div class="col-xs-12">
                         <h2>2017년 7월 박세훈 탁구동호회 월례대회</h2>
@@ -42,7 +72,7 @@ body {
                             <!--
                             <li><a href="/rt_gbrackets_v2/main/teamEvent">단체전</a></li>
                             -->
-                            <li><a href="/rt_gbrackets_v2/main/singleMatch">대회 홈페이지 가기</a></li><br><br>
+                            <li><a href="/main/singleMatch">대회 홈페이지 가기</a></li><br><br>
 
                         </div>
                         <div class="col-xs-12">
@@ -54,8 +84,8 @@ body {
                         </div>
 
                         <div class="col-xs-12">
-                            <h3>리그및 토너먼트 테스트용 </h3>
-                            <li><a href="/rbtable_test/9990-rb-tmsingle-170628-test">리그전 순위 계산테이블</a></li>
+                            <h3>리그및 토너먼트 참고용 </h3>
+                            <li><a href="/rbtable_test/9990-rb-tmsingle-170628-test">리그전 순위 계산</a></li>
                             <li><a href="/tbrackets_make/test/makebarcket/9993-tnt-32-170710-테스트">토너먼트표 작성</a></li>
                             <br><br>
 
@@ -65,7 +95,7 @@ body {
 
 
                 </div> <!-- end of row -->
-            </div><!-- end of content -->
+    </div><!-- end of content -->
     <footer>
       <% include ../partials/footer %>
     </footer>
