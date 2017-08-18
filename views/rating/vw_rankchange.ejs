@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <% include ../partials/headforall %>
+
+<body>
+  <% include ../partials/navbar %>
+
+          <h2> 레이팅 등락 반영</h2>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div>
+          <input class="btn btn-primary" type="button" value="홈으로" onclick="window.location.href='/'" />
+          <input class="btn btn-success" type="button" value="월례대회" onclick="window.location.href='/main/singleMatch' " />
+          <br><br><br>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <form action="/rt_viewrating/rankchange/dochange" method="get">
+          <input class="btn btn-info active" type="submit"
+             onclick="return confirm('레이팅 등락을 반영합니다 계속하삼?')" value="레이팅 등락 반영">
+        </form>
+    <% include ../partials/scripts %>
+  </div>
+  </div>
+    </script> %>
+</body>
+
+</html>

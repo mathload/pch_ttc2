@@ -22,6 +22,11 @@ router.get("/all", function(req, res){
 });
 
 router.get("/rankchange", function(req, res){
+  res.render("rating/vw_rankchange");
+});
+
+
+router.get("/rankchange/dochange", function(req, res){
   memberList.find({}, {_id:0}, function(err, members){
     if(err) return res.status(500).send({error: 'database find failure'});
     var sortingField = "myCurrentRating";

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <% include ../partials/head %>
-
+<head>
+  <% include ../partials/headforall %>
+  <script src='/js/jquery-paginate.min.js'></script>
+</head>
 <body>
   <% include ../partials/navbar %>
-  <% include ../partials/header %>
   <article id="main">
   <div class="container-fluid">
     <div class="row">
@@ -19,7 +20,7 @@
       	<div class="row">
       		<div class="col-md-12">
               <h2><%= myname %>님의 레이팅 내역 </h2>
-      			<table class="table table-bordered table-hover">
+      			<table class="table table-bordered table-hover" id="myTable">
       				<thead>
       					<tr class="danger">
                   <th>번호</th>
@@ -45,22 +46,32 @@
       	</div>
       </div>
 
-  <script type="text/javascript">
+      <script type='text/javascript'>
+          $('#myTable').paginate({
+          limit:10, // 10 elements per page
+          initialPage:0, // Start on second page
+          previous:true, // Show previous button
+          previousText:'<', // Change previous button text
+          next:true, // Show previous button
+          nextText:'>', // Change next button text
+          first:true, // Show first button
+          firstText:'First', // Change first button text
+          last:true, // Show last button
+          lastText:'Last', // Change last button text
+          optional:false, // Always show the navigation menu
+          // onCreate:function(obj) { console.log('Pagination done!'); } // `onCreate` callback
+          // onSelect:function(obj, i) { console.log('Page '+ i +' selected!'); } // `onSelect` callback
+          // childrenSelector:'tbody > tr.ugly', // Paginate the rows with the `ugly` class
+          // navigationWrapper:$('div#myNavWrapper'), // Append the navigation menu to the `#myNavWrapper` div
+          // navigationClass:'my-page-navigation', // New css class added to the navigation menu
+          // pageToText:function(i) { return (i +1).toString(16); } // Page numbers will be shown on hexadecimal notation
+        });
+    </script>
 
-  </script>
-
-  <script type="text/javascript">
-
-
-
-
-
-  </script>
 
 </article>
     <% include ../partials/scripts %>
 
-    </script> %>
 </body>
 
 </html>

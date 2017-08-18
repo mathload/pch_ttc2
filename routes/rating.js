@@ -8,7 +8,8 @@ var User     = require('../models/User');
 var memberList     = require('../models/md_memberList');
 
 // index
-router.get("/", isLoggedIn, function(req, res){
+// router.get("/", isLoggedIn, function(req, res){
+  router.get("/", function(req, res){
   memberList.find({}, {_id:0}, function(err, memberLists){
     if(err) return res.status(500).send({error: 'database find failure'});
     var sortingField = "myCurrentRating";
