@@ -7,6 +7,7 @@ var util     = require("../../util");
 //var ResultSet     = require('../../models/md_resultSet');
 var rbsm = require('../../models/md_sm_rb');
 var robin = require('roundrobin');
+
 // Home
 router.get("/:id", function(req, res){
   var gameID = req.params.id;
@@ -77,10 +78,166 @@ router.get("/:id", function(req, res){
          }
 
    }
-    res.render("htable/rb_each", {pList:pListi,  gname:gname, gameID:gameID,
-               hlow:hlow,hcol:hcol,gordermulti:gordermulti, doneArr:doneArr});
+   var viewtype = 'detail';
+    res.render("htable/vw_rankcal", {pList:pListi,  gname:gname, gameID:gameID,ranklist:pListi,
+               hlow:hlow,hcol:hcol,gordermulti:gordermulti, doneArr:doneArr,viewtype:viewtype});
 }); // find
 }); // router
+
+
+router.get("/rankview/:id", function(req, res){
+  var gameID = req.params.id;
+  var strArr = gameID.split('-');
+  var gname = strArr[4];
+  var pListi = [];
+  var ranklist = [];
+  rbsm.find({matchid : gameID}, {_id:0, rbsmplist:1}, function(err, pLists){
+    if(err) return res.status(500).send({error: 'database find failure'});
+    pListi = pLists[0].rbsmplist;
+    var hcol2 = [];
+    var hlow2 = [];
+    var count;
+    count = pListi.length;
+    for(var i=0; i<count-1; i++) {
+      ranklist[i] = new Array(3);
+    }
+    pListi.sort(function(a, b){
+      return a[count+1]-b[count+1]
+    });
+
+    hlow2[0]='';
+    // for(var i=0; i<count; i++) {
+    //   hlow[i+1]=i+1;
+    //   hcol2[i] = '';
+    // };
+    hcol2[0] = '순위';
+    hcol2[1] = '이름';
+    hcol2[2] = '승점(승-패)';
+    for(var i=0; i<count-1; i++) {
+      hlow2[i+1]='';
+      ranklist[i][0] = pListi[i+1][count+1];
+      ranklist[i][1] = pListi[i+1][0];
+      ranklist[i][2] = pListi[i+1][count];
+    }
+
+    var dlist = [];
+    for ( var i = 1 ; i < count ; i++ ){
+      for ( var j = 1+i ; j < count ; j++ ){
+            if(pListi[i][j]  && pListi[j][i] && i!==j ){
+              dlist.push([i] + "-" + [j]);
+            }
+      }
+    };
+   var test = robin(count-1);
+   var testArr = [];
+   var gameorderArr = [];
+   var gordermulti = [];
+   for (i=0 ; i < test.length ; i++){
+        for (j=0 ; j < test[0].length ; j++){
+         testArr.push(test[i][j]);
+        }
+   }
+   for (i=0 ; i < testArr.length ; i++){
+     gameorderArr.push(testArr[i][0]+'#'+testArr[i][1]);
+   }
+     var col_no = 9;
+     var row_no = parseInt(gameorderArr.length/col_no)+1;
+     for (i=0 ; i < row_no; i++){
+       gordermulti[i] = new Array();
+      }
+
+     for (i=0 ; i < gameorderArr.length ; i++){
+       gordermulti[parseInt(i/col_no)][i%col_no]= gameorderArr[i];
+     }
+
+    var doneArr = [];
+    for (k=0 ; k < dlist.length ; k++){
+        var a = dlist[k].split('-');
+
+         var tmpArr = [];
+         for (i=0 ; i < gordermulti.length ; i++){
+           for (j=0 ; j < gordermulti[0].length ; j++){
+              if(gordermulti[i][j]){
+                     var b = gordermulti[i][j].split('#');
+                     if ( (a[0]==b[0] && a[1]==b[1]) || (a[0]==b[1] && a[1]==b[0]) ){
+                       tmpArr[0]=i;
+                       tmpArr[1]=j;
+                       doneArr.push(tmpArr);
+                     }
+              }
+           }
+         }
+
+   }
+    var viewtype = 'rank';
+    res.render("htable/vw_LeagueTable", {pList:pListi,ranklist:ranklist, gname:gname, gameID:gameID,
+               hlow:hlow2,hcol:hcol2,viewtype:viewtype,gordermulti:gordermulti, doneArr:doneArr});
+}); // find
+}); // router
+
+router.post('/substitute/:id', function(req, res){
+  async.waterfall([
+  function(callback){
+    var nameout = req.body.outplayer;
+    var namein = req.body.inplayer;
+    var gameID = req.params.id;
+    // console.log('nameout=' + nameout);
+    // console.log('namein=' + namein);
+    var hcol = [];
+    var hlow = [];
+    var count;
+    rbsm.find({matchid : gameID}, {_id:0, rbsmplist:1}, function(err, pLists){
+      if(err) return res.status(500).send({error: 'database find failure'});
+      pListi = pLists[0].rbsmplist;
+      count = pListi.length;
+      for(var i=0; i<count; i++) {
+        if(pListi[i][0] == nameout ){
+          pListi[i][0] = namein;
+          pListi[0][i] = namein;
+        }
+      }
+
+      hlow[0]='';
+      for(var i=0; i<count-1; i++) {
+        hlow[i+1]=i+1;
+        hcol[i] = '';
+      };
+      hcol[count-1] =  '';
+      hcol[count] = '승점(승-패)';
+      hcol[count+1] = '순위';
+      callback(null, pListi, hcol, hlow, gameID);
+      });
+    //callback(null, pListi,gameID);
+  },
+  function(pListi, hcol, hlow, gameID, callback){
+            var pListr = [];
+            rbsm.findOneAndUpdate({matchid : gameID},
+              {rbsmplist:pListi},
+              {new: true, upsert: true, setDefaultsOnInsert: true},
+              function(error, pLists) {
+                if(error){
+                    console.log("Something wrong when updating data!");
+                }
+
+                pListr = pLists.rbsmplist;
+                callback(null, pListr, hcol, hlow, gameID);
+            });
+    //callback(null, pListr,gameID);
+  },
+  function(pListr, hcol, hlow, gameID, callback){
+        var strArr = gameID.split('-');
+        var gname = strArr[4];
+        res.redirect('back');
+      //  console.log('pListr='+pListr);
+      //  res.render("htable/rb_each", {pList:pListr,  gname:gname, gameID:gameID,hcol:hcol, hlow:hlow});
+    callback(null, '끝');
+  }
+], function (err, result) {
+   // result에는 '끝'이 담겨 온다.
+});
+//res.redirect('back');
+
+});
 
 router.post('/:id', function(req, res){
   async.waterfall([
@@ -147,6 +304,7 @@ router.post('/:id', function(req, res){
 //res.redirect('back');
 
 });
+
 
 router.post('/remove/:id', function(req, res){
   async.waterfall([
