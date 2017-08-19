@@ -24,7 +24,7 @@
   <div class="container" id="about">
     <div class="row">
         <div class="col-xs-12">
-    <h2>2017-08 월례대회 결선 토너먼트-<%= gamename %></h2>
+    <h2 style="color:#549bb2;">2017-08 월례대회 결선 토너먼트-<%= gamename %></h2>
 
     <form action="/tbrackets/<%= tntid %>" method="post">
       <input type="hidden" id="resetdata" name="tdata" value="">
@@ -38,7 +38,7 @@
         <input type="hidden" id="savedata" name="tdata" value="">
         <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
         <input class="btn btn-warning active" type="submit" value="저장">
-        <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/tbrackets_make/test/makebarcket'" />
+        <input class="btn btn-success active" type="button" value="업데이트보기" onclick="window.location.href='/tbrackets/<%= tntid %>'" />
     </form>
 
          <hr>

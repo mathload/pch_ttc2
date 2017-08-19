@@ -7,6 +7,7 @@ var util     = require("../../util");
 //var ResultSet     = require('../../models/md_resultSet');
 var rbsm = require('../../models/md_sm_rb');
 var robin = require('roundrobin');
+
 // Home
 router.get("/:id", function(req, res){
   var gameID = req.params.id;
@@ -78,7 +79,7 @@ router.get("/:id", function(req, res){
 
    }
    var viewtype = 'detail';
-    res.render("htable/rb_test", {pList:pListi,  gname:gname, gameID:gameID,ranklist:pListi,
+    res.render("htable/vw_LeagueTable", {pList:pListi,  gname:gname, gameID:gameID,ranklist:pListi,
                hlow:hlow,hcol:hcol,gordermulti:gordermulti, doneArr:doneArr,viewtype:viewtype});
 }); // find
 }); // router
@@ -169,7 +170,7 @@ router.get("/rankview/:id", function(req, res){
 
    }
     var viewtype = 'rank';
-    res.render("htable/rb_test", {pList:pListi,ranklist:ranklist, gname:gname, gameID:gameID,
+    res.render("htable/vw_LeagueTable", {pList:pListi,ranklist:ranklist, gname:gname, gameID:gameID,
                hlow:hlow2,hcol:hcol2,viewtype:viewtype,gordermulti:gordermulti, doneArr:doneArr});
 }); // find
 }); // router

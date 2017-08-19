@@ -33,7 +33,9 @@ router.get("/", function(req, res){
     });
 });
 
-router.post('/:id', isLoggedIn, function(req,res){
+   // 저장
+// router.post('/:id', isLoggedIn, function(req,res){
+  router.post('/:id', function(req,res){
   try {
   var jsondata = JSON.parse(req.body.tdata);
   //console.log('라우터'+req.body.tdata);

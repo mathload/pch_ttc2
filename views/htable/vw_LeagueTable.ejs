@@ -27,51 +27,52 @@
     <div class="container-fluid" id="about">
       <div class="row">
           <div class="col-xs-12">
-          <!-- <h1>2017년 07월 월례대회 조별 예선리그 현황 - <%= gname %></h1> -->
-
+            <p>
+              <h2>2017년 08월 월례대회 </h2>
+            </p>
+            <p>
+              <h2 style="color:#ff6c36;">조별 예선리그 현황 - <%= gname %> </h2>
+            </p>
           </div>
       </div>
 
-      <!-- <div class="contentBox"> -->
-
-      <!-- <div class="buttons"> -->
-
       <div class="row">
-        <div class="col-xs-5">
-      <form action="/rbtable/init/<%= gameID %>" method="get">
-        <input type="hidden" id="resetdata" name="tdata" value="">
-        <input class="btn btn-danger active" type="submit"  onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
-      </form>
-      </div>
       <div class="col-xs-7">
-        <!-- <form action="/rbtable/savedata/<%= gameID %>" method="post"> -->
         <button class="btn btn-primary" onclick="location.href='/'">Home</button>
-        <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
-        <!-- <input class="btn btn-success active" type="button" value="초기화" onclick="window.location.href='/rbtable/init/<%= gameID %>'" />
-        <input class="btn btn-primary active" type="hidden" id="savedata" name="savedata" value=""> -->
-        </form>
+        <input class="btn btn-info active" type="button" value="월례대회"
+            onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
+      </div>
+
+      <div class="col-xs-5">
+       <form action="/rbtable/init/<%= gameID %>" method="get">
+         <input type="hidden" id="resetdata" name="tdata" value="">
+         <input class="btn btn-danger active pull-right" type="submit"
+            onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')"
+            value="초기화">
+       </form>
+     </div>
+     </div>
+
 
       </div>
-      </div>
-      </div>
-      <!-- </div> -->
-      <!-- </div> -->
+
            <br>
            <h4 >스코어 테이블</h4>
            <div class="row">
              <div class="col-xs-1">
              </div>
-              <div class="col-xs-3">
-                <form action="/rbtable_test/<%= gameID %>" method="get">
-                  <input class="btn btn-default active" type="submit"  value="상세보기">
-                </form>
+              <div class="col-xs-2">
+                  <form action="/rbtable/<%= gameID %>" method="get">
+                    <input class="btn btn-default active" type="submit"  value="상세보기">
+                  </form>
               </div>
-              <div class="col-xs-3">
-                <form action="/rbtable_test/rankview/<%= gameID %>" method="get">
-                  <input class="btn btn-default active" type="submit"  value="순위보기">
-                </form>
+              <div class="col-xs-2">
+                  <form action="/rbtable/rankview/<%= gameID %>" method="get">
+                    <input class="btn btn-default active" type="submit"  value="순위보기">
+                  </form>
               </div>
           </div>
+
 
            <% if(viewtype == 'rank') {%>
             <div class="container-fluid">
@@ -180,23 +181,34 @@
 
      <h4 >선수등록, 교체및 말소</h4>
        <!-- 선수등록 -->
+       <div class="row">
+          <div class="col-xs-1">
+          </div>
+          <div class="col-xs-10">
      <form class="form-horizontal" action="/rbtable/<%= gameID %>" method="post">
        <div class="form-group">
-       <label class="control-label col-xs-1" for="playerName">name:</label>
+       <!-- <label class="control-label col-xs-1" for="playerName">name:</label> -->
        <div class="col-xs-10">
        <input type="text" class="form-control" id="playerName" placeholder="선수이름입력" name="playerName">
 
                 <button class="btn btn-success" type="submit" >선수등록</button>
      </div>
      </div>
+ </div>
+   </div>
      </form>
      <br>
+
+
+
+
      <div class="row">
-        <div class="col-xs-6">
+       <div class="col-xs-1">
+       </div>
+        <div class="col-xs-2">
           <!-- 선수교체 -->
           <div class="container">
             <button type="button" class="btn btn-info" id="myBtn3">선수 교체</button>
-            <== 클릭
             <!-- Modal -->
             <div class="modal fade" id="myModal3" role="dialog">
               <div class="modal-dialog" >
@@ -251,11 +263,10 @@
           });
           </script>
         </div>
-        <div class="col-xs-6">
+        <div class="col-xs-2">
           <!-- 선수말소 -->
           <div class="container">
             <button type="button" class="btn btn-warning" id="myBtn2">선수 말소</button>
-            <== 클릭
             <!-- Modal -->
             <div class="modal fade" id="myModal2" role="dialog">
               <div class="modal-dialog" >
