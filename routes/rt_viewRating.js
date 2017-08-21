@@ -42,7 +42,7 @@ router.get("/rankchange/dochange", function(req, res){
             updownrank.myname = member.myname;
             updownrank.beforerank = member.currentrank;
             updownrank.currentrank = idx;
-            updownrank.rankupdown = idx-member.currentrank;
+            updownrank.rankupdown = member.currentrank-idx;
             callback(null, updownrank, 'two');
         },
         function(updownrank, arg2, callback) {
