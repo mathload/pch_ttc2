@@ -115,10 +115,16 @@ router.get("/relative/:id", function(req, res){
                 //callback(null, listsets);;
     },
     function(listsets, callback){
-        var oppList = [];
+        var oppListMulti = [];
         for ( var op = 0 ; op < listsets.length ; op++ ){
-          oppList.push(listsets[op].oppname);
+          oppListMulti.push(listsets[op].oppname);
         };
+
+        var oppList = oppListMulti.reduce(function(a,b){
+          	if (a.indexOf(b) < 0 ) a.push(b);
+          	return a;
+            },[]);
+        oppList.sort();
           callback(null, listsets, oppList);
     },
     function(listsets, oppList, callback){
