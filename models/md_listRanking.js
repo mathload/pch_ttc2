@@ -23,6 +23,7 @@ var listRankingSchema = mongoose.Schema({
   no_win: {type:Number},
   no_loss: {type:Number},
   winRate: {type:Number},
+  gamedate: {type:String}
 });
 
 listRankingSchema.plugin(autoIncrement.plugin, {

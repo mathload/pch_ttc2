@@ -34,7 +34,8 @@
               <% for(var i=0; i < listRankings.length; i++) { %>
                <tr class="success">
                  <td><%= listRankings.length-i %></td>
-                 <td><%= listRankings[i].currentDate.toISOString().substring(0, 10) %></td>
+                 <td><%= listRankings[i].gamedate %></td>
+                 <!-- <td><%= listRankings[i].currentDate.toISOString().substring(0, 10) %></td> -->
                  <td><%= myname %>(<%= parseInt(listRankings[i].myBeforeRating) %>-><%= parseInt(listRankings[i].myCurrentRating) %>)</td>
                  <td><%= listRankings[i].myScore %>:<%= listRankings[i].oppScore %></td>
                  <td><%= listRankings[i].oppname %>(<%= parseInt(listRankings[i].oppBeforeRating) %>-><%= parseInt(listRankings[i].oppCurrentRating) %>)</td>

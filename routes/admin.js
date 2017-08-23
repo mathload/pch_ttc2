@@ -121,6 +121,7 @@ router.post('/tntrating', function(req,res){
   });
 
  var tntidArr = (req.body.gameID).split('-');
+ var gamedate=tntidArr[3];
  if(tntidArr[2] == 8){
 
  }
@@ -372,7 +373,7 @@ router.post('/tntrating', function(req,res){
            };
         }
      } // end for loop
-     mkratinglist(resultSet);
+     mkratinglist(gamedate,resultSet);
   }); // end find
  }
  if(tntidArr[2] == 32){
@@ -623,7 +624,7 @@ router.post('/tntrating', function(req,res){
            };
         }
      } // end for loop
-     mkratinglist(resultSet);
+     mkratinglist(gamedate,resultSet);
   }); // end find
  }  //  end ==32
  if(tntidArr[2] == 64){
@@ -671,7 +672,7 @@ router.post('/dorating', function(req,res){
 
   var gameID = req.body.gameID;
   var strArr = gameID.split('-');
-  var datea = strArr[2];
+  var datea = strArr[3];
   var rsets = [];
 
   // if(strArr[1] == 'rb'){
@@ -789,6 +790,7 @@ router.post('/dorating', function(req,res){
                   upRanking.oppCurrentRating = yourrating.rating;
 
                   //lRanking.gameid = rsets[rst].gid;
+                  lRanking.gamedate =datea;
                   lRanking.myname =upRanking.myname;
                   lRanking.myCurrentRating =upRanking.myCurrentRating;
                   lRanking.myBeforeRating=upRanking.myBeforeRating;
@@ -908,6 +910,7 @@ router.post('/dorating', function(req,res){
                           upRanking.vol = myrating.vol;
                           upRanking.oppCurrentRating = yourrating.rating;
 
+                          lRanking.gamedate =datea;
                           lRanking.myname =upRanking.myname;
                           lRanking.myCurrentRating =upRanking.myCurrentRating;
                           lRanking.myBeforeRating=upRanking.myBeforeRating;
@@ -1096,8 +1099,10 @@ function createSearch(queries){
 }
 
 
-function mkratinglist(rsetArr){
-
+function mkratinglist(datea,rsetArr){
+  // var gameID = req.body.gameID;
+  // var strArr = gameID.split('-');
+  // var datea = strArr[3];
   var playerList = [];
   var rsets = rsetArr;
   // console.log('rsets =' +rsets );
@@ -1175,6 +1180,7 @@ function mkratinglist(rsetArr){
                       upRanking.vol = myrating.vol;
                       upRanking.oppCurrentRating = yourrating.rating;
 
+                      lRanking.gamedate =datea;
                       lRanking.myname =upRanking.myname;
                       lRanking.myCurrentRating =upRanking.myCurrentRating;
                       lRanking.myBeforeRating=upRanking.myBeforeRating;
@@ -1291,6 +1297,7 @@ function mkratinglist(rsetArr){
                           upRanking.vol = myrating.vol;
                           upRanking.oppCurrentRating = yourrating.rating;
 
+                          lRanking.gamedate =datea;
                           lRanking.myname =upRanking.myname;
                           lRanking.myCurrentRating =upRanking.myCurrentRating;
                           lRanking.myBeforeRating=upRanking.myBeforeRating;
