@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/head_bkt %>
+</head>
+
+<body>
+    <% include ../partials/navbar %>
+    <div class="container-fluid" id="about">
+      <div class="row">
+          <div class="col-xs-12">
+          <h1>06월례대회 조별 예선 현황 - <%= gname %></h1>
+          </div>
+      </div>
+  <script type='text/javascript'>
+  var participants = []
+  var p = _(participants)
+  var roundCount = p.size() - 1 + (p.size() % 2)
+  var matches = p.map(function(_, i) {
+    return p.filter(function(_, j) { return j < i }).map(function(_, i2) {
+      return { round: ~~(Math.random()*10)%(roundCount + 1),
+              a: { team: i,  score: ~~(Math.random()*10)%10 },
+              b: { team: i2, score: ~~(Math.random()*10)%10 } }
+    }).value()
+  }).flatten(true).value()
+
+  var testData = {
+    teams: participants,
+    matches: matches
+  }
+  </script>
+
+  <script type="text/javascript">
+    rdata = <%- JSON.stringify(sdata) %>;
+    if(rdata){
+      viewData = rdata;
+    };
+
+  </script>
+
+  <div class="buttons">
+    <% if(user.username == 'admin') {%>
+      <div class="row">
+          <div class="col-xs-12">
+            <h2>Admin view</h2>
+          </div>
+          <div class="col-xs-7">
+            <form action="/rt_gbrackets_v2/<%= gameID %>" method="post">
+            <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
+            <input class="btn btn-success active" type="button" value="업데이트 보기" onclick="window.location.href='/rt_gbrackets_v2/view/<%= gameID %>'" />
+            <input class="btn btn-primary active" type="hidden" id="data_save" name="gdata" value="">
+            <input class="btn btn-warning active" type="submit" value="저장">
+            </form>
+            </div>
+        <div class="col-xs-5">
+        <form action="/rt_gbrackets_v2/<%= gameID %>" method="post">
+        <input type="hidden" id="resetdata" name="gdata" value="">
+        <input class="btn btn-primary active" type="button" value="홈페이지"  onclick="window.location.href='/'" />
+        <input class="btn btn-danger active" type="submit"
+          onclick="return confirm('모든데이터가 삭제됩니다 초기화를 하시겠습니까?')" value="초기화">
+        </form>
+      </div>
+    </div>
+          <div class="row">
+            <div class="col-xs-12">
+                <div id="editor"></div>
+           </div>
+        </div>
+    <% } %>
+    <%  if(user.username == 'guest') { %>
+      <div class="row">
+        <div class="col-xs-12">
+        <h2>Visitor view</h2>
+        <input class="btn btn-info active" type="button" value="월례대회" onclick="window.location.href='/rt_gbrackets_v2/main/singleMatch'" />
+        <input class="btn btn-success active" type="button" value="업데이트 보기" onclick="window.location.href='/rt_gbrackets_v2/view/<%= gameID %>'" />
+        <input class="btn btn-primary active" type="button" value="홈페이지" style="float: right" onclick="window.location.href='/'" />
+      </div>
+      </div>
+      <div class="row">
+            <div class="col-xs-12">
+            <div id="view"></div>
+            </div>
+      </div>
+
+    <% } %>
+  </div>
+    </div>
+
+
+
+  <script type="text/javascript">
+    var nullData = {
+      teams: participants,
+      matches: matches
+    }
+    $('#resetdata').val(JSON.stringify(nullData, undefined, 2));
+  </script>
+
+  <script class="demo" type="text/javascript">
+    $('#editor').group({
+      init: viewData,
+      save: function(state) {
+        // console.log(JSON.stringify(state, undefined, 2));
+        $('#data_save').val(JSON.stringify(state, undefined, 2));
+        $('pre').text(JSON.stringify(state, undefined, 2));
+        $('#view').empty().group({
+          init: state
+        })
+     }
+    });
+ </script>
+
+<% include ../partials/footer %>
+
+</body>
+
+</html>
