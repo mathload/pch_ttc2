@@ -76,6 +76,50 @@ router.get("/2017/2017-07-16", function(req, res){
       });
 });
 
+
+router.get("/2017/2017-08-20", function(req, res){
+  var pListi = [];
+  var hcol = [];
+  var hlow = [];
+  var rsf = [];
+  rbsm.find({ $or:[
+    {'matchid':'2008-rb-sm-170820-1조'},
+    {'matchid':'2009-rb-sm-170820-2조'},
+    {'matchid':'2010-rb-sm-170820-3조'},
+    {'matchid':'2011-rb-sm-170820-4조'}
+    ]},
+    {_id:0, rbsmplist:1}, function(err, results){
+    if(err) return res.status(500).send({error: 'database find failure'});
+    var sortingField = "matchid";
+    results.sort(function(a, b) { // 내림차순
+        return b[sortingField] - a[sortingField];
+    });
+
+    for(i=0; i<4; i++){
+          pListi[i] = results[i].rbsmplist;
+          rsf = maketableheader(pListi[i]);
+          hcol[i] = rsf[0];
+          hlow[i] = rsf[1];
+    }
+    mtnt_all.find({ $or:[
+      {'gameid':'2012-tntsm-16-170820-상위부'},
+      {'gameid':'2013-tntsm-16-170820-하위부'}
+      ]},
+      {_id:0, tnt_all:1}, function(err, tresults){
+      if(err) return res.status(500).send({error: 'database find failure'});
+      var sortingField = "gameid";
+      tresults.sort(function(a, b) { // 내림차순
+          return b[sortingField] - a[sortingField];
+      });
+
+        pListi[4] = tresults[0].tnt_all;
+        pListi[5] = tresults[1].tnt_all;
+  res.render("pastgame/2017-08-20", {pList:pListi, hlow:hlow,hcol:hcol});
+  });
+      });
+});
+
+
 router.get("/test9", function(req, res){
   res.render("htable/test9");
 });

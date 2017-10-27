@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <% include ../partials/headforall %>
+
+  </head>
+  <body>
+    <% include ../partials/navbar %>
+    <!-- <div class="container home home-about"> -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+     <h2 style="color:#998A00;">2017-08 월례대회 결과</h2>
+     <h3 style="color:#BCE55C;">1조 예선리그전 결과</h3>
+     <div class="handsontable" id="example"></div>
+     <br>
+     <h3 style="color:#BCE55C;">2조 예선리그전 결과</h3>
+     <div class="handsontable" id="example2"></div>
+     <br>
+     <h3 style="color:#BCE55C;">3조 예선리그전 결과</h3>
+     <div class="handsontable" id="example3"></div>
+     <br>
+     <h3 style="color:#BCE55C;">4조 예선리그전 결과</h3>
+     <div class="handsontable" id="example4"></div>
+     <br>
+     <h3 style="color:#BCE55C;">상위부 결선 토너먼트 결과</h3>     <br>
+      <div id="tnthigh"></div><br>
+    <h3 style="color:#BCE55C;">하위부 결선 토너먼트 결과</h3>     <br>
+     <div id="tntlow"></div>
+    </div>
+</div>
+</div>
+
+<script type='text/javascript'>
+var
+  data1 = [
+    ['', 'Kia', 'Nissan', 'Toyota', 'Honda', 'Mazda', 'Ford'],
+    ['2012', 10, 11, 12, 13, 15, 16],
+    ['2013', 10, 11, 12, 13, 15, 16],
+    ['2014', 10, 11, 12, 13, 15, 16],
+    ['2015', 10, 11, 12, 13, 15, 16],
+    ['2016', 10, 11, 12, 13, 15, 16]
+  ]
+
+  var list1 = <%- JSON.stringify(pList[0]) %>;
+  var list2 = <%- JSON.stringify(pList[1]) %>;
+  var list3 = <%- JSON.stringify(pList[2]) %>;
+  var list4 = <%- JSON.stringify(pList[3]) %>;
+  var list5 = <%- JSON.stringify(pList[4]) %>;
+  var list6 = <%- JSON.stringify(pList[5]) %>;
+  var lowh1 = <%- JSON.stringify(hlow[0]) %>;
+  var lowh2 = <%- JSON.stringify(hlow[1]) %>;
+  var lowh3 = <%- JSON.stringify(hlow[2]) %>;
+  var lowh4 = <%- JSON.stringify(hlow[3]) %>;
+  // var lowh3 = <%- JSON.stringify(hlow[2]) %>;
+  var colh1 = <%- JSON.stringify(hcol[0]) %>;
+  var colh2 = <%- JSON.stringify(hcol[1]) %>;
+  var colh3 = <%- JSON.stringify(hcol[2]) %>;
+  var colh4 = <%- JSON.stringify(hcol[3]) %>;
+  // var colh3 = <%- JSON.stringify(hcol[2]) %>;
+
+
+$(document).ready(function () {
+    $('#example').handsontable({
+        data: list1,
+        rowHeaders: lowh1,
+        colHeaders: colh1,
+        contextMenu: true,
+        className: "htCenter",
+        stretchH: 'all',
+        readOnly: true
+    });
+});
+
+$(document).ready(function () {
+    $('#example2').handsontable({
+        data: list2,
+        rowHeaders: lowh2,
+        colHeaders: colh2,
+        contextMenu: true,
+        className: "htCenter",
+        stretchH: 'all',
+        readOnly: true
+    });
+});
+
+$(document).ready(function () {
+    $('#example3').handsontable({
+        data: list3,
+        rowHeaders: lowh3,
+        colHeaders: colh3,
+        contextMenu: true,
+        className: "htCenter",
+        stretchH: 'all',
+        readOnly: true
+    });
+});
+
+
+$(document).ready(function () {
+    $('#example4').handsontable({
+        data: list4,
+        rowHeaders: lowh4,
+        colHeaders: colh4,
+        contextMenu: true,
+        className: "htCenter",
+        stretchH: 'all',
+        readOnly: true
+    });
+});
+
+</script>
+<script type="text/javascript">
+rdata = <%- JSON.stringify(pList[4]) %>;
+rdata2 = <%- JSON.stringify(pList[5]) %>;
+$(function() {
+    var container = $('div#tnthigh .demo')
+    container.bracket({
+      teamWidth: 100,
+      scoreWidth: 30,
+      matchMargin: 10,
+      roundMargin: 50,
+      init: rdata,
+      userData:  <%- JSON.stringify(pList[4]) %>
+    })
+  })
+
+  $(function() {
+      var container = $('div#tntlow .demo')
+      container.bracket({
+        teamWidth: 100,
+        scoreWidth: 30,
+        matchMargin: 10,
+        roundMargin: 50,
+        init: rdata2,
+        userData:  <%- JSON.stringify(pList[5]) %>
+      })
+    })
+</script>
+  <% include ../partials/scripts %>
+
+
+  </body>
+</html>
