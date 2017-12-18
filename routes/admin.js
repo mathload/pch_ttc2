@@ -123,7 +123,206 @@ router.post('/tntrating', function(req,res){
  var tntidArr = (req.body.gameID).split('-');
  var gamedate=tntidArr[3];
  if(tntidArr[2] == 8){
+   mtnt_all.find({gameid : req.body.gameID}, {_id:0, tnt_all:1, gameDate:1}, function(err, mtnt_alls){
+     if(err) return res.status(500).send({error: 'database find failure'});
 
+   var ts = mtnt_alls[0].tnt_all;
+   gd = mtnt_alls[0].gameDate;
+  //  sidc = mtnt_low32s[0].gid;
+  var resultSet = [];
+
+  //  var round2_name=[];
+  //  for(var idx = 0; idx<4; idx++)
+  //      {
+  //        round2_name[idx] = new Array();
+  //      }
+   var round2_name=[];
+   for(var idx = 0; idx<2; idx++)
+       {
+         round2_name[idx] = new Array();
+       }
+   var round3_name=[];
+   for(var idx = 0; idx<2; idx++)
+       {
+         round3_name[idx] = new Array();
+       }
+
+     for ( var rd1 = 0 ; rd1 < 4 ; rd1++ ){
+       pname_a = ts.teams[rd1][0];
+       pname_b = ts.teams[rd1][1];
+       a_score = ts.results[0][0][rd1][0];
+       b_score = ts.results[0][0][rd1][1];
+         var  winner;
+         if(pname_a==null || pname_b==null) {
+               if(pname_a !==null && pname_b==null) {
+                 round2_name[parseInt(rd1/2)][parseInt(rd1%2)]=pname_a;
+               };
+               if(pname_a==null && pname_b!== null) {
+                 round2_name[parseInt(rd1/2)][parseInt(rd1%2)]=pname_b;
+               };
+
+         }
+         if(pname_a!==null && pname_b!==null) {
+             if(a_score>b_score){
+               winner=1;
+              round2_name[parseInt(rd1/2)][parseInt(rd1%2)]=pname_a;
+             };
+             if(a_score<b_score) {
+               winner=0;
+               round2_name[parseInt(rd1/2)][parseInt(rd1%2)]=pname_b;
+             };
+             if(a_score==b_score) {
+               winner=0.5;
+             };
+
+           if(a_score==null || b_score==null) {
+             winner=0.5;
+           };
+
+         var rSet = {
+           pName1: pname_a,
+           pName2: pname_b,
+           score1: a_score,
+           score2: b_score,
+           result: winner,
+         }
+         if(a_score!==null && b_score!==null) {
+          resultSet.push(rSet);
+         };
+      };
+     } // end for loop
+
+    //  for ( var rd2 = 0 ; rd2 < 4 ; rd2++ ){
+    //    pname_a = round2_name[rd2][0];
+    //    pname_b = round2_name[rd2][1];
+    //    a_score = ts.results[0][1][rd2][0];
+    //    b_score = ts.results[0][1][rd2][1];
+    //      var  winner;
+    //      if(pname_a==null || pname_b==null) {
+    //            if(pname_a !==null && pname_b==null) {
+    //              round3_name[parseInt(rd2/2)][parseInt(rd2%2)]=pname_a;
+    //            };
+    //            if(pname_a==null && pname_b!== null) {
+    //              round3_name[parseInt(rd2/2)][parseInt(rd2%2)]=pname_b;
+    //            };
+     //
+    //      }
+    //     if(pname_a!==null && pname_b!==null) {
+    //          if(a_score>b_score){
+    //            winner=1;
+    //           round3_name[parseInt(rd2/2)][parseInt(rd2%2)]=pname_a;
+    //          };
+    //          if(a_score<b_score) {
+    //            winner=0;
+    //            round3_name[parseInt(rd2/2)][parseInt(rd2%2)]=pname_b;
+    //          };
+    //          if(a_score==b_score) {
+    //            winner=0.5;
+    //          };
+     //
+    //        if(a_score==null || b_score==null) {
+    //          winner=0.5;
+    //        };
+    //       //  console.log(' pname_b='+pname_a+pname_b) );
+    //        var rSet = {
+    //          pName1: pname_a,
+    //          pName2: pname_b,
+    //          score1: a_score,
+    //          score2: b_score,
+    //          result: winner,
+    //        }
+    //        if(a_score!==null && b_score!==null && pname_a!==null && pname_b!==null) {
+    //         resultSet.push(rSet);
+    //        };
+    //      };
+    //  } // end for loop
+
+     for ( var rd2 = 0 ; rd2 < 2 ; rd2++ ){
+       pname_a = round2_name[rd2][0];
+       pname_b = round2_name[rd2][1];
+       a_score = ts.results[0][1][rd2][0];
+       b_score = ts.results[0][1][rd2][1];
+         var  winner;
+         if(pname_a==null || pname_b==null) {
+               if(pname_a !==null && pname_b==null) {
+                 round3_name[parseInt(rd2/2)][parseInt(rd2%2)]=pname_a;
+               };
+               if(pname_a==null && pname_b!== null) {
+                 round3_name[parseInt(rd2/2)][parseInt(rd2%2)]=pname_b;
+               };
+
+         }
+        if(pname_a!==null && pname_b!==null) {
+             if(a_score>b_score){
+               winner=1;
+              round3_name[parseInt(rd2/2)][parseInt(rd2%2)]=pname_a;
+              round3_name[1][parseInt(rd2%2)]=pname_b;
+             };
+             if(a_score<b_score) {
+               winner=0;
+               round3_name[parseInt(rd2/2)][parseInt(rd2%2)]=pname_b;
+               round3_name[1][parseInt(rd2%2)]=pname_a;
+             };
+             if(a_score==b_score) {
+               winner=0.5;
+             };
+
+           if(a_score==null || b_score==null) {
+             winner=0.5;
+           };
+
+           var rSet = {
+             pName1: pname_a,
+             pName2: pname_b,
+             score1: a_score,
+             score2: b_score,
+             result: winner,
+           }
+           if(a_score!==null && b_score!==null && pname_a!==null && pname_b!==null) {
+            resultSet.push(rSet);
+           };
+         };
+     } // end for loop
+
+     for ( var rd3 = 0 ; rd3 < 2 ; rd3++ ){
+       pname_a = round3_name[rd3][0];
+       pname_b = round3_name[rd3][1];
+       a_score = ts.results[0][2][rd3][0];
+       b_score = ts.results[0][2][rd3][1];
+         var  winner;
+         if(a_score==null || b_score==null) {
+           winner=2;
+         } else if(a_score!==null && b_score!==null) {
+           winner=2;
+
+             if(a_score>b_score){
+               winner=1;
+             };
+             if(a_score<b_score) {
+               winner=0;
+             };
+             if(a_score==b_score) {
+               winner=0.5;
+             };
+
+           if(a_score==null || b_score==null) {
+             winner=2;
+           };
+
+           var rSet = {
+             pName1: pname_a,
+             pName2: pname_b,
+             score1: a_score,
+             score2: b_score,
+             result: winner,
+           }
+           if(a_score!==null && b_score!==null && pname_a!==null && pname_b!==null) {
+            resultSet.push(rSet);
+           };
+        }
+     } // end for loop
+     mkratinglist(gamedate,resultSet);
+  }); // end find
  }
  if(tntidArr[2] == 16){
    mtnt_all.find({gameid : req.body.gameID}, {_id:0, tnt_all:1, gameDate:1}, function(err, mtnt_alls){
